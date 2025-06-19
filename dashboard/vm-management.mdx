@@ -1,0 +1,426 @@
+---
+title: "VM Management"
+description: "Comprehensive tools for managing your virtual machines throughout their lifecycle"
+---
+
+# VM Management
+
+The dashboard provides comprehensive tools for managing your virtual machines throughout their lifecycle.
+
+## VM Status Management
+
+Control your virtual machines with these state management options:
+
+<CardGroup cols={2}>
+  <Card title="Power Management" icon="power-off">
+    **VM State Controls**
+    - **Start:** Power on a stopped VM
+    - **Stop:** Gracefully shut down an active VM
+    - **Reboot:** Restart an active VM
+    - **Hibernate:** Save VM state and release resources
+    - **Restore:** Resume a hibernated VM from saved state
+  </Card>
+  
+  <Card title="Resource Management" icon="server">
+    **VM Resource Operations**
+    - **View Details:** Access comprehensive VM information
+    - **Create Volume:** Add persistent storage to VMs
+    - **Take Snapshot:** Create point-in-time backups
+    - **Delete:** Permanently remove VMs and free resources
+  </Card>
+</CardGroup>
+
+## VM State Operations
+
+### Power Management Operations
+
+<Tabs>
+  <Tab title="Start VM">
+    **Power On Operations**
+    - Available for VMs in SHUTOFF or HIBERNATED state
+    - Boot time varies by configuration and state
+    - Billing begins when VM reaches ACTIVE state
+    - Network connectivity restored upon startup
+    
+    **Use Cases:**
+    - Resume work on stopped VMs
+    - Restore hibernated development environments
+    - Activate scheduled or batch processing VMs
+  </Tab>
+  
+  <Tab title="Stop VM">
+    **Graceful Shutdown**
+    - Available for VMs in ACTIVE state
+    - Attempts graceful OS shutdown first
+    - Forces shutdown if graceful fails
+    - Resources remain reserved (full billing continues)
+    
+    **Use Cases:**
+    - Temporary VM shutdown for maintenance
+    - Coordinated shutdown for system updates
+    - Preparation for hibernation or deletion
+  </Tab>
+  
+  <Tab title="Reboot VM">
+    **Restart Operations**
+    - Available for VMs in ACTIVE state
+    - Performs graceful restart when possible
+    - Maintains all configurations and data
+    - Brief service interruption during restart
+    
+    **Use Cases:**
+    - Apply system updates requiring restart
+    - Clear temporary issues or memory leaks
+    - Restart services that require system reboot
+  </Tab>
+</Tabs>
+
+### Advanced State Management
+
+<AccordionGroup>
+  <Accordion title="Hibernation Process">
+    **VM Hibernation Benefits**
+    - **Cost Savings:** Reduced billing rate ($0.01/€0.01/₹1.00 per hour)
+    - **State Preservation:** Complete VM state saved to disk
+    - **Quick Recovery:** Faster than full VM boot
+    - **Resource Release:** Hardware resources freed for other users
+    
+    **Hibernation Process:**
+    1. VM memory state saved to persistent storage
+    2. VM processes and applications preserved
+    3. Hardware resources released
+    4. VM enters HIBERNATED state with reduced billing
+  </Accordion>
+  
+  <Accordion title="Restoration Process">
+    **Restoring from Hibernation**
+    - **Memory Recovery:** VM state loaded from storage
+    - **Process Continuation:** Applications resume where left off
+    - **Network Reconnection:** Network connections re-established
+    - **Service Resumption:** Services restart automatically
+    
+    **Restoration Time:**
+    - Typically 2-5 minutes depending on VM size
+    - Larger VMs with more memory take longer
+    - Network-heavy applications may need reconnection time
+  </Accordion>
+  
+  <Accordion title="State Transition Limitations">
+    **Operation Restrictions**
+    - Cannot perform operations during state transitions
+    - Must wait for current operation to complete
+    - Some operations restricted based on current state
+    - Error handling for invalid state transitions
+  </Accordion>
+</AccordionGroup>
+
+## VM Information Display
+
+The dashboard shows comprehensive information for each virtual machine:
+
+### Hardware Information
+
+<Tabs>
+  <Tab title="Compute Specifications">
+    **Processing Resources**
+    - **CPU Cores:** Number of virtual CPU cores allocated
+    - **RAM:** Total memory allocation in GB
+    - **GPU Type:** Specific GPU model and memory
+    - **GPU Count:** Number of GPUs assigned to VM
+    - **Performance Tier:** Relative performance classification
+  </Tab>
+  
+  <Tab title="Storage Configuration">
+    **Storage Resources**
+    - **Root Disk:** Operating system storage capacity
+    - **Attached Volumes:** Additional persistent storage volumes
+    - **Volume Status:** Current attachment and health status
+    - **Total Storage:** Combined storage allocation across all volumes
+    - **Bootable Volumes:** Volumes capable of booting VMs
+  </Tab>
+  
+  <Tab title="Network Details">
+    **Connectivity Information**
+    - **Private IP:** Internal network address for VM communication
+    - **Public IP:** Internet-accessible IP address (if assigned)
+    - **SSH Key Information:** Configured authentication keys
+    - **Regional Location:** Deployment region and availability zone
+    - **Network Performance:** Bandwidth and latency characteristics
+  </Tab>
+</Tabs>
+
+### Real-time Status Information
+
+<CardGroup cols={3}>
+  <Card title="VM State" icon="activity">
+    **Current Status**
+    - ACTIVE, SHUTOFF, HIBERNATED, or transitional states
+    - State transition progress indicators
+    - Last state change timestamp
+    - Uptime and availability metrics
+  </Card>
+  
+  <Card title="Resource Utilization" icon="chart-bar">
+    **Usage Metrics**
+    - CPU utilization percentage
+    - Memory usage and availability
+    - GPU utilization metrics
+    - Network throughput statistics
+  </Card>
+  
+  <Card title="Health Monitoring" icon="heart">
+    **System Health**
+    - Overall VM health status
+    - Service availability indicators
+    - Performance alerts and warnings
+    - System responsiveness metrics
+  </Card>
+</CardGroup>
+
+## Pricing Information Display
+
+### Real-time Cost Tracking
+
+<AccordionGroup>
+  <Accordion title="Current Billing Rates">
+    **Active Cost Information**
+    - **Per-hour Rate:** Current hourly cost for VM configuration
+    - **Per-minute Rate:** Precise minute-by-minute billing rate
+    - **Current State Cost:** Billing rate based on current VM state
+    - **Projected Costs:** Daily and monthly cost projections
+  </Accordion>
+  
+  <Accordion title="Cost Breakdown">
+    **Detailed Cost Analysis**
+    - **GPU Costs:** Primary cost component based on GPU type and count
+    - **Storage Costs:** Additional costs for attached volumes
+    - **Network Costs:** Any applicable network or data transfer costs
+    - **Total Cost:** Combined cost calculation for all resources
+  </Accordion>
+  
+  <Accordion title="Billing State Impact">
+    **State-based Billing**
+    - **ACTIVE:** Full rate billing for all resources
+    - **HIBERNATED:** Reduced rate billing (storage only)
+    - **SHUTOFF:** Full rate billing (resources reserved)
+    - **Transitional States:** No additional charges during state changes
+  </Accordion>
+</AccordionGroup>
+
+### Cost Optimization Insights
+
+<Steps>
+  <Step title="Monitor Usage Patterns">
+    - Track actual VM usage vs. allocated time
+    - Identify periods of low or no utilization
+    - Analyze cost trends over time
+    - Compare costs across different VM configurations
+  </Step>
+  <Step title="Identify Optimization Opportunities">
+    - Hibernation opportunities during downtime
+    - Right-sizing opportunities for over-provisioned VMs
+    - Alternative GPU selections for cost efficiency
+    - Storage optimization for unused or oversized volumes
+  </Step>
+  <Step title="Implement Cost-Saving Strategies">
+    - Schedule hibernation during predictable downtime
+    - Adjust VM configurations based on actual usage
+    - Clean up unused resources regularly
+    - Monitor and adjust based on changing requirements
+  </Step>
+</Steps>
+
+## VM Lifecycle Management
+
+### Creation to Deletion Workflow
+
+<Steps>
+  <Step title="VM Creation">
+    **Deployment Process**
+    - Configure VM specifications (GPU, storage, network)
+    - Select boot source (OS image, volume, or custom image)
+    - Configure SSH access and security settings
+    - Deploy VM and monitor creation progress
+  </Step>
+  <Step title="Active Management">
+    **Operational Phase**
+    - Monitor VM performance and health
+    - Manage storage volumes and attachments
+    - Create snapshots for backup and recovery
+    - Adjust configurations as needed
+  </Step>
+  <Step title="Maintenance Operations">
+    **Ongoing Maintenance**
+    - Apply system updates and patches
+    - Monitor and optimize resource usage
+    - Manage access keys and security settings
+    - Perform regular backup operations
+  </Step>
+  <Step title="Decommissioning">
+    **End-of-Life Management**
+    - Create final backups and snapshots
+    - Detach and preserve important volumes
+    - Document configurations for future reference
+    - Delete VM to free resources and stop billing
+  </Step>
+</Steps>
+
+### Best Practices for VM Management
+
+<AccordionGroup>
+  <Accordion title="Performance Monitoring">
+    **Proactive Performance Management**
+    - Monitor CPU, memory, and GPU utilization regularly
+    - Set up alerts for performance thresholds
+    - Track application performance metrics
+    - Identify and resolve performance bottlenecks
+  </Accordion>
+  
+  <Accordion title="Cost Management">
+    **Efficient Cost Control**
+    - Use hibernation strategically for cost savings
+    - Right-size VMs based on actual usage patterns
+    - Regular cleanup of unused resources
+    - Monitor and optimize storage allocation
+  </Accordion>
+  
+  <Accordion title="Security Management">
+    **Security Best Practices**
+    - Keep SSH keys updated and secure
+    - Apply security updates promptly
+    - Monitor access logs for suspicious activity
+    - Implement proper firewall configurations
+  </Accordion>
+  
+  <Accordion title="Backup and Recovery">
+    **Data Protection Strategies**
+    - Create regular snapshots of important VMs
+    - Test restoration procedures periodically
+    - Maintain off-site backups for critical data
+    - Document recovery procedures
+  </Accordion>
+</AccordionGroup>
+
+## Multi-VM Management
+
+### Managing Multiple Virtual Machines
+
+<CardGroup cols={2}>
+  <Card title="Fleet Overview" icon="servers">
+    **Multi-VM Monitoring**
+    - View status of all VMs at a glance
+    - Compare configurations and costs
+    - Identify optimization opportunities across fleet
+    - Coordinate operations across multiple VMs
+  </Card>
+  
+  <Card title="Batch Operations" icon="layer-group">
+    **Coordinated Management**
+    - Bulk hibernation for cost savings
+    - Coordinated snapshot creation
+    - Mass configuration updates
+    - Synchronized maintenance operations
+  </Card>
+</CardGroup>
+
+### VM Organization Strategies
+
+<Tabs>
+  <Tab title="Naming Conventions">
+    **Systematic VM Naming**
+    - Use descriptive names indicating purpose
+    - Include environment indicators (dev, staging, prod)
+    - Add project or team identifiers
+    - Include version or iteration numbers
+    
+    **Examples:**
+    - `ml-training-team-alpha-v2`
+    - `web-api-production-us-east`
+    - `dev-jupyter-john-smith`
+  </Tab>
+  
+  <Tab title="Environment Separation">
+    **Logical Environment Organization**
+    - Separate development, staging, and production VMs
+    - Use different regions for environment isolation
+    - Implement different access controls per environment
+    - Coordinate deployment pipelines across environments
+  </Tab>
+  
+  <Tab title="Team Collaboration">
+    **Multi-User VM Management**
+    - Shared SSH keys for team access
+    - Documented VM purposes and configurations
+    - Coordinated hibernation schedules
+    - Clear ownership and responsibility assignments
+  </Tab>
+</Tabs>
+
+## Troubleshooting VM Issues
+
+### Common VM Problems
+
+<AccordionGroup>
+  <Accordion title="VM Won't Start">
+    **Startup Issues**
+    - Check VM state and any error messages
+    - Verify account has sufficient credits
+    - Ensure attached volumes are healthy
+    - Contact support for persistent issues
+  </Accordion>
+  
+  <Accordion title="Performance Problems">
+    **Performance Degradation**
+    - Monitor resource utilization metrics
+    - Check for resource contention
+    - Verify network connectivity
+    - Consider VM resizing or optimization
+  </Accordion>
+  
+  <Accordion title="Connectivity Issues">
+    **Network and Access Problems**
+    - Verify SSH key configuration
+    - Check firewall rules and network settings
+    - Confirm VM has public IP if needed
+    - Test network connectivity from different locations
+  </Accordion>
+  
+  <Accordion title="State Transition Failures">
+    **State Change Problems**
+    - Wait for current operations to complete
+    - Check for conflicting operations
+    - Verify VM is in appropriate state for operation
+    - Retry operation after brief delay
+  </Accordion>
+</AccordionGroup>
+
+### Diagnostic Tools and Resources
+
+<Steps>
+  <Step title="Dashboard Monitoring">
+    - Use real-time status indicators in dashboard
+    - Monitor resource utilization graphs
+    - Check error messages and alerts
+    - Review recent activity logs
+  </Step>
+  <Step title="VM Console Access">
+    - Access VM console for direct troubleshooting
+    - Check system logs and error messages
+    - Verify service status and configurations
+    - Test network connectivity from within VM
+  </Step>
+  <Step title="Support Resources">
+    - Consult troubleshooting documentation
+    - Contact support with detailed error information
+    - Provide VM ID and error reproduction steps
+    - Include relevant screenshots and log excerpts
+  </Step>
+</Steps>
+
+<Info>
+Regular VM management includes monitoring performance, optimizing costs through hibernation, maintaining security updates, and creating backups. Use the dashboard's real-time information to make informed decisions about your VM operations.
+</Info>
+
+<Tip>
+Take advantage of hibernation to reduce costs by up to 95% for VMs that don't need to run continuously. This is especially effective for development environments and intermittent processing workloads.
+</Tip>

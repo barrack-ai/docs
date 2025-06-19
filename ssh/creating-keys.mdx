@@ -1,0 +1,433 @@
+---
+title: "Creating SSH Keys"
+description: "Generate secure SSH key pairs for accessing your virtual machines"
+---
+
+# Creating SSH Keys
+
+SSH keys provide secure access to your virtual machines, replacing password-based authentication with more secure cryptographic keys. At least one SSH key is required for VM deployment.
+
+## SSH Key Creation Process
+
+To create a new SSH key:
+
+<Steps>
+  <Step title="Navigate to SSH Keys">
+    Navigate to the [SSH Keys page](https://barrack.ai/ssh-keys) from the sidebar
+  </Step>
+  <Step title="Initiate Creation">
+    Click "Create Key" button
+  </Step>
+  <Step title="Name Your Key">
+    Enter a descriptive name for the key (maximum 50 characters):
+    - Names must contain only letters, numbers, underscores, hyphens, and periods
+    - Use descriptive names like "my-project-key" or "development-server"
+    - Choose names that help identify the key's purpose
+  </Step>
+  <Step title="Generate Key">
+    Click "Create Key" to generate the keypair:
+    - System automatically generates a secure 2048-bit RSA public/private key pair
+    - Private key file will automatically download to your computer
+    - Public key is stored in your account for VM deployment
+  </Step>
+</Steps>
+
+## Key Generation Features
+
+### Automatic Generation Process
+
+<CardGroup cols={2}>
+  <Card title="Secure Generation" icon="shield">
+    **Cryptographic Security**
+    - 2048-bit RSA encryption for strong security
+    - Cryptographically secure random generation
+    - Industry-standard key format
+    - Compatible with all SSH clients and servers
+  </Card>
+  
+  <Card title="Instant Download" icon="download">
+    **Secure Key Delivery**
+    - Private key automatically downloads during creation
+    - Download happens only once for security
+    - File is named with your chosen key name
+    - Ready to use immediately with proper permissions
+  </Card>
+</CardGroup>
+
+### Platform Integration
+
+<AccordionGroup>
+  <Accordion title="Seamless Integration">
+    **Platform-Wide Availability**
+    - Public key automatically stored in your account
+    - Key distributed to all regions automatically
+    - Available for immediate VM deployment
+    - No additional configuration required
+  </Accordion>
+  
+  <Accordion title="Multi-Region Distribution">
+    **Global Availability**
+    - Keys automatically available in all regions:
+      - NORWAY-1 (Europe)
+      - CANADA-1 (North America)
+      - US-1 (United States)
+    - No manual distribution required
+    - Consistent access across all deployments
+  </Accordion>
+</AccordionGroup>
+
+## Critical Security Notice
+
+<Warning>
+**Private Key Security - READ CAREFULLY:**
+
+• **One-Time Download:** The private key is only available for download once during creation
+• **No Recovery:** Private keys cannot be retrieved later from our servers
+• **Automatic Download:** Private key file automatically downloads for security reasons
+• **Never Share:** Never share your private key with anyone or upload it to version control
+• **Secure Storage:** Back up your private key in a secure, encrypted location
+• **Irreplaceable:** If you lose the private key, you'll need to create a new SSH key pair
+</Warning>
+
+### Private Key Handling
+
+<Steps>
+  <Step title="Immediate Download">
+    Private key downloads automatically upon creation
+  </Step>
+  <Step title="Secure Storage">
+    Move the downloaded key to a secure location (e.g., ~/.ssh/)
+  </Step>
+  <Step title="Set Permissions">
+    Set correct file permissions for security
+  </Step>
+  <Step title="Create Backup">
+    Create encrypted backups of important private keys
+  </Step>
+</Steps>
+
+## Setting Private Key Permissions
+
+After downloading your private key file, you must set the correct permissions for security:
+
+<Tabs>
+  <Tab title="Linux/MacOS">
+    **Set Secure Permissions**
+    
+    ```bash
+    chmod 600 /path/to/your_private_key.pem
+    ```
+    
+    **Example:**
+    ```bash
+    # Move key to SSH directory
+    mv ~/Downloads/my-project-key.pem ~/.ssh/
+    
+    # Set secure permissions
+    chmod 600 ~/.ssh/my-project-key.pem
+    ```
+    
+    This command ensures only you can read and write the file, which is required for SSH security.
+  </Tab>
+  
+  <Tab title="Windows">
+    **PowerShell Permission Setting**
+    
+    ```powershell
+    icacls "C:\path\to\your_private_key.pem" /inheritance:r /grant:r "$($env:USERNAME):(R,W)"
+    ```
+    
+    **Example:**
+    ```powershell
+    # Navigate to Downloads folder
+    cd $env:USERPROFILE\Downloads
+    
+    # Set secure permissions
+    icacls "my-project-key.pem" /inheritance:r /grant:r "$($env:USERNAME):(R,W)"
+    
+    # Move to SSH directory (create if doesn't exist)
+    mkdir -Force $env:USERPROFILE\.ssh
+    move my-project-key.pem $env:USERPROFILE\.ssh\
+    ```
+    
+    This removes inheritance and grants only the current user read/write access.
+  </Tab>
+</Tabs>
+
+## Key Naming Requirements
+
+### Naming Rules and Validation
+
+<AccordionGroup>
+  <Accordion title="Character Requirements">
+    **Allowed Characters**
+    - Letters (a-z, A-Z)
+    - Numbers (0-9)
+    - Underscores (_)
+    - Hyphens (-)
+    - Periods (.)
+    - No spaces or special characters
+  </Accordion>
+  
+  <Accordion title="Length and Uniqueness">
+    **Naming Constraints**
+    - Maximum length: 50 characters
+    - Minimum length: 1 character
+    - Must be unique within your account
+    - Cannot be empty or whitespace only
+  </Accordion>
+  
+  <Accordion title="Best Practices">
+    **Effective Naming**
+    - Use descriptive names indicating purpose
+    - Include project or environment identifiers
+    - Avoid generic names like "key1" or "test"
+    - Consider versioning for key rotation
+    
+    **Good Examples:**
+    - `production-web-servers`
+    - `ml-development-team`
+    - `personal-laptop-key`
+    - `backup-access-key-v2`
+  </Accordion>
+</AccordionGroup>
+
+## Key Limits and Restrictions
+
+### Account Limitations
+
+<CardGroup cols={2}>
+  <Card title="Quantity Limits" icon="hash">
+    **Key Count Restrictions**
+    - Maximum of 25 SSH keys per region
+    - Keys automatically distributed to all regions
+    - Limit applies to total keys across account
+    - Delete unused keys to free quota
+  </Card>
+  
+  <Card title="Technical Specifications" icon="cog">
+    **Key Specifications**
+    - Generated keys use 2048-bit RSA encryption
+    - Industry-standard OpenSSH format
+    - Compatible with all major SSH clients
+    - Suitable for all security requirements
+  </Card>
+</CardGroup>
+
+### Key Management Best Practices
+
+<Steps>
+  <Step title="Plan Key Usage">
+    - Determine how many keys you need
+    - Plan separate keys for different purposes
+    - Consider team access requirements
+    - Plan for key rotation schedules
+  </Step>
+  <Step title="Use Descriptive Names">
+    - Choose names that indicate key purpose
+    - Include environment or project identifiers
+    - Avoid generic or temporary names
+    - Document key purposes and usage
+  </Step>
+  <Step title="Secure Key Storage">
+    - Store private keys in secure locations
+    - Use encrypted storage for backups
+    - Set proper file permissions
+    - Never share private keys
+  </Step>
+  <Step title="Regular Maintenance">
+    - Review and audit key usage regularly
+    - Remove unused or unnecessary keys
+    - Rotate keys based on security policies
+    - Monitor key access and usage patterns
+  </Step>
+</Steps>
+
+## Using Created SSH Keys
+
+### VM Deployment Integration
+
+<AccordionGroup>
+  <Accordion title="Automatic Selection">
+    **Seamless VM Deployment**
+    - Keys automatically appear in VM deployment interface
+    - If you have only one key, it's automatically selected
+    - Multiple keys can be selected for team access
+    - Keys work immediately after creation
+  </Accordion>
+  
+  <Accordion title="Multi-Key Deployment">
+    **Team Collaboration**
+    - Select multiple keys during VM deployment
+    - Each team member can use their own key
+    - Shared access without shared credentials
+    - Individual accountability and access control
+  </Accordion>
+</AccordionGroup>
+
+### Connection Examples
+
+Once your key is created and VM is deployed:
+
+<Tabs>
+  <Tab title="Basic Connection">
+    **Standard SSH Connection**
+    
+    ```bash
+    ssh -i ~/.ssh/your-private-key.pem ubuntu@vm-ip-address
+    ```
+    
+    **Parameters:**
+    - `-i` specifies the private key file
+    - `ubuntu` is the username (varies by OS)
+    - `vm-ip-address` is your VM's public IP
+  </Tab>
+  
+  <Tab title="SSH Config">
+    **Simplified Connection with SSH Config**
+    
+    Create `~/.ssh/config`:
+    ```
+    Host my-vm
+      HostName 203.0.113.1
+      User ubuntu
+      IdentityFile ~/.ssh/your-private-key.pem
+      IdentitiesOnly yes
+    ```
+    
+    Then connect simply:
+    ```bash
+    ssh my-vm
+    ```
+  </Tab>
+  
+  <Tab title="Troubleshooting">
+    **Connection Debugging**
+    
+    ```bash
+    # Verbose output for debugging
+    ssh -v -i ~/.ssh/your-private-key.pem ubuntu@vm-ip-address
+    
+    # Test key authentication
+    ssh-add ~/.ssh/your-private-key.pem
+    ssh-add -l  # List loaded keys
+    ```
+  </Tab>
+</Tabs>
+
+## Key Security Best Practices
+
+### Generation Security
+
+<CardGroup cols={2}>
+  <Card title="Strong Generation" icon="key">
+    **Secure Key Creation**
+    - Always use platform-generated keys for maximum security
+    - 2048-bit RSA provides excellent security for most use cases
+    - Keys generated using cryptographically secure random sources
+    - No need to generate keys manually unless specifically required
+  </Card>
+  
+  <Card title="Unique Keys" icon="fingerprint">
+    **Key Separation**
+    - Generate separate keys for different projects or environments
+    - Use different keys for production and development
+    - Consider separate keys for different team members
+    - Avoid reusing keys across multiple purposes
+  </Card>
+</CardGroup>
+
+### Storage Security
+
+<AccordionGroup>
+  <Accordion title="Local Storage">
+    **Secure Private Key Storage**
+    - Store private keys in ~/.ssh/ directory
+    - Set file permissions to 600 (owner read/write only)
+    - Use encrypted filesystems where possible
+    - Avoid storing keys in cloud storage or version control
+  </Accordion>
+  
+  <Accordion title="Backup Strategy">
+    **Secure Backup Practices**
+    - Create encrypted backups of important private keys
+    - Store backups in secure, offline locations
+    - Use password-protected archives for key backups
+    - Test backup restoration procedures regularly
+  </Accordion>
+  
+  <Accordion title="Access Control">
+    **Key Access Management**
+    - Limit access to private key files
+    - Use proper user account permissions
+    - Monitor key file access and modifications
+    - Remove keys from compromised systems immediately
+  </Accordion>
+</AccordionGroup>
+
+## Troubleshooting Key Creation
+
+### Common Issues
+
+<Tabs>
+  <Tab title="Download Problems">
+    **Private Key Download Issues**
+    - **Browser Settings:** Check popup blockers and download settings
+    - **Antivirus:** Verify antivirus isn't blocking downloads
+    - **Storage Space:** Ensure sufficient disk space for download
+    - **Permissions:** Check browser download folder permissions
+  </Tab>
+  
+  <Tab title="Naming Issues">
+    **Key Name Problems**
+    - **Character Validation:** Use only allowed characters
+    - **Length Limits:** Keep names under 50 characters
+    - **Uniqueness:** Choose names not already in use
+    - **Descriptive Names:** Use meaningful, identifiable names
+  </Tab>
+  
+  <Tab title="Account Limits">
+    **Quota and Limit Issues**
+    - **Key Count:** Delete unused keys if at limit
+    - **Account Status:** Ensure account is in good standing
+    - **Regional Limits:** Check key distribution across regions
+    - **Usage Monitoring:** Track key usage and requirements
+  </Tab>
+</Tabs>
+
+### Error Resolution
+
+<Steps>
+  <Step title="Identify the Issue">
+    - Read error messages carefully
+    - Check browser console for technical errors
+    - Verify account status and limits
+    - Test with different browsers if needed
+  </Step>
+  <Step title="Apply Appropriate Solution">
+    - Address specific error conditions
+    - Clear browser cache if needed
+    - Try alternative download methods
+    - Contact support for persistent issues
+  </Step>
+  <Step title="Verify Success">
+    - Confirm private key downloaded successfully
+    - Check key appears in SSH keys list
+    - Test key with VM deployment
+    - Verify key functionality with test connection
+  </Step>
+  <Step title="Secure the Key">
+    - Set proper file permissions immediately
+    - Move key to secure location
+    - Create backup if key is important
+    - Document key purpose and usage
+  </Step>
+</Steps>
+
+<Info>
+**Remember:** SSH keys provide the foundation for secure access to your virtual machines. Take time to properly name, secure, and manage your keys for optimal security and usability.
+</Info>
+
+<Tip>
+**Pro Tip:** Create separate SSH keys for different environments (development, staging, production) and projects. This provides better security isolation and makes it easier to manage access as your infrastructure grows.
+</Tip>

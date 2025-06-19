@@ -1,0 +1,411 @@
+---
+title: "Importing SSH Keys"
+description: "Import existing SSH keys from GitHub, GitLab, or other services"
+---
+
+# Importing SSH Keys
+
+If you already have SSH keys that you use for other services (GitHub, GitLab, other cloud providers), you can import the public key to use with your virtual machines on our platform.
+
+## SSH Key Import Process
+
+To import an existing SSH public key:
+
+<Steps>
+  <Step title="Navigate to SSH Keys">
+    Navigate to the [SSH Keys page](https://barrack.ai/ssh-keys) from the sidebar
+  </Step>
+  <Step title="Initiate Import">
+    Click "Import Key" button
+  </Step>
+  <Step title="Name Your Key">
+    Enter a descriptive name for the key (maximum 50 characters):
+    - Names must contain only letters, numbers, underscores, hyphens, and periods
+    - Use descriptive names like "github-key" or "laptop-ssh-key"
+    - Choose names that identify the key's source or purpose
+  </Step>
+  <Step title="Paste Public Key">
+    Paste your public key content in the text area:
+    - Key must begin with ssh-rsa, ssh-ed25519, or similar
+    - Include the entire public key on a single line
+    - Include optional comment if desired
+  </Step>
+  <Step title="Import Key">
+    Click "Import Key" to add it to your account:
+    - System validates key format automatically
+    - Key is added to your account immediately
+    - Available for VM deployment right away
+  </Step>
+</Steps>
+
+## Finding Your Public Key
+
+Locate your existing public key on your system:
+
+<Tabs>
+  <Tab title="Linux/MacOS">
+    **Common Public Key Locations**
+    
+    Your public key is typically located at:
+    ```bash
+    ~/.ssh/id_rsa.pub
+    ~/.ssh/id_ed25519.pub
+    ~/.ssh/id_ecdsa.pub
+    ```
+    
+    **Display and copy your public key:**
+    ```bash
+    # For RSA keys
+    cat ~/.ssh/id_rsa.pub
+    
+    # For Ed25519 keys (recommended)
+    cat ~/.ssh/id_ed25519.pub
+    
+    # For ECDSA keys
+    cat ~/.ssh/id_ecdsa.pub
+    
+    # Copy to clipboard (macOS)
+    pbcopy < ~/.ssh/id_rsa.pub
+    
+    # Copy to clipboard (Linux with xclip)
+    xclip -sel clip < ~/.ssh/id_rsa.pub
+    ```
+  </Tab>
+  
+  <Tab title="Windows">
+    **Windows Key Locations**
+    
+    **With Git Bash or WSL:**
+    ```bash
+    ~/.ssh/id_rsa.pub
+    ~/.ssh/id_ed25519.pub
+    ```
+    
+    **Display with Git Bash:**
+    ```bash
+    cat ~/.ssh/id_rsa.pub
+    ```
+    
+    **With PowerShell:**
+    ```powershell
+    Get-Content $env:USERPROFILE\.ssh\id_rsa.pub
+    
+    # Copy to clipboard
+    Get-Content $env:USERPROFILE\.ssh\id_rsa.pub | Set-Clipboard
+    ```
+    
+    **Common Windows locations:**
+    - `C:\Users\YourUsername\.ssh\id_rsa.pub`
+    - `C:\Users\YourUsername\.ssh\id_ed25519.pub`
+  </Tab>
+</Tabs>
+
+## Public Key Format Requirements
+
+Understanding the correct format for import:
+
+### Valid Key Formats
+
+<CodeGroup>
+```bash RSA Key Example
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC0WGP1EZykEtv5YGC9nMiPFW3U3DmZNzKFO5nEu6uozEHh3JLi9bii user@example.com
+```
+
+```bash Ed25519 Key Example
+ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIE1ZWv7A6ZH9R7O3k6Cq8A5b9J5r8aKz1L2mN3oPq4Rs user@example.com
+```
+
+```bash ECDSA Key Example
+ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBAzq5s... user@example.com
+```
+</CodeGroup>
+
+### Format Validation
+
+<Warning>
+**Public Key Requirements:**
+
+A valid public key must:
+- Begin with a key type: `ssh-rsa`, `ssh-ed25519`, or `ssh-dss`
+- Contain a long base64-encoded string of characters
+- Be on a single line with no line breaks
+- Optionally end with a comment (usually email address or description)
+</Warning>
+
+## Supported Key Types
+
+The platform supports industry-standard SSH key types:
+
+<Tabs>
+  <Tab title="RSA Keys">
+    **RSA Key Support**
+    - **Format:** ssh-rsa
+    - **Recommended Size:** 2048+ bits (4096 bits preferred)
+    - **Compatibility:** Universal compatibility with all SSH clients
+    - **Security:** Mature, well-tested algorithm
+    - **Use Case:** Most common, works everywhere
+  </Tab>
+  
+  <Tab title="Ed25519 Keys">
+    **Ed25519 Key Support**
+    - **Format:** ssh-ed25519
+    - **Security:** Modern, highly secure elliptic curve cryptography
+    - **Performance:** Faster than RSA with equivalent security
+    - **Recommended:** Best choice for new key generation
+    - **Use Case:** Modern applications requiring high security
+  </Tab>
+  
+  <Tab title="ECDSA Keys">
+    **ECDSA Key Support**
+    - **Formats:** ecdsa-sha2-nistp256/384/521
+    - **Curves:** NIST P-256, P-384, P-521
+    - **Compatibility:** Supported by modern SSH clients
+    - **Performance:** Good balance of security and performance
+    - **Use Case:** Alternative to RSA with smaller key sizes
+  </Tab>
+</Tabs>
+
+## Importing from Popular Services
+
+### GitHub SSH Keys
+
+<Steps>
+  <Step title="Access GitHub SSH Keys">
+    Go to GitHub → Settings → SSH and GPG keys
+  </Step>
+  <Step title="Copy Public Key">
+    Copy the public key content from GitHub
+  </Step>
+  <Step title="Import to Platform">
+    Paste the key in the import dialog
+  </Step>
+  <Step title="Use Descriptive Name">
+    Name it something like "github-personal-key"
+  </Step>
+</Steps>
+
+### GitLab SSH Keys
+
+<Steps>
+  <Step title="Access GitLab SSH Keys">
+    Go to GitLab → User Settings → SSH Keys
+  </Step>
+  <Step title="Copy Public Key">
+    Copy the public key content from GitLab
+  </Step>
+  <Step title="Import to Platform">
+    Paste the key in the import dialog
+  </Step>
+  <Step title="Use Descriptive Name">
+    Name it something like "gitlab-work-key"
+  </Step>
+</Steps>
+
+## Import Validation and Errors
+
+### Common Import Issues
+
+<AccordionGroup>
+  <Accordion title="Format Errors">
+    **Invalid Key Format**
+    - **Symptoms:** "Invalid key format" error message
+    - **Causes:** Line breaks, missing key type, corrupted key
+    - **Solutions:** 
+      - Ensure key is on single line
+      - Verify key type prefix (ssh-rsa, ssh-ed25519)
+      - Copy key again from source
+      - Check for extra whitespace or characters
+  </Accordion>
+  
+  <Accordion title="Key Type Issues">
+    **Unsupported Key Types**
+    - **Symptoms:** "Unsupported key type" error
+    - **Causes:** Very old key formats, custom key types
+    - **Solutions:**
+      - Use supported key types (RSA, Ed25519, ECDSA)
+      - Generate new key with supported algorithm
+      - Convert key to supported format if possible
+  </Accordion>
+  
+  <Accordion title="Duplicate Keys">
+    **Key Already Exists**
+    - **Symptoms:** "Key already exists" error
+    - **Causes:** Same public key already imported
+    - **Solutions:**
+      - Check existing keys in account
+      - Use different key if available
+      - Delete old key if no longer needed
+  </Accordion>
+  
+  <Accordion title="Name Conflicts">
+    **Duplicate Key Names**
+    - **Symptoms:** "Name already in use" error
+    - **Causes:** Key name already used in account
+    - **Solutions:**
+      - Choose different, unique name
+      - Check existing key names
+      - Use more specific naming convention
+  </Accordion>
+</AccordionGroup>
+
+## Best Practices for Key Import
+
+### Key Selection
+
+<CardGroup cols={2}>
+  <Card title="Choose Strong Keys" icon="shield">
+    **Security Considerations**
+    - Prefer Ed25519 keys for new imports
+    - Use RSA keys with 2048+ bits minimum
+    - Avoid old or deprecated key formats
+    - Verify key source and integrity
+  </Card>
+  
+  <Card title="Organize by Purpose" icon="folder">
+    **Key Organization**
+    - Import separate keys for different purposes
+    - Use descriptive names indicating source/purpose
+    - Group related keys with consistent naming
+    - Document key purposes for team usage
+  </Card>
+</CardGroup>
+
+### Naming Strategy
+
+<Steps>
+  <Step title="Identify Source">
+    Include the source service or system in the name
+  </Step>
+  <Step title="Specify Purpose">
+    Indicate what the key will be used for
+  </Step>
+  <Step title="Add Context">
+    Include environment or project information
+  </Step>
+  <Step title="Use Consistent Format">
+    Develop naming convention for consistency
+  </Step>
+</Steps>
+
+**Example naming patterns:**
+- `github-personal-2024`
+- `gitlab-work-project-alpha`
+- `laptop-development-key`
+- `ci-cd-deployment-key`
+
+## Security Considerations
+
+### Key Reuse Benefits
+
+<AccordionGroup>
+  <Accordion title="Simplified Management">
+    **Key Management Advantages**
+    - Fewer keys to manage and secure
+    - Consistent access across platforms
+    - Reduced risk of key loss or confusion
+    - Easier team collaboration
+  </Accordion>
+  
+  <Accordion title="Proven Security">
+    **Using Existing Keys**
+    - Keys already tested and validated
+    - Established security procedures
+    - Known key strength and format
+    - Existing backup and recovery procedures
+  </Accordion>
+</AccordionGroup>
+
+### Security Precautions
+
+<Warning>
+**Security Reminders:**
+
+- Only import keys you control and trust
+- Verify key integrity before import
+- Use keys from secure, trusted sources
+- Keep private keys secure and never share them
+- Monitor key usage across all platforms
+</Warning>
+
+## Troubleshooting Import Issues
+
+### Validation Problems
+
+<Tabs>
+  <Tab title="Format Issues">
+    **Key Format Problems**
+    
+    **Common Problems:**
+    - Line breaks in the middle of key
+    - Missing key type prefix
+    - Extra whitespace or characters
+    - Truncated or incomplete key
+    
+    **Solutions:**
+    - Copy key again from original source
+    - Verify entire key is selected
+    - Check for line wrapping issues
+    - Use text editor to verify format
+  </Tab>
+  
+  <Tab title="Copy-Paste Issues">
+    **Copy-Paste Problems**
+    
+    **Common Problems:**
+    - Partial key copying
+    - Added formatting from rich text
+    - Character encoding issues
+    - Browser copy-paste problems
+    
+    **Solutions:**
+    - Use plain text editor for copying
+    - Copy from command line output
+    - Verify complete key selection
+    - Try different browser or method
+  </Tab>
+</Tabs>
+
+### Testing Imported Keys
+
+<Steps>
+  <Step title="Verify Import Success">
+    Check that key appears in SSH keys list
+  </Step>
+  <Step title="Test with VM Deployment">
+    Use imported key for new VM deployment
+  </Step>
+  <Step title="Test SSH Connection">
+    Connect to VM using imported key
+  </Step>
+  <Step title="Validate Functionality">
+    Confirm normal SSH operations work correctly
+  </Step>
+</Steps>
+
+## Import vs. Creation Comparison
+
+<Tabs>
+  <Tab title="When to Import">
+    **Import Existing Keys When:**
+    - You already have secure, trusted keys
+    - You want consistent access across platforms
+    - You have established key management procedures
+    - You're migrating from another platform
+  </Tab>
+  
+  <Tab title="When to Create New">
+    **Create New Keys When:**
+    - You don't have existing SSH keys
+    - You want platform-specific keys
+    - Your existing keys are old or weak
+    - You need fresh keys for security reasons
+  </Tab>
+</Tabs>
+
+<Info>
+Importing existing SSH keys allows you to use your established keys while keeping your private key secure on your local machine. This is often the preferred method for users who already have a key management system in place.
+</Info>
+
+<Tip>
+When importing keys from services like GitHub or GitLab, use descriptive names that indicate both the source and purpose. This makes it easier to manage multiple keys and understand their intended use.
+</Tip>

@@ -1,0 +1,540 @@
+---
+title: "Advanced Configuration"
+description: "Configure additional options for your VM to enhance security, access, and initial setup"
+---
+
+# Advanced Configuration
+
+Configure additional options for your virtual machine to enhance security, access, and initial setup capabilities.
+
+## Public IP Configuration
+
+Control whether your VM has internet connectivity and public accessibility.
+
+<CardGroup cols={2}>
+  <Card title="Enable Public IP" icon="globe">
+    **Internet Connectivity**
+    - VM receives a publicly accessible IP address
+    - Full internet access for downloads and updates
+    - Accessible from anywhere on the internet
+    - Required for remote access and most applications
+  </Card>
+  
+  <Card title="Disable Public IP" icon="lock">
+    **Internal Network Only**
+    - VM accessible only within internal network
+    - Enhanced security through network isolation
+    - No direct internet access
+    - Requires VPN or bastion host for access
+  </Card>
+</CardGroup>
+
+### Public IP Security Considerations
+
+<Warning>
+**Security Warning:**
+
+Enabling public IP makes your VM accessible from the internet. Ensure proper security measures:
+- Configure firewall rules appropriately
+- Use strong SSH keys
+- Keep system updated with security patches
+- Monitor access logs regularly
+</Warning>
+
+### Public IP Use Cases
+
+<Tabs>
+  <Tab title="Development & Testing">
+    **Recommended: Enable Public IP**
+    - Easy remote access for development
+    - Internet access for package installations
+    - Simple collaboration with team members
+    - Direct access to web services and APIs
+  </Tab>
+  
+  <Tab title="Production Workloads">
+    **Consider Security Requirements**
+    - Enable with proper firewall configuration
+    - Use load balancers for web applications
+    - Implement monitoring and logging
+    - Regular security audits
+  </Tab>
+  
+  <Tab title="High Security Environments">
+    **Consider Private Networking**
+    - Disable public IP for maximum security
+    - Use VPN or bastion hosts for access
+    - Implement network segmentation
+    - Enhanced compliance for sensitive data
+  </Tab>
+</Tabs>
+
+## Security Rules Configuration
+
+Configure firewall rules through the integrated interface to protect your virtual machine.
+
+### Firewall Integration
+
+<Steps>
+  <Step title="Access Security Rules">
+    Security rules are configured during VM deployment or through the security management interface
+  </Step>
+  <Step title="Define Rule Types">
+    Add rules for specific protocols:
+    - **TCP:** Web services, databases, custom applications
+    - **UDP:** DNS, video streaming, custom protocols
+    - **ICMP:** Ping, network diagnostics
+  </Step>
+  <Step title="Configure Access">
+    Define allowed sources and destinations:
+    - **IP Ranges:** Specific networks or addresses in CIDR notation
+    - **Port Restrictions:** Specific ports or port ranges
+    - **Direction:** Ingress (incoming) or Egress (outgoing) traffic
+  </Step>
+  <Step title="Apply Rules">
+    Rules are applied automatically after VM becomes active:
+    - Real-time rule validation
+    - Automatic conflict detection
+    - Progressive rule application
+  </Step>
+</Steps>
+
+### Common Security Rule Examples
+
+<AccordionGroup>
+  <Accordion title="SSH Access">
+    **Secure Remote Access**
+    - **Protocol:** TCP
+    - **Port:** 22
+    - **Source:** Your IP address or trusted network
+    - **Direction:** Ingress
+    
+    ```
+    Rule: Allow TCP 22 from 203.0.113.0/24
+    ```
+  </Accordion>
+  
+  <Accordion title="Web Services">
+    **HTTP/HTTPS Traffic**
+    - **Protocol:** TCP
+    - **Ports:** 80 (HTTP), 443 (HTTPS)
+    - **Source:** 0.0.0.0/0 (public access)
+    - **Direction:** Ingress
+    
+    ```
+    Rule: Allow TCP 80,443 from 0.0.0.0/0
+    ```
+  </Accordion>
+  
+  <Accordion title="Custom Applications">
+    **Application-Specific Ports**
+    - **Protocol:** TCP/UDP (as required)
+    - **Port:** Application-specific port
+    - **Source:** Trusted networks only
+    - **Direction:** Ingress/Egress as needed
+    
+    ```
+    Rule: Allow TCP 8080 from 10.0.0.0/8
+    ```
+  </Accordion>
+  
+  <Accordion title="Database Access">
+    **Database Connectivity**
+    - **Protocol:** TCP
+    - **Ports:** 3306 (MySQL), 5432 (PostgreSQL), etc.
+    - **Source:** Application servers only
+    - **Direction:** Ingress
+    
+    ```
+    Rule: Allow TCP 5432 from 192.168.1.0/24
+    ```
+  </Accordion>
+</AccordionGroup>
+
+### Security Rule Best Practices
+
+<CardGroup cols={2}>
+  <Card title="Principle of Least Privilege" icon="shield">
+    **Minimize Access**
+    - Only open ports that are actively needed
+    - Restrict source IP ranges to minimum required
+    - Regularly audit and remove unnecessary rules
+    - Use specific ports instead of ranges when possible
+  </Card>
+  
+  <Card title="Defense in Depth" icon="layers">
+    **Multiple Security Layers**
+    - Combine firewall rules with application security
+    - Use both network and host-based firewalls
+    - Implement monitoring and intrusion detection
+    - Regular security assessments and updates
+  </Card>
+</CardGroup>
+
+<Note>
+Security rules may take up to 10 minutes to be fully applied after VM deployment. During this time, your VM may appear to have limited connectivity.
+</Note>
+
+## Jupyter Notebook Configuration
+
+Optionally enable Jupyter Notebook server for interactive computing and data science workflows.
+
+### Jupyter Setup Process
+
+<Steps>
+  <Step title="Enable Jupyter">
+    Toggle the Jupyter Notebook option during VM configuration
+  </Step>
+  <Step title="Set Password">
+    Configure a secure password for Jupyter access:
+    - Minimum 8 characters required
+    - Password strength validation (weak/medium/strong)
+    - Strong passwords recommended for security
+  </Step>
+  <Step title="Access Jupyter">
+    After VM deployment, access via browser:
+    ```
+    http://<vm-ip>:8888
+    ```
+  </Step>
+  <Step title="Login">
+    Use the configured password to access the Jupyter interface
+  </Step>
+</Steps>
+
+### Password Requirements
+
+<Tabs>
+  <Tab title="Minimum Requirements">
+    **Basic Security**
+    - At least 8 characters
+    - No common dictionary words
+    - Not easily guessable
+  </Tab>
+  
+  <Tab title="Strong Password">
+    **Recommended Security**
+    - 12+ characters
+    - Mix of uppercase and lowercase letters
+    - Include numbers and special characters
+    - Avoid personal information
+  </Tab>
+  
+  <Tab title="Password Strength Indicator">
+    **Real-time Validation**
+    - **Weak:** Basic requirements met but not secure
+    - **Medium:** Good combination of character types
+    - **Strong:** Excellent security with complex pattern
+  </Tab>
+</Tabs>
+
+### Jupyter Security Considerations
+
+<Warning>
+**Jupyter Security:**
+
+- Jupyter will be accessible from any IP that can reach your VM
+- Use strong passwords to prevent unauthorized access
+- Consider restricting access through firewall rules
+- Keep Jupyter updated for security patches
+- Monitor access logs for suspicious activity
+</Warning>
+
+### Jupyter Use Cases
+
+<AccordionGroup>
+  <Accordion title="Data Science Development">
+    **Interactive Data Analysis**
+    - Exploratory data analysis
+    - Machine learning model development
+    - Data visualization and reporting
+    - Collaborative research environments
+  </Accordion>
+  
+  <Accordion title="Educational Environments">
+    **Learning and Teaching**
+    - Interactive programming tutorials
+    - Data science course materials
+    - Student assignment environments
+    - Demonstration and presentation tools
+  </Accordion>
+  
+  <Accordion title="Prototyping and Experimentation">
+    **Rapid Development**
+    - Quick algorithm prototyping
+    - Model experimentation and testing
+    - Documentation and reporting
+    - Sharing reproducible results
+  </Accordion>
+</AccordionGroup>
+
+## Cloud-Init Script Configuration
+
+Add custom initialization scripts to configure your VM environment at first boot.
+
+### Cloud-Init Overview
+
+<CardGroup cols={2}>
+  <Card title="Automatic Configuration" icon="cog">
+    **System Initialization**
+    - Runs during first boot process
+    - Configures system before user access
+    - Automates software installation
+    - Sets up custom environments
+  </Card>
+  
+  <Card title="Script Flexibility" icon="code">
+    **Custom Scripting**
+    - Bash shell scripts supported
+    - Package installation commands
+    - Configuration file modifications
+    - Service setup and management
+  </Card>
+</CardGroup>
+
+### Cloud-Init Script Limitations
+
+<Warning>
+**Script Constraints:**
+
+- Maximum script size: 16KB
+- Input validation and sanitization applied
+- Scripts run with root privileges
+- Execution time limits apply
+- Network access may be limited during early boot
+</Warning>
+
+### Common Cloud-Init Examples
+
+<Tabs>
+  <Tab title="Package Installation">
+    **Install Additional Software**
+    
+    ```bash
+    #!/bin/bash
+    
+    # Update package lists
+    apt update
+    
+    # Install additional packages
+    apt install -y htop vim git curl wget
+    
+    # Install Python packages
+    pip3 install numpy pandas matplotlib
+    
+    # Install Docker
+    curl -fsSL https://get.docker.com | sh
+    usermod -aG docker ubuntu
+    ```
+  </Tab>
+  
+  <Tab title="System Configuration">
+    **Configure System Settings**
+    
+    ```bash
+    #!/bin/bash
+    
+    # Set timezone
+    timedatectl set-timezone America/New_York
+    
+    # Configure swap
+    fallocate -l 4G /swapfile
+    chmod 600 /swapfile
+    mkswap /swapfile
+    swapon /swapfile
+    echo '/swapfile none swap sw 0 0' >> /etc/fstab
+    
+    # Set hostname
+    hostnamectl set-hostname my-ml-server
+    ```
+  </Tab>
+  
+  <Tab title="User Setup">
+    **Create Users and Configure Access**
+    
+    ```bash
+    #!/bin/bash
+    
+    # Create additional user
+    useradd -m -s /bin/bash developer
+    usermod -aG sudo developer
+    
+    # Set up SSH directory for new user
+    mkdir -p /home/developer/.ssh
+    chown developer:developer /home/developer/.ssh
+    chmod 700 /home/developer/.ssh
+    
+    # Copy SSH keys
+    cp /home/ubuntu/.ssh/authorized_keys /home/developer/.ssh/
+    chown developer:developer /home/developer/.ssh/authorized_keys
+    ```
+  </Tab>
+  
+  <Tab title="Application Setup">
+    **Install and Configure Applications**
+    
+    ```bash
+    #!/bin/bash
+    
+    # Install Anaconda
+    wget https://repo.anaconda.com/archive/Anaconda3-2023.09-0-Linux-x86_64.sh
+    bash Anaconda3-2023.09-0-Linux-x86_64.sh -b -p /opt/anaconda3
+    
+    # Add to all users' PATH
+    echo 'export PATH="/opt/anaconda3/bin:$PATH"' >> /etc/environment
+    
+    # Install specific conda environment
+    /opt/anaconda3/bin/conda create -n ml-env python=3.9 -y
+    /opt/anaconda3/bin/conda activate ml-env
+    /opt/anaconda3/bin/conda install pytorch torchvision -c pytorch -y
+    ```
+  </Tab>
+</Tabs>
+
+### Cloud-Init Best Practices
+
+<AccordionGroup>
+  <Accordion title="Script Reliability">
+    **Error Handling and Logging**
+    
+    ```bash
+    #!/bin/bash
+    set -e  # Exit on any error
+    
+    # Log all output
+    exec > >(tee /var/log/cloud-init-custom.log)
+    exec 2>&1
+    
+    echo "Starting custom initialization..."
+    
+    # Your commands here
+    apt update && apt install -y package-name
+    
+    echo "Custom initialization completed successfully"
+    ```
+  </Accordion>
+  
+  <Accordion title="Resource Management">
+    **Efficient Resource Usage**
+    - Keep scripts under 16KB limit
+    - Minimize network downloads during init
+    - Use package managers when possible
+    - Consider script execution time
+    - Test scripts on similar systems first
+  </Accordion>
+  
+  <Accordion title="Security Considerations">
+    **Secure Script Practices**
+    - Validate input sources
+    - Use official package repositories
+    - Avoid hardcoded credentials
+    - Implement proper error handling
+    - Log activities for troubleshooting
+  </Accordion>
+  
+  <Accordion title="Testing and Validation">
+    **Script Testing**
+    - Test scripts on development VMs first
+    - Validate script syntax before deployment
+    - Test with different OS images
+    - Monitor script execution logs
+    - Have rollback procedures ready
+  </Accordion>
+</AccordionGroup>
+
+### Cloud-Init Troubleshooting
+
+<Steps>
+  <Step title="Check Execution Logs">
+    View cloud-init logs on the VM:
+    ```bash
+    sudo cat /var/log/cloud-init.log
+    sudo cat /var/log/cloud-init-output.log
+    ```
+  </Step>
+  <Step title="Verify Script Status">
+    Check cloud-init status:
+    ```bash
+    sudo cloud-init status
+    sudo cloud-init status --long
+    ```
+  </Step>
+  <Step title="Manual Script Testing">
+    Test script components manually:
+    ```bash
+    # Run individual commands from your script
+    # Check for errors or missing dependencies
+    ```
+  </Step>
+  <Step title="Debug and Iterate">
+    - Fix identified issues
+    - Test updated script on new VM
+    - Document working configurations
+    - Share successful scripts with team
+  </Step>
+</Steps>
+
+## Advanced Configuration Integration
+
+### Configuration Workflow
+
+<Steps>
+  <Step title="Plan Configuration">
+    - Determine public IP requirements
+    - Design security rule strategy
+    - Plan application requirements (Jupyter, etc.)
+    - Prepare cloud-init scripts
+  </Step>
+  <Step title="Configure During Deployment">
+    - Set public IP preferences
+    - Configure initial security rules
+    - Enable and configure Jupyter if needed
+    - Add cloud-init script
+  </Step>
+  <Step title="Validate Configuration">
+    - Test connectivity and access
+    - Verify security rules are working
+    - Check application functionality
+    - Monitor cloud-init script execution
+  </Step>
+  <Step title="Refine and Optimize">
+    - Adjust security rules as needed
+    - Optimize cloud-init scripts
+    - Document working configurations
+    - Plan for configuration updates
+  </Step>
+</Steps>
+
+### Configuration Templates
+
+Create reusable configuration templates for common deployment scenarios:
+
+<Tabs>
+  <Tab title="Development Environment">
+    **Development VM Configuration**
+    - **Public IP:** Enabled
+    - **Security Rules:** SSH (22), Jupyter (8888), Custom app ports
+    - **Jupyter:** Enabled with strong password
+    - **Cloud-Init:** Development tools installation
+  </Tab>
+  
+  <Tab title="Production Web Server">
+    **Production Web Configuration**
+    - **Public IP:** Enabled
+    - **Security Rules:** SSH (22), HTTP (80), HTTPS (443)
+    - **Jupyter:** Disabled
+    - **Cloud-Init:** Web server setup and hardening
+  </Tab>
+  
+  <Tab title="Secure Computing">
+    **High-Security Configuration**
+    - **Public IP:** Disabled
+    - **Security Rules:** Minimal, VPN access only
+    - **Jupyter:** Disabled
+    - **Cloud-Init:** Security hardening and monitoring
+  </Tab>
+</Tabs>
+
+<Tip>
+Start with basic configurations and gradually add complexity. Test each configuration component separately before combining them in production deployments.
+</Tip>

@@ -10,8 +10,8 @@
     "light": "#f0f5dd", 
     "dark": "#d0dab3",
     "background": {
-      "light": "#ffffff",
-      "dark": "#1a1a1a"
+      "light": "#000000",
+      "dark": "#000000"
     },
     "anchors": {
       "from": "#0D9373",
@@ -33,6 +33,10 @@
     "url": "https://barrack.ai/deploy"
   },
   "css": "/custom.css",
+  "modeToggle": {
+    "default": "dark",
+    "isHidden": true
+  },
   "navigation": [
     {
       "group": "Get Started",

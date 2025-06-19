@@ -1,0 +1,125 @@
+---
+title: "Custom Images"
+description: "Create reusable VM templates from your snapshots for quick deployment and standardized environments"
+---
+
+Custom images allow you to create reusable VM templates from your snapshots. These images can be used as boot sources when deploying new virtual machines, enabling you to quickly replicate configurations and software setups.
+
+## What are Custom Images?
+
+Custom images are created from your VM snapshots and serve as templates for new virtual machine deployments. They contain:
+
+- The complete operating system and all installed software
+- System configurations and settings
+- User data and applications
+- Custom scripts and automation
+
+## Creating Custom Images
+
+To create a custom image from a snapshot:
+
+1. Navigate to the Images page or access it from the snapshots interface
+2. Click "Create Image" in the Images section
+3. Select a snapshot from the available list (must have SUCCESS status)
+4. Enter a unique name for your image (1-50 characters)
+5. Optionally add a description to help identify the image's purpose
+6. Click "Create Image" to begin the creation process
+
+### Image Creation Requirements
+
+- **Source Snapshot:** Must be in SUCCESS or available status
+- **Name Requirements:** 1-50 characters, letters, numbers, spaces, hyphens, underscores, periods
+- **Uniqueness:** Image names must be unique within your account
+- **Region Specific:** Images are created in the same region as the source snapshot
+
+## Using Custom Images
+
+Once created, custom images can be used when deploying new VMs:
+
+1. In the VM deployment wizard, select "Custom Images" as your boot source
+2. Choose your custom image from the dropdown list
+3. Images are filtered by the selected region automatically
+4. Complete the rest of your VM configuration and deploy
+
+### Custom Image Benefits
+
+- **Rapid Deployment:** Skip manual software installation and configuration
+- **Consistency:** Ensure identical environments across multiple VMs
+- **Team Collaboration:** Share standardized environments with team members
+- **Version Control:** Create multiple image versions for different use cases
+
+## Managing Custom Images
+
+The Images page provides comprehensive management capabilities:
+
+### Image Information
+- View image name, size, and creation date
+- Check image status and region information
+- Access detailed image properties and metadata
+- Monitor storage usage across all images
+
+### Image Operations
+- Delete images that are no longer needed
+- View detailed image information and properties
+- Filter images by region for easier management
+- Track image creation from source snapshots
+
+## Image Status and Lifecycle
+
+Custom images go through different states during their lifecycle:
+
+- **Available / SUCCESS:** Image is ready to be used for VM deployment
+- **Creating:** Image is being created from the source snapshot
+
+## Region-Based Management
+
+Custom images are managed on a per-region basis:
+
+- Images are created in the same region as their source snapshot
+- Use the region dropdown to view images in different locations
+- Images can only be used to deploy VMs in their respective regions
+- Transfer between regions requires creating new snapshots and images
+
+<Tip>
+**Image Best Practices**
+
+- Use descriptive names that indicate the image's purpose and software versions
+- Create images from clean, well-configured snapshots for best results
+- Document your images with detailed descriptions for team collaboration
+- Regularly clean up unused images to manage storage costs
+- Test newly created images by deploying test VMs before production use
+- Consider creating versioned images for different software configurations
+</Tip>
+
+<Warning>
+**Important Considerations**
+
+- Custom images inherit the storage footprint of their source snapshots
+- Deleting an image does not affect VMs that were deployed from it
+- Image creation can take several minutes depending on snapshot size
+- Images are private to your account and cannot be shared with other users
+- Ensure source snapshots are from stable, properly configured VMs
+</Warning>
+
+## Common Use Cases
+
+### Development Environment Templates
+Create standardized development environments with:
+- Pre-installed development tools and IDEs
+- Configured runtime environments (Python, Node.js, etc.)
+- Database servers and development dependencies
+- Custom scripts and shortcuts
+
+### Production Application Images
+Build production-ready images containing:
+- Production application code and dependencies
+- Optimized system configurations
+- Security hardening and monitoring tools
+- Load balancing and scaling configurations
+
+### Machine Learning Workloads
+Create ML-optimized images with:
+- Pre-installed ML frameworks (TensorFlow, PyTorch, etc.)
+- Jupyter notebooks and development environments
+- Pre-configured CUDA and GPU drivers
+- Common datasets and model libraries

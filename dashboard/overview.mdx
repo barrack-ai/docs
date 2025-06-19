@@ -1,0 +1,418 @@
+---
+title: "Dashboard Overview"
+description: "Comprehensive overview of your virtual machines, account information, and quick access to platform features"
+---
+
+# Dashboard Overview
+
+The Dashboard provides a comprehensive overview of your virtual machines, account information, and quick access to platform features.
+
+## Main Dashboard Layout
+
+The dashboard is organized into three main sections for optimal workflow:
+
+<CardGroup cols={3}>
+  <Card title="Instance Details" icon="server">
+    **Left Panel**
+    - Selected VM overview and specifications
+    - Hardware details (CPU, Memory, Storage, GPU)
+    - Network information (Private/Public IPs)
+    - Real-time status indicators
+    - Quick action buttons
+  </Card>
+  
+  <Card title="VM Operations" icon="cogs">
+    **Center Panel**
+    - VM selector dropdown
+    - VM configuration controls
+    - Status control actions (Start, Stop, Hibernate)
+    - Management operations (Delete, Snapshot)
+    - Pricing information
+  </Card>
+  
+  <Card title="Account & Actions" icon="user">
+    **Right Panel**
+    - Account information and Barrack ID
+    - Credit balance and billing details
+    - GST/VAT information management
+    - Quick navigation actions
+    - Logout functionality
+  </Card>
+</CardGroup>
+
+## Key Dashboard Features
+
+### Real-time Monitoring
+
+<AccordionGroup>
+  <Accordion title="VM Status Tracking">
+    **Live Status Updates**
+    - Real-time VM state monitoring (ACTIVE, HIBERNATED, SHUTOFF)
+    - Health indicators and performance metrics
+    - Resource utilization display
+    - Network connectivity status
+    - Automatic status refresh
+  </Accordion>
+  
+  <Accordion title="Resource Monitoring">
+    **Hardware Status**
+    - GPU utilization and temperature
+    - Memory usage and availability
+    - Storage capacity and usage
+    - Network throughput metrics
+    - Performance trend indicators
+  </Accordion>
+  
+  <Accordion title="Cost Tracking">
+    **Financial Monitoring**
+    - Real-time cost per minute calculation
+    - Hourly and daily cost projections
+    - Credit balance tracking
+    - Usage pattern analysis
+    - Cost optimization suggestions
+  </Accordion>
+</AccordionGroup>
+
+### Quick Actions
+
+Access frequently used platform features directly from the dashboard:
+
+<CardGroup cols={2}>
+  <Card title="VM Management" icon="server">
+    **Virtual Machine Operations**
+    - [Deploy VM](https://barrack.ai/deploy) - Create new virtual machines
+    - Start, stop, and hibernate existing VMs
+    - Create snapshots for backup
+    - Delete VMs when no longer needed
+  </Card>
+  
+  <Card title="Resource Management" icon="database">
+    **Storage and Infrastructure**
+    - [SSH Keys](https://barrack.ai/ssh-keys) - Manage secure access
+    - [Volumes](https://barrack.ai/volumes) - Create and manage storage
+    - [Snapshots](https://barrack.ai/snapshots) - Backup and recovery
+    - Security and firewall configuration
+  </Card>
+</CardGroup>
+
+## VM Information Display
+
+The dashboard shows comprehensive information for each virtual machine:
+
+### Hardware Specifications
+
+<Tabs>
+  <Tab title="Compute Resources">
+    **Processing Power**
+    - **CPU Cores:** Number of virtual CPU cores
+    - **RAM:** Total memory allocation in GB
+    - **GPU Type:** Specific GPU model and count
+    - **GPU Memory:** GPU memory allocation
+    - **Performance Tier:** Relative performance rating
+  </Tab>
+  
+  <Tab title="Storage Configuration">
+    **Storage Details**
+    - **Root Disk:** Operating system storage size
+    - **Attached Volumes:** Additional persistent storage
+    - **Volume Status:** Attachment status and health
+    - **Total Storage:** Combined storage allocation
+    - **Bootable Volumes:** Volumes that can boot VMs
+  </Tab>
+  
+  <Tab title="Network Configuration">
+    **Connectivity Information**
+    - **Private IP:** Internal network address
+    - **Public IP:** Internet-accessible address (if assigned)
+    - **SSH Key Information:** Configured access keys
+    - **Region:** Deployment location
+    - **Availability Zone:** Specific data center location
+  </Tab>
+</Tabs>
+
+### Pricing Information
+
+<CardGroup cols={2}>
+  <Card title="Current Costs" icon="dollar-sign">
+    **Real-time Billing**
+    - Cost per hour for current configuration
+    - Cost per minute for precise tracking
+    - Current billing state (ACTIVE, HIBERNATED, etc.)
+    - Projected daily and monthly costs
+  </Card>
+  
+  <Card title="Billing Details" icon="receipt">
+    **Cost Breakdown**
+    - GPU costs (primary cost component)
+    - Storage costs for attached volumes
+    - Network costs (if applicable)
+    - Total cost calculation
+  </Card>
+</CardGroup>
+
+## VM Selector and Management
+
+### VM Selection Interface
+
+<Steps>
+  <Step title="VM Dropdown">
+    Use the VM selector dropdown to quickly switch between multiple virtual machines
+  </Step>
+  <Step title="Automatic Update">
+    The dashboard automatically updates to show details for the selected VM
+  </Step>
+  <Step title="Real-time Sync">
+    All panels update simultaneously with current VM information
+  </Step>
+  <Step title="Persistent Selection">
+    Your selected VM remains active across dashboard refreshes
+  </Step>
+</Steps>
+
+### Multi-VM Management
+
+<AccordionGroup>
+  <Accordion title="VM Comparison">
+    **Compare Multiple VMs**
+    - Quick switching between VMs to compare configurations
+    - Side-by-side cost comparison
+    - Performance characteristic comparison
+    - Resource utilization comparison
+  </Accordion>
+  
+  <Accordion title="Batch Operations">
+    **Manage Multiple VMs**
+    - Bulk hibernation for cost savings
+    - Coordinated snapshot creation
+    - Mass VM cleanup operations
+    - Synchronized VM operations
+  </Accordion>
+  
+  <Accordion title="Fleet Monitoring">
+    **Overall Fleet Status**
+    - Total cost across all VMs
+    - Overall resource utilization
+    - Fleet health indicators
+    - Optimization opportunities
+  </Accordion>
+</AccordionGroup>
+
+## Account Information Panel
+
+### Account Details
+
+<Tabs>
+  <Tab title="Basic Information">
+    **Account Identification**
+    - **Barrack ID:** Unique account identifier
+    - **Account Email:** Primary contact email
+    - **Account Type:** Individual or organization
+    - **Registration Date:** Account creation date
+  </Tab>
+  
+  <Tab title="Billing Information">
+    **Financial Details**
+    - **Current Credit Balance:** Available credits
+    - **Currency:** USD, EUR, or INR based on account
+    - **Recent Transactions:** Credit purchases and usage
+    - **Payment Method:** Configured payment options
+  </Tab>
+  
+  <Tab title="Usage Statistics">
+    **Account Activity**
+    - **Total VMs Created:** Lifetime VM deployments
+    - **Current Active VMs:** Running VM count
+    - **Storage Usage:** Total storage allocation
+    - **Monthly Spend:** Current month expenditure
+  </Tab>
+</Tabs>
+
+### Credit Balance Monitoring
+
+<CardGroup cols={2}>
+  <Card title="Balance Tracking" icon="credit-card">
+    **Current Financial Status**
+    - Real-time credit balance display
+    - Low balance warnings and alerts
+    - Spending rate calculation
+    - Projected balance duration
+  </Card>
+  
+  <Card title="Usage Insights" icon="chart-bar">
+    **Spending Analysis**
+    - Daily and hourly spending patterns
+    - Cost breakdown by resource type
+    - Optimization recommendations
+    - Budget planning assistance
+  </Card>
+</CardGroup>
+
+## Navigation and Quick Actions
+
+### Platform Navigation
+
+Access key platform features directly from the dashboard:
+
+<AccordionGroup>
+  <Accordion title="Resource Management">
+    **Infrastructure Controls**
+    - **Deploy VM:** Launch new virtual machines with custom configurations
+    - **SSH Keys:** Manage secure access credentials for all VMs
+    - **Volumes:** Create and manage persistent storage volumes
+    - **Snapshots:** Create backups and manage VM images
+  </Accordion>
+  
+  <Accordion title="Account Management">
+    **Account Controls**
+    - **Account Settings:** Update profile and billing information
+    - **Credit Management:** Purchase credits and view usage history
+    - **Security Settings:** Manage access controls and authentication
+    - **Support:** Access help and contact support team
+  </Accordion>
+  
+  <Accordion title="Monitoring and Analytics">
+    **Performance Tracking**
+    - **Usage Reports:** Detailed resource utilization reports
+    - **Cost Analysis:** Spending trends and optimization opportunities
+    - **Performance Metrics:** VM and application performance data
+    - **Alert Management:** Configure monitoring and notifications
+  </Accordion>
+</AccordionGroup>
+
+### Quick Action Benefits
+
+<Steps>
+  <Step title="Streamlined Workflow">
+    Reduce clicks and navigation time with direct action access
+  </Step>
+  <Step title="Contextual Actions">
+    Actions are relevant to current VM selection and state
+  </Step>
+  <Step title="Consistent Interface">
+    Familiar interface across all platform features
+  </Step>
+  <Step title="Rapid Operations">
+    Perform common tasks without leaving the dashboard
+  </Step>
+</Steps>
+
+## Dashboard Customization
+
+### Layout Preferences
+
+<CardGroup cols={2}>
+  <Card title="Display Options" icon="eye">
+    **Customize View**
+    - Panel arrangement preferences
+    - Information density settings
+    - Refresh rate configuration
+    - Theme and color preferences
+  </Card>
+  
+  <Card title="Notification Settings" icon="bell">
+    **Alert Configuration**
+    - Status change notifications
+    - Cost threshold alerts
+    - Performance warnings
+    - Maintenance notifications
+  </Card>
+</CardGroup>
+
+### Performance Optimization
+
+<AccordionGroup>
+  <Accordion title="Auto-refresh Settings">
+    **Real-time Updates**
+    - Configurable refresh intervals
+    - Automatic status synchronization
+    - Bandwidth optimization for slower connections
+    - Battery-saving modes for mobile devices
+  </Accordion>
+  
+  <Accordion title="Data Loading">
+    **Efficient Information Display**
+    - Progressive data loading
+    - Cached information for faster display
+    - Selective data refresh
+    - Optimized API calls
+  </Accordion>
+</AccordionGroup>
+
+## Mobile and Responsive Design
+
+### Cross-Device Compatibility
+
+<Tabs>
+  <Tab title="Desktop Experience">
+    **Full-Featured Interface**
+    - Three-panel layout with full information display
+    - Comprehensive controls and detailed metrics
+    - Multi-monitor support
+    - Keyboard shortcuts for power users
+  </Tab>
+  
+  <Tab title="Tablet Experience">
+    **Adaptive Layout**
+    - Two-panel layout optimized for touch
+    - Swipe gestures for navigation
+    - Touch-friendly controls
+    - Portrait and landscape orientation support
+  </Tab>
+  
+  <Tab title="Mobile Experience">
+    **Streamlined Interface**
+    - Single-panel, stacked layout
+    - Essential information prioritized
+    - Touch-optimized buttons and controls
+    - Simplified navigation menu
+  </Tab>
+</Tabs>
+
+## Dashboard Best Practices
+
+### Monitoring Efficiency
+
+<Steps>
+  <Step title="Regular Check-ins">
+    - Monitor VM status and costs daily
+    - Review resource utilization weekly
+    - Analyze spending patterns monthly
+    - Plan capacity changes quarterly
+  </Step>
+  <Step title="Proactive Management">
+    - Set up cost alerts for budget management
+    - Monitor performance trends
+    - Plan for scaling needs
+    - Optimize resource allocation
+  </Step>
+  <Step title="Cost Optimization">
+    - Use hibernation for unused VMs
+    - Right-size VMs based on actual usage
+    - Clean up unused resources regularly
+    - Monitor and adjust storage allocation
+  </Step>
+</Steps>
+
+### Security Monitoring
+
+<AccordionGroup>
+  <Accordion title="Access Monitoring">
+    **Security Awareness**
+    - Monitor login activity and access patterns
+    - Review SSH key usage and access logs
+    - Check for unusual resource usage
+    - Verify account security settings regularly
+  </Accordion>
+  
+  <Accordion title="Resource Security">
+    **Infrastructure Protection**
+    - Monitor firewall rule effectiveness
+    - Review network access patterns
+    - Check for unauthorized resource access
+    - Validate security configurations
+  </Accordion>
+</AccordionGroup>
+
+<Tip>
+**Navigation Tip:** Use the VM selector dropdown to quickly switch between multiple virtual machines. The dashboard automatically updates to show details for the selected VM, making it easy to manage multiple resources efficiently.
+</Tip>

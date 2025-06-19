@@ -1,0 +1,361 @@
+---
+title: "Managing Volumes"
+description: "Attach, detach, and delete your storage volumes"
+---
+
+# Managing Volumes
+
+The Volumes page provides comprehensive tools for managing your storage, including attaching, detaching, and deleting volumes.
+
+## Attaching Volumes
+
+To attach a volume to a VM:
+
+<Steps>
+  <Step title="Select Volume">
+    Click `Attach` on an available volume card
+  </Step>
+  <Step title="Review Volume Details">
+    The Volume Attach Modal opens showing:
+    - Volume details (name, size, region, type)
+    - List of VMs in the same region with ACTIVE status
+    - VM information (name, status, region) in a table format
+  </Step>
+  <Step title="Select Target VM">
+    Select a VM using the radio button selection
+  </Step>
+  <Step title="Confirm Attachment">
+    Click "Attach Volume" to confirm
+  </Step>
+</Steps>
+
+### Volume Attach Modal Features
+
+<CardGroup cols={2}>
+  <Card title="Smart VM Filtering" icon="filter">
+    **Intelligent VM Selection**
+    
+    - Only shows VMs in the same region as the volume
+    - Filters by ACTIVE status for compatibility
+    - Displays VM information clearly
+    - Prevents incompatible attachments
+  </Card>
+  
+  <Card title="Status Validation" icon="check-circle">
+    **Comprehensive Validation**
+    
+    - Only ACTIVE VMs can be selected for attachment
+    - Visual status indicators with color coding (green for ACTIVE)
+    - Helpful messages explaining why non-ACTIVE VMs cannot be selected
+    - Auto-selection of the first ACTIVE VM if available
+  </Card>
+</CardGroup>
+
+### Attachment Requirements
+
+<Warning>
+**Prerequisites for Volume Attachment:**
+
+- VM must be in `ACTIVE` state for volume operations
+- Volume and VM must be in the same region
+- Bootable volumes that are already in use cannot be attached to another VM
+- VM must not be undergoing another operation
+</Warning>
+
+The system includes loading states that show progress during attachment operations, ensuring you have real-time feedback on the process.
+
+## Detaching Volumes
+
+To detach a volume from a VM:
+
+<Steps>
+  <Step title="Initiate Detachment">
+    Click `Detach` on an attached volume
+  </Step>
+  <Step title="Review Warning">
+    A confirmation modal appears with volume details and warnings
+  </Step>
+  <Step title="Acknowledge Impact">
+    Review the warning about potential application disruption
+  </Step>
+  <Step title="Confirm Detachment">
+    Click "Detach" to confirm the operation
+  </Step>
+</Steps>
+
+### Smart Detachment System
+
+The platform includes an intelligent detachment system:
+
+<Tabs>
+  <Tab title="Automatic Detection">
+    - **VM Identification:** System automatically finds the VM to detach from
+    - **Multi-source VM ID:** Uses instance_id, attached volume mapping, or region-based VM search
+    - **Relationship Mapping:** Tracks volume-VM relationships automatically
+  </Tab>
+  
+  <Tab title="Status Validation">
+    - **VM State Check:** Ensures VM is in ACTIVE state before detachment
+    - **Operation Conflicts:** Prevents detachment during other operations
+    - **Safety Checks:** Validates detachment won't cause system issues
+  </Tab>
+  
+  <Tab title="Error Handling">
+    - **Graceful Error Handling:** Clear error messages for various failure scenarios
+    - **Status Display:** Shows VM status when volume is attached
+    - **Recovery Options:** Provides guidance when detachment fails
+  </Tab>
+</Tabs>
+
+### Detachment Requirements
+
+<CardGroup cols={2}>
+  <Card title="VM Status" icon="server">
+    **Active VM Required**
+    
+    - VM must be in `ACTIVE` state for volume detachment
+    - Cannot detach during VM state transitions
+    - System validates VM availability before proceeding
+  </Card>
+  
+  <Card title="System Volumes" icon="hard-drive">
+    **Boot Volume Protection**
+    
+    - Cannot detach the system/boot volume of a running VM
+    - System identifies and protects critical volumes
+    - Prevents accidental system disruption
+  </Card>
+</CardGroup>
+
+## Deleting Volumes
+
+To delete a volume:
+
+<Steps>
+  <Step title="Ensure Detachment">
+    Volume must be detached from all VMs first
+  </Step>
+  <Step title="Initiate Deletion">
+    Click `Delete` on an unattached volume
+  </Step>
+  <Step title="Review Confirmation">
+    A delete confirmation modal appears showing:
+    - Volume name to be deleted
+    - Warning that action cannot be undone
+    - Permanent data loss warning
+  </Step>
+  <Step title="Confirm Deletion">
+    Click "Delete" to confirm the permanent deletion
+  </Step>
+</Steps>
+
+### Delete Confirmation Modal
+
+The deletion process includes comprehensive safeguards:
+
+<AccordionGroup>
+  <Accordion title="Safety Warnings">
+    - **Volume Identification:** Shows exact volume name being deleted
+    - **Irreversible Action:** Warning triangle icon with danger messaging
+    - **Data Loss Notice:** Clear statement that action cannot be undone
+    - **Final Confirmation:** Separate confirmation required to proceed
+  </Accordion>
+  
+  <Accordion title="Process Protection">
+    - **Disable During Process:** Delete button becomes disabled during processing
+    - **Loading State:** Shows spinner animation during deletion
+    - **Error Handling:** Clear error messages if deletion fails
+    - **Status Updates:** Real-time feedback on deletion progress
+  </Accordion>
+</AccordionGroup>
+
+### Deletion Requirements
+
+<Warning>
+**Volume Deletion Prerequisites:**
+
+- Volumes must be detached before deletion
+- Deletion is permanent and cannot be undone
+- All data on the volume will be permanently lost
+- Any snapshots of the volume will remain available
+</Warning>
+
+## Volume Status Indicators
+
+Volumes display status indicators to show their current state:
+
+<Tabs>
+  <Tab title="Operational States">
+    <CodeGroup>
+    ```bash Available
+    The volume is ready to be attached to a VM
+    ```
+
+    ```bash Attached / In-use
+    The volume is currently attached to a VM
+    ```
+    </CodeGroup>
+  </Tab>
+  
+  <Tab title="Transitional States">
+    <CodeGroup>
+    ```bash Creating
+    The volume is currently being created
+    ```
+
+    ```bash Attaching
+    Volume is being connected to a VM
+    ```
+
+    ```bash Detaching
+    Volume is being disconnected from a VM
+    ```
+
+    ```bash Error
+    There was an issue creating or attaching the volume
+    ```
+    </CodeGroup>
+  </Tab>
+</Tabs>
+
+## Volume Information Display
+
+Each volume card displays comprehensive information:
+
+### Header Information
+- **Volume Name:** User-defined identifier with database icon
+- **Status Badge:** Current operational state with color coding
+- **Attachment Info:** Shows which VM the volume is attached to (if any)
+- **VM Status:** Displays the status of the attached VM for operational context
+
+### Specifications Grid
+- **Size:** Storage capacity in GB
+- **Region:** Geographic location (NORWAY-1, CANADA-1, US-1)
+- **Type:** Storage type (Cloud-SSD)
+- **Bootable Status:** Whether the volume can be used to boot VMs
+
+### Action Buttons
+Dynamic buttons based on volume state:
+- **Attach/Detach:** Available based on current attachment status
+- **Delete:** Only available for unattached volumes
+
+## Storage Best Practices
+
+<AccordionGroup>
+  <Accordion title="Regional Planning">
+    **Optimize Performance and Compliance**
+    
+    - Create volumes in the same region as your VMs to avoid compatibility issues
+    - Consider data residency requirements for compliance
+    - Plan for disaster recovery across multiple regions
+    - Monitor regional availability and pricing differences
+  </Accordion>
+  
+  <Accordion title="Capacity Management">
+    **Right-size Your Storage**
+    
+    - Size volumes appropriately for your workload to optimize cost
+    - Plan for growth but avoid over-provisioning
+    - Monitor usage patterns and adjust capacity as needed
+    - Use bootable volumes for persistent OS configurations that you want to reuse
+  </Accordion>
+  
+  <Accordion title="Data Protection">
+    **Safeguard Your Information**
+    
+    - Detach volumes before deleting VMs if you want to preserve the data
+    - Consider creating snapshots before major changes to ensure data recovery options
+    - Monitor your volume usage to avoid unnecessary storage costs
+    - Complete your profile and maintain sufficient credits before creating volumes
+  </Accordion>
+  
+  <Accordion title="Operational Efficiency">
+    **Streamline Your Workflow**
+    
+    - Use descriptive naming conventions for easy identification
+    - Regular cleanup of unused volumes to manage costs
+    - Implement consistent attachment/detachment procedures
+    - Monitor volume performance and optimize as needed
+  </Accordion>
+</AccordionGroup>
+
+## Volume Management Tips
+
+### Refresh and Data Management
+
+Keep your volume data current:
+
+- **Automatic Refresh:** The page automatically refreshes after volume operations to show updated status
+- **Loading States:** Visual progress indicators show progress for create, attach, detach, and delete operations
+- **Pagination Management:** Pagination automatically adjusts when volumes are added or removed
+- **Regional Filtering:** Region filtering allows you to manage volumes across different geographic locations
+- **Real-time Updates:** Volume statistics update in real-time as you perform operations
+
+### Error Handling and Recovery
+
+<Tabs>
+  <Tab title="Attachment Failures">
+    **Common Issues and Solutions:**
+    
+    - **VM Not Active:** Wait for VM to reach ACTIVE state before attaching
+    - **Region Mismatch:** Ensure volume and VM are in the same region
+    - **Volume In Use:** Check if volume is already attached to another VM
+    - **Insufficient Permissions:** Verify account permissions and status
+  </Tab>
+  
+  <Tab title="Detachment Issues">
+    **Troubleshooting Detachment:**
+    
+    - **VM State Issues:** Ensure VM is in ACTIVE state before detaching
+    - **System Volume Protection:** Cannot detach boot/system volumes from running VMs
+    - **Concurrent Operations:** Wait for other operations to complete
+    - **Application Impact:** Plan detachment to minimize service disruption
+  </Tab>
+  
+  <Tab title="Deletion Problems">
+    **Deletion Prerequisites:**
+    
+    - **Attachment Status:** Ensure volume is completely detached
+    - **Active Operations:** Wait for any ongoing operations to complete
+    - **Confirmation Required:** Double-check volume name before deletion
+    - **Data Backup:** Create snapshots if data preservation is needed
+  </Tab>
+</Tabs>
+
+## Integration with VM Workflow
+
+### Seamless Operations
+
+Volume management integrates seamlessly with your VM workflow:
+
+- **Live Management:** Attach and detach volumes without VM downtime (for data volumes)
+- **Performance Monitoring:** Real-time status updates and performance metrics
+- **Automated Detection:** System automatically detects volume-VM relationships
+- **Consistency Checks:** Validates operations to prevent configuration conflicts
+
+### Workflow Examples
+
+<Steps>
+  <Step title="Development Environment">
+    - Create volumes for project data and dependencies
+    - Attach volumes to development VMs as needed
+    - Detach and reattach volumes to different VMs for testing
+    - Delete temporary volumes when projects are complete
+  </Step>
+  <Step title="Production Deployment">
+    - Create bootable volumes with production configurations
+    - Attach data volumes to production VMs for persistence
+    - Implement backup strategies with regular snapshots
+    - Manage volume lifecycle based on business requirements
+  </Step>
+  <Step title="Disaster Recovery">
+    - Create cross-region volume backups using snapshots
+    - Test volume restoration procedures regularly
+    - Document volume dependencies and relationships
+    - Implement automated recovery workflows
+  </Step>
+</Steps>
+
+<Tip>
+Regular monitoring of volume status and proactive management helps prevent issues and optimizes performance across your entire infrastructure.
+</Tip>

@@ -1,0 +1,459 @@
+---
+title: "Firewall Rules"
+description: "Define what network traffic is allowed to and from your VMs"
+---
+
+# Firewall Rules
+
+Firewall rules define what network traffic is allowed to and from your virtual machines.
+
+## Rule Components
+
+Each firewall rule consists of several components that work together to control network traffic:
+
+<CardGroup cols={2}>
+  <Card title="Traffic Direction" icon="arrows-alt">
+    **Direction Control**
+    - **Ingress:** Incoming traffic to your VM
+    - **Egress:** Outgoing traffic from your VM
+    - Rules can be specific to direction
+    - Different rules may apply for each direction
+  </Card>
+  
+  <Card title="Protocol Specification" icon="network-wired">
+    **Protocol Types**
+    - **TCP:** Reliable connection-based protocols
+    - **UDP:** Connectionless, fast protocols
+    - **ICMP:** Network diagnostic and control messages
+    - Protocol determines available configuration options
+  </Card>
+</CardGroup>
+
+### Core Rule Elements
+
+<Tabs>
+  <Tab title="Direction">
+    **Traffic Flow Control**
+    
+    **Ingress (Incoming)**
+    - Controls traffic coming into your VM
+    - Typical for services your VM provides
+    - Examples: Web servers, databases, SSH access
+    - Source IP restrictions apply to incoming connections
+    
+    **Egress (Outgoing)**
+    - Controls traffic leaving your VM
+    - Typical for services your VM consumes
+    - Examples: API calls, database connections, internet access
+    - Destination IP restrictions apply to outgoing connections
+  </Tab>
+  
+  <Tab title="Protocol">
+    **Network Protocol Selection**
+    
+    **TCP (Transmission Control Protocol)**
+    - Connection-oriented, reliable delivery
+    - Used for: HTTP, HTTPS, SSH, databases
+    - Supports port ranges
+    - Stateful connection tracking
+    
+    **UDP (User Datagram Protocol)**
+    - Connectionless, fast delivery
+    - Used for: DNS, streaming, gaming
+    - Supports port ranges
+    - Lower overhead than TCP
+    
+    **ICMP (Internet Control Message Protocol)**
+    - Network diagnostics and control
+    - Used for: Ping, traceroute, error messages
+    - No port configuration needed
+    - Essential for network troubleshooting
+  </Tab>
+  
+  <Tab title="IP Version">
+    **Internet Protocol Version**
+    
+    **IPv4**
+    - Standard internet protocol
+    - 32-bit addresses (e.g., 192.168.1.1)
+    - Most common for current applications
+    - CIDR notation for ranges (e.g., 192.168.1.0/24)
+    
+    **IPv6**
+    - Next-generation internet protocol
+    - 128-bit addresses (e.g., 2001:db8::1)
+    - Growing adoption for modern applications
+    - CIDR notation for ranges (e.g., 2001:db8::/32)
+  </Tab>
+</Tabs>
+
+## Adding Firewall Rules
+
+To add a rule to an existing firewall:
+
+<Steps>
+  <Step title="Access Rule Management">
+    From the firewall details page or click "Add Rule" button on firewall card
+  </Step>
+  <Step title="Configure Direction">
+    Select traffic direction:
+    - **Ingress:** For incoming traffic (most common)
+    - **Egress:** For outgoing traffic
+  </Step>
+  <Step title="Select Protocol">
+    Choose the appropriate protocol:
+    - **TCP:** For web services, SSH, databases
+    - **UDP:** For DNS, streaming, real-time applications
+    - **ICMP:** For ping and network diagnostics
+  </Step>
+  <Step title="Set IP Version">
+    Choose IP version:
+    - **IPv4:** Standard choice for most applications
+    - **IPv6:** For modern applications requiring IPv6
+  </Step>
+  <Step title="Configure IP Range">
+    Enter remote IP range in CIDR format:
+    - **Specific IP:** 203.0.113.1/32
+    - **IP Range:** 192.168.1.0/24
+    - **All IPs:** 0.0.0.0/0 (IPv4) or ::/0 (IPv6)
+  </Step>
+  <Step title="Set Port Range (TCP/UDP only)">
+    For TCP and UDP protocols, specify port ranges:
+    - **Single Port:** Set both min and max to same value
+    - **Port Range:** Set minimum and maximum ports
+    - **Port Numbers:** Must be between 1 and 65535
+  </Step>
+  <Step title="Save Rule">
+    Click "Add Rule" to save the configuration
+  </Step>
+</Steps>
+
+## Port Range Specifications
+
+For TCP and UDP protocols, you must configure port access:
+
+### Port Configuration Requirements
+
+<Warning>
+**Port Range Rules:**
+
+- Port numbers must be between 1 and 65535
+- Minimum port must be less than or equal to maximum port
+- Both minimum and maximum ports must be specified together
+- For single port access, set both minimum and maximum to the same value
+- Port ranges are not applicable for ICMP protocol
+</Warning>
+
+### Common Port Configurations
+
+<Tabs>
+  <Tab title="Single Ports">
+    **Specific Service Ports**
+    
+    | Service | Protocol | Port | Min/Max Setting |
+    |---------|----------|------|-----------------|
+    | SSH | TCP | 22 | Min: 22, Max: 22 |
+    | HTTP | TCP | 80 | Min: 80, Max: 80 |
+    | HTTPS | TCP | 443 | Min: 443, Max: 443 |
+    | MySQL | TCP | 3306 | Min: 3306, Max: 3306 |
+    | PostgreSQL | TCP | 5432 | Min: 5432, Max: 5432 |
+    | Redis | TCP | 6379 | Min: 6379, Max: 6379 |
+  </Tab>
+  
+  <Tab title="Port Ranges">
+    **Service Port Ranges**
+    
+    | Use Case | Protocol | Range | Min/Max Setting |
+    |----------|----------|-------|-----------------|
+    | FTP Data | TCP | 20-21 | Min: 20, Max: 21 |
+    | HTTP Alt | TCP | 8000-8999 | Min: 8000, Max: 8999 |
+    | Custom Apps | TCP | 3000-3010 | Min: 3000, Max: 3010 |
+    | Gaming | UDP | 7000-7100 | Min: 7000, Max: 7100 |
+    | Development | TCP | 8080-8090 | Min: 8080, Max: 8090 |
+  </Tab>
+  
+  <Tab title="Well-Known Ports">
+    **Standard Service Ports**
+    
+    **Web Services:**
+    - HTTP: 80 (TCP)
+    - HTTPS: 443 (TCP)
+    - HTTP Alt: 8080 (TCP)
+    
+    **Database Services:**
+    - MySQL: 3306 (TCP)
+    - PostgreSQL: 5432 (TCP)
+    - MongoDB: 27017 (TCP)
+    - Redis: 6379 (TCP)
+    
+    **System Services:**
+    - SSH: 22 (TCP)
+    - DNS: 53 (UDP)
+    - DHCP: 67-68 (UDP)
+    - SNMP: 161 (UDP)
+  </Tab>
+</Tabs>
+
+## IP Range Validation
+
+Remote IP ranges must follow CIDR notation for proper network specification:
+
+### IPv4 CIDR Examples
+
+<CodeGroup>
+```bash Single IP Address
+203.0.113.1/32
+# Allows access from exactly one IP address
+```
+
+```bash Small Network
+192.168.1.0/24
+# Allows access from 192.168.1.1 to 192.168.1.254 (254 addresses)
+```
+
+```bash Large Network
+10.0.0.0/8
+# Allows access from 10.0.0.1 to 10.255.255.254 (16,777,214 addresses)
+```
+
+```bash All IPv4 Addresses
+0.0.0.0/0
+# Allows access from any IPv4 address (use with caution)
+```
+</CodeGroup>
+
+### IPv6 CIDR Examples
+
+<CodeGroup>
+```bash Single IPv6 Address
+2001:db8::1/128
+# Allows access from exactly one IPv6 address
+```
+
+```bash IPv6 Subnet
+2001:db8::/64
+# Standard IPv6 subnet (18,446,744,073,709,551,616 addresses)
+```
+
+```bash Large IPv6 Network
+2001:db8::/32
+# Large IPv6 network allocation
+```
+
+```bash All IPv6 Addresses
+::/0
+# Allows access from any IPv6 address (use with caution)
+```
+</CodeGroup>
+
+### CIDR Validation Rules
+
+<AccordionGroup>
+  <Accordion title="IPv4 Validation">
+    **IPv4 Address Requirements**
+    - Address parts must be 0-255 (e.g., 192.168.1.100)
+    - CIDR prefix must be 0-32 (e.g., /24, /16, /8)
+    - Valid format: xxx.xxx.xxx.xxx/prefix
+    - Cannot use broadcast or network addresses in single IP specifications
+  </Accordion>
+  
+  <Accordion title="IPv6 Validation">
+    **IPv6 Address Requirements**
+    - Must follow standard IPv6 format (e.g., 2001:db8::1)
+    - CIDR prefix must be 0-128 (e.g., /64, /32, /128)
+    - Supports compressed notation (:: for consecutive zeros)
+    - Valid format: xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx/prefix
+  </Accordion>
+</AccordionGroup>
+
+## Common Rule Configurations
+
+### Web Server Rules
+
+<Tabs>
+  <Tab title="Basic Web Server">
+    **HTTP/HTTPS Traffic**
+    
+    | Purpose | Direction | Protocol | Port | Remote IP | Use Case |
+    |---------|-----------|----------|------|-----------|----------|
+    | Public HTTP | Ingress | TCP | 80 | 0.0.0.0/0 | Public website |
+    | Public HTTPS | Ingress | TCP | 443 | 0.0.0.0/0 | Secure website |
+    | SSH Access | Ingress | TCP | 22 | Your IP/32 | Server management |
+    | Health Check | Ingress | TCP | 80 | Load balancer IP | Monitoring |
+  </Tab>
+  
+  <Tab title="API Server">
+    **REST API Services**
+    
+    | Purpose | Direction | Protocol | Port | Remote IP | Use Case |
+    |---------|-----------|----------|------|-----------|----------|
+    | API Endpoint | Ingress | TCP | 8080 | 0.0.0.0/0 | Public API |
+    | Admin API | Ingress | TCP | 8443 | Admin IPs | Management |
+    | Database | Egress | TCP | 5432 | DB Server IP | Data access |
+    | External API | Egress | TCP | 443 | API Provider | External calls |
+  </Tab>
+</Tabs>
+
+### Database Server Rules
+
+<AccordionGroup>
+  <Accordion title="MySQL Database">
+    **MySQL Server Protection**
+    
+    | Rule Purpose | Configuration | Security Notes |
+    |--------------|---------------|----------------|
+    | **Application Access** | Ingress TCP 3306 from app servers | Restrict to app server IPs only |
+    | **Admin Access** | Ingress TCP 3306 from admin IPs | Use VPN or bastion host |
+    | **Backup Access** | Ingress TCP 3306 from backup server | Dedicated backup network preferred |
+    | **SSH Management** | Ingress TCP 22 from admin IPs | Essential for server management |
+  </Accordion>
+  
+  <Accordion title="PostgreSQL Database">
+    **PostgreSQL Server Protection**
+    
+    | Rule Purpose | Configuration | Security Notes |
+    |--------------|---------------|----------------|
+    | **Application Access** | Ingress TCP 5432 from app servers | Restrict to application subnet |
+    | **Replication** | Ingress TCP 5432 from replica IPs | Master-slave replication |
+    | **Monitoring** | Ingress TCP 5432 from monitoring | Database performance monitoring |
+    | **SSH Management** | Ingress TCP 22 from admin IPs | Server administration |
+  </Accordion>
+</AccordionGroup>
+
+### Application-Specific Rules
+
+<Tabs>
+  <Tab title="Jupyter Notebook">
+    **Data Science Environment**
+    
+    ```
+    Purpose: Jupyter Web Interface
+    Direction: Ingress
+    Protocol: TCP
+    Port: 8888
+    Remote IP: Your IP address or trusted network
+    Security: Use strong password and HTTPS
+    ```
+  </Tab>
+  
+  <Tab title="Docker Registry">
+    **Container Registry**
+    
+    ```
+    Purpose: Docker Registry Access
+    Direction: Ingress
+    Protocol: TCP
+    Port: 5000
+    Remote IP: Developer IPs or CI/CD servers
+    Security: Use authentication and TLS
+    ```
+  </Tab>
+  
+  <Tab title="Monitoring Services">
+    **System Monitoring**
+    
+    ```
+    Purpose: Prometheus Metrics
+    Direction: Ingress
+    Protocol: TCP
+    Port: 9090
+    Remote IP: Monitoring server IPs
+    Security: Restrict to monitoring infrastructure
+    ```
+  </Tab>
+</Tabs>
+
+### Network Diagnostic Rules
+
+<CardGroup cols={2}>
+  <Card title="ICMP Rules" icon="search">
+    **Network Diagnostics**
+    
+    **Ping Access:**
+    - Direction: Ingress
+    - Protocol: ICMP
+    - IP Range: Your network or 0.0.0.0/0
+    - Use: Network connectivity testing
+    
+    **Traceroute Support:**
+    - Essential for network troubleshooting
+    - Helps diagnose connectivity issues
+    - Useful for performance analysis
+  </Card>
+  
+  <Card title="Management Access" icon="tools">
+    **Administrative Access**
+    
+    **SSH Access:**
+    - Direction: Ingress
+    - Protocol: TCP
+    - Port: 22
+    - IP Range: Admin IPs only
+    - Use: Secure server management
+    
+    **VPN Access:**
+    - Consider VPN for enhanced security
+    - Reduces public IP exposure
+    - Centralized access control
+  </Card>
+</CardGroup>
+
+## Security Best Practices
+
+### Rule Design Principles
+
+<Steps>
+  <Step title="Start Restrictive">
+    Begin with the most restrictive rules and gradually open access as needed
+  </Step>
+  <Step title="Document Purpose">
+    Add clear descriptions to rules explaining their purpose and requirements
+  </Step>
+  <Step title="Use Specific IPs">
+    Avoid 0.0.0.0/0 unless public access is truly required
+  </Step>
+  <Step title="Regular Review">
+    Periodically audit rules and remove unnecessary access
+  </Step>
+</Steps>
+
+### Common Security Mistakes
+
+<Warning>
+**Avoid These Common Errors:**
+
+- **Overly Broad Access:** Using 0.0.0.0/0 for internal services
+- **Unnecessary Ports:** Opening ports that aren't actively used
+- **Missing SSH Restrictions:** Allowing SSH from any IP address
+- **Ignoring Egress:** Not controlling outbound traffic
+- **Poor Documentation:** Rules without clear purpose or ownership
+</Warning>
+
+### Rule Testing and Validation
+
+<AccordionGroup>
+  <Accordion title="Testing New Rules">
+    **Validation Process**
+    - Test rules in development environment first
+    - Use network diagnostic tools to verify connectivity
+    - Monitor application logs for connection issues
+    - Validate both allowed and blocked traffic
+  </Accordion>
+  
+  <Accordion title="Troubleshooting Rules">
+    **Common Debugging Steps**
+    - Check rule order and precedence
+    - Verify CIDR notation is correct
+    - Confirm protocol and port specifications
+    - Test from source IP to verify access
+    - Review firewall logs for blocked connections
+  </Accordion>
+</AccordionGroup>
+
+<Info>
+Remember that firewall rules may take up to 10 minutes to be fully applied after creation. Plan rule changes during maintenance windows to minimize service disruption.
+</Info>
+
+<Tip>
+Start with restrictive rules and gradually open access as needed. It's much safer to start with limited access and expand than to start with broad access and try to restrict later.
+</Tip>

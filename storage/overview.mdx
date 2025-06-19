@@ -1,0 +1,198 @@
+---
+title: "Storage Management"
+description: "Create and manage persistent storage volumes for your virtual machines"
+---
+
+# Storage Management
+
+The Storage Management system allows you to create and manage persistent storage volumes for your virtual machines.
+
+## Prerequisites
+
+<Warning>
+**Required Before Creating Volumes**
+
+- **Complete Profile:** Your profile must be complete with billing information (address, postal code, country)
+- **Minimum Balance:** Account must have sufficient credits:
+  - USD: Minimum $1.00
+  - EUR: Minimum €1.00
+  - INR: Minimum ₹100.00
+</Warning>
+
+To check your profile completion status:
+1. Navigate to [Account Settings](https://barrack.ai/account)
+2. Verify all required fields are completed
+3. Ensure billing address is fully filled out
+
+## Volume Types
+
+The platform supports different volume types for various use cases:
+
+<CardGroup cols={2}>
+  <Card title="Standard Volumes" icon="database">
+    **General-purpose storage** for data and applications
+    
+    **Specifications:**
+    - **Minimum size:** 10GB
+    - **Maximum size:** 1,048,576GB (1TB)
+    - **Performance:** Optimized for GPU workloads
+    - **Persistence:** Data persists across VM lifecycles
+    - **Attachment:** Can be attached to any VM in the same region
+    - **Use cases:** Application data, databases, file storage
+  </Card>
+
+  <Card title="Bootable Volumes" icon="hard-drive">
+    **Volumes containing an operating system** that can boot a VM
+    
+    **Specifications:**
+    - **Minimum size:** 100GB
+    - **Maximum size:** 1,048,576GB (1TB)
+    - **Initialization:** Must have a valid OS image
+    - **Usage:** Can be used to deploy new VMs
+    - **Benefits:** Preserves installed software and configurations
+    - **Use cases:** Custom OS setups, pre-configured environments
+  </Card>
+</CardGroup>
+
+## Volume Storage Pricing
+
+<Info>
+**Volume Storage:** $0.1 per TB per hour (€0.1 per TB per hour | ₹10 per TB per hour)
+
+Billing is calculated hourly based on provisioned storage capacity.
+</Info>
+
+## Volume Dashboard Statistics
+
+The [Volumes page](https://barrack.ai/volumes) displays key statistics for your storage in the selected region:
+
+- **Total Volumes:** Number of volumes in the selected region
+- **Total Storage:** Combined storage allocated across all volumes (in GB)
+- **Attached Volumes:** Number of volumes currently attached to VMs
+- **Bootable Volumes:** Number of volumes that can be used to boot VMs
+
+## Pagination and Display
+
+Volume management includes efficient pagination:
+
+- 6 volumes displayed per page
+- Previous/Next navigation with page numbers
+- Pagination controls appear when more than 6 volumes exist
+- Grid layout adjusts for desktop (3 columns) and mobile (1 column)
+
+## Volume Operations
+
+<CardGroup cols={2}>
+  <Card title="Create Volumes" icon="plus" href="/storage/creating-volumes">
+    **Add new storage volumes**
+    
+    - Standard and bootable volume creation
+    - Automatic naming suggestions
+    - Real-time validation
+    - OS image integration for bootable volumes
+  </Card>
+  
+  <Card title="Manage Volumes" icon="gear" href="/storage/managing-volumes">
+    **Attach, detach, and delete volumes**
+    
+    - Smart VM filtering by region and status
+    - Graceful attachment/detachment
+    - Status validation and error handling
+    - Multi-volume management
+  </Card>
+</CardGroup>
+
+## Volume Status Indicators
+
+Volumes display status indicators to show their current state:
+
+<CodeGroup>
+```bash Available
+The volume is ready to be attached to a VM
+```
+
+```bash Attached/In-use
+The volume is currently attached to a VM
+```
+
+```bash Creating
+The volume is currently being created
+```
+
+```bash Error
+There was an issue creating or attaching the volume
+```
+</CodeGroup>
+
+## Storage Best Practices
+
+<AccordionGroup>
+  <Accordion title="Regional Planning">
+    **Optimize performance and compliance**
+    
+    - Create volumes in the same region as your VMs to avoid compatibility issues
+    - Consider data residency requirements for compliance
+    - Plan for disaster recovery across multiple regions
+    - Monitor regional availability and pricing differences
+  </Accordion>
+  
+  <Accordion title="Capacity Planning">
+    **Right-size your storage**
+    
+    - Size volumes appropriately for your workload to optimize cost
+    - Plan for growth but avoid over-provisioning
+    - Monitor usage patterns and adjust capacity as needed
+    - Use bootable volumes for persistent OS configurations that you want to reuse
+  </Accordion>
+  
+  <Accordion title="Data Management">
+    **Protect and organize your data**
+    
+    - Detach volumes before deleting VMs if you want to preserve the data
+    - Create regular snapshots before major changes to ensure data recovery options
+    - Use descriptive naming conventions for easy identification
+    - Implement proper access controls and security measures
+  </Accordion>
+  
+  <Accordion title="Cost Optimization">
+    **Manage storage costs effectively**
+    
+    - Monitor your volume usage to avoid unnecessary storage costs
+    - Delete unused volumes to reduce ongoing costs
+    - Consider snapshot strategies for long-term data retention
+    - Regular cleanup of temporary or test volumes
+  </Accordion>
+  
+  <Accordion title="Security & Backup">
+    **Ensure data protection**
+    
+    - Complete your profile and maintain sufficient credits before creating volumes
+    - Implement regular backup schedules using snapshots
+    - Consider encryption for sensitive data
+    - Monitor access logs and unusual activity
+  </Accordion>
+</AccordionGroup>
+
+## Quick Actions
+
+<CardGroup cols={3}>
+  <Card title="Create Volume" icon="plus" href="/storage/creating-volumes">
+    Add persistent storage to your VMs
+  </Card>
+  <Card title="Manage Volumes" icon="gear" href="/storage/managing-volumes">
+    Attach, detach, and delete volumes
+  </Card>
+  <Card title="Best Practices" icon="lightbulb" href="#storage-best-practices">
+    Learn storage optimization tips
+  </Card>
+</CardGroup>
+
+## Next Steps
+
+1. **[Create your first volume](/storage/creating-volumes)** - Start with a standard volume for data storage
+2. **[Learn volume management](/storage/managing-volumes)** - Master attaching and detaching volumes
+3. **[Explore bootable volumes](/storage/creating-volumes#bootable-volume-creation)** - Create reusable OS configurations
+
+<Tip>
+Create volumes in the same region as your VMs to avoid compatibility issues and optimize performance.
+</Tip>

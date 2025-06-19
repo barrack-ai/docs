@@ -1,5 +1,5 @@
 {
-  "name": "Barrack.ai Documentation",
+  "name": "Barrack Documentation",
   "logo": {
     "dark": "/logo/dark.svg",
     "light": "/logo/light.svg"
@@ -8,42 +8,107 @@
   "colors": {
     "primary": "#0D9373",
     "light": "#07C983",
-    "dark": "#0D9373"
+    "dark": "#0D9373",
+    "anchors": {
+      "from": "#0D9373",
+      "to": "#07C983"
+    }
   },
   "topbarLinks": [
+    {
+      "name": "Dashboard",
+      "url": "https://barrack.ai/dashboard"
+    },
     {
       "name": "Support",
       "url": "mailto:support@barrack.ai"
     }
   ],
+  "topbarCtaButton": {
+    "name": "Deploy VM",
+    "url": "https://barrack.ai/deploy"
+  },
   "navigation": [
     {
       "group": "Get Started",
       "pages": [
         "introduction",
-        "getting-started"
+        "getting-started",
+        "authentication"
       ]
     },
     {
-      "group": "Storage",
+      "group": "Storage Management",
       "pages": [
-        "storage",
-        "volumes"
+        "storage/overview",
+        "storage/creating-volumes",
+        "storage/managing-volumes"
       ]
     },
     {
-      "group": "Virtual Machines",
+      "group": "Virtual Machine Management",
       "pages": [
-        "vm-deployment",
-        "gpu-config"
+        "vm/gpu-configuration",
+        "vm/region-selection",
+        "vm/boot-sources",
+        "vm/ssh-configuration",
+        "vm/advanced-configuration",
+        "vm/states-billing"
       ]
     },
     {
-      "group": "Account",
+      "group": "Dashboard & Operations",
       "pages": [
-        "account",
+        "dashboard/overview",
+        "dashboard/vm-management"
+      ]
+    },
+    {
+      "group": "Security & Networking",
+      "pages": [
+        "security/firewall-management",
+        "security/firewall-rules",
+        "security/attaching-firewalls"
+      ]
+    },
+    {
+      "group": "Backup & Recovery",
+      "pages": [
+        "backup/snapshots-management",
+        "backup/creating-snapshots",
+        "backup/restoring-snapshots",
+        "backup/managing-snapshots",
+        "backup/custom-images"
+      ]
+    },
+    {
+      "group": "SSH Access Management",
+      "pages": [
+        "ssh/creating-keys",
+        "ssh/importing-keys",
+        "ssh/managing-keys"
+      ]
+    },
+    {
+      "group": "Account & Billing",
+      "pages": [
+        "account/management",
+        "account/credits-system"
+      ]
+    },
+    {
+      "group": "Help & Support",
+      "pages": [
         "troubleshooting"
       ]
     }
-  ]
+  ],
+  "footerSocials": {
+    "website": "https://barrack.ai"
+  },
+  "feedback": {
+    "thumbsRating": true,
+    "suggestEdit": true,
+    "raiseIssue": true
+  }
 }

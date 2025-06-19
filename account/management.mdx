@@ -1,0 +1,406 @@
+---
+title: "Account Management"
+description: "Manage your account profile and billing information"
+---
+
+# Account Management
+
+Your account profile contains essential information for using the platform and processing payments.
+
+## Personal Information
+
+Update your basic personal details in your [account settings](https://barrack.ai/account):
+
+<CardGroup cols={2}>
+  <Card title="Basic Details" icon="user">
+    **Required Information**
+    - **Name:** Full name (required, letters, spaces, hyphens, apostrophes only, 2-100 characters)
+    - **Email:** Your registered email address (cannot be changed after registration)
+    - **Phone Number:** Optional contact number (international format supported)
+  </Card>
+  
+  <Card title="Contact Preferences" icon="envelope">
+    **Communication Settings**
+    - **Primary Email:** Used for all platform communications
+    - **Phone Notifications:** Optional SMS alerts for important events
+    - **Marketing Preferences:** Control promotional communications
+  </Card>
+</CardGroup>
+
+### Name Requirements
+
+<Warning>
+**Name Field Validation:**
+
+- Required field with 2-100 characters
+- Only letters, spaces, hyphens, and apostrophes are allowed
+- Must match billing/legal name for payment processing
+- Cannot be empty or contain numbers or special characters
+</Warning>
+
+### Email Address Management
+
+<AccordionGroup>
+  <Accordion title="Email Restrictions">
+    **Email Address Limitations**
+    - Email address cannot be changed after registration
+    - Must be a valid, accessible email address
+    - Used for all account communications and security
+    - Required for password recovery and security notifications
+  </Accordion>
+  
+  <Accordion title="Email Verification">
+    **Verification Requirements**
+    - Email must be verified during registration
+    - Re-verification required for security changes
+    - Used for two-factor authentication
+    - Critical for account recovery processes
+  </Accordion>
+</AccordionGroup>
+
+## Billing Address
+
+Complete your billing address to enable payments on the platform:
+
+<Tabs>
+  <Tab title="Required Fields">
+    **Mandatory Information**
+    - **Address Line:** Street address, apartment, suite, etc. (required, max 255 characters)
+    - **Postal Code:** Postal or ZIP code (required, alphanumeric with hyphens/spaces)
+    - **Country:** Select your country from the dropdown list (required)
+  </Tab>
+  
+  <Tab title="Optional Fields">
+    **Additional Information**
+    - **City:** City name (optional, letters, spaces, hyphens, periods, apostrophes only)
+    - **State/Province:** State or province name (optional, letters, spaces, hyphens only)
+    - **Address Line 2:** Additional address information (apartment number, suite, etc.)
+  </Tab>
+  
+  <Tab title="Validation Rules">
+    **Address Validation**
+    - **Address Line:** Required field with maximum 255 characters
+    - **City:** Only letters, spaces, hyphens, periods, and apostrophes allowed
+    - **State/Province:** Only letters, spaces, and hyphens allowed
+    - **Postal Code:** Required, accepts alphanumeric characters, hyphens, and spaces
+    - **Country:** Required selection from provided list
+  </Tab>
+</Tabs>
+
+### Address Formatting Guidelines
+
+<Steps>
+  <Step title="Street Address">
+    Enter your complete street address including:
+    - House/building number
+    - Street name
+    - Apartment/suite number (if applicable)
+    - Any additional location identifiers
+  </Step>
+  <Step title="Geographic Information">
+    Provide accurate geographic details:
+    - Correct city name
+    - State or province (where applicable)
+    - Accurate postal/ZIP code
+    - Select correct country from dropdown
+  </Step>
+  <Step title="Validation">
+    Ensure all information is accurate:
+    - Double-check spelling of all fields
+    - Verify postal code format for your country
+    - Confirm country selection matches your location
+    - Review for completeness before saving
+  </Step>
+</Steps>
+
+## Payment Information
+
+Your country selection automatically determines the currency used for all transactions:
+
+<CardGroup cols={3}>
+  <Card title="Indian Rupee (₹)" icon="rupee-sign">
+    **India-based Accounts**
+    - **Country:** India
+    - **Currency:** Indian Rupee (₹)
+    - **Tax:** GST at 18% applied
+    - **Payment Methods:** UPI, cards, net banking
+  </Card>
+  
+  <Card title="Euro (€)" icon="euro-sign">
+    **European Countries**
+    - **Countries:** EU member states and select European countries
+    - **Currency:** Euro (€)
+    - **Tax:** VAT may apply based on local regulations
+    - **Payment Methods:** Credit card, SEPA transfers
+  </Card>
+  
+  <Card title="US Dollar ($)" icon="dollar-sign">
+    **All Other Countries**
+    - **Countries:** United States and most other countries
+    - **Currency:** US Dollar ($)
+    - **Tax:** Generally no additional taxes
+    - **Payment Methods:** Credit card, debit card
+  </Card>
+</CardGroup>
+
+### Currency Assignment Rules
+
+<AccordionGroup>
+  <Accordion title="Automatic Currency Selection">
+    **Country-Based Assignment**
+    - Currency is automatically determined by your selected country
+    - Cannot be manually changed or overridden
+    - Remains consistent throughout your account lifetime
+    - All billing and payments use assigned currency
+  </Accordion>
+  
+  <Accordion title="Tax Implications">
+    **Regional Tax Requirements**
+    - **India:** 18% GST automatically applied to all purchases
+    - **Europe:** VAT rates vary by country and may apply
+    - **Other Regions:** Generally no additional taxes unless locally required
+    - Tax rates are automatically calculated and displayed before payment
+  </Accordion>
+  
+  <Accordion title="Payment Processing">
+    **Currency-Specific Processing**
+    - Payment methods vary by currency and region
+    - Local payment methods available where supported
+    - Exchange rates not applicable (direct currency processing)
+    - All prices displayed in your account currency
+  </Accordion>
+</AccordionGroup>
+
+## Profile Completion
+
+The system tracks whether your profile has all required information:
+
+### Completion Status
+
+<CardGroup cols={2}>
+  <Card title="Complete Profile" icon="check-circle">
+    **Ready for Platform Use**
+    - All required fields completed
+    - Billing address information provided
+    - Payment processing enabled
+    - Full platform access available
+  </Card>
+  
+  <Card title="Incomplete Profile" icon="exclamation-circle">
+    **Requires Additional Information**
+    - Missing required billing information
+    - Cannot purchase credits or create paid resources
+    - Limited platform functionality
+    - Profile completion required for full access
+  </Card>
+</CardGroup>
+
+### Required for Completion
+
+<Warning>
+**Profile Completion Requirements:**
+
+A profile is considered complete when it includes:
+- **Full Name:** Legal name matching payment information
+- **Address Line:** Complete street address
+- **Postal Code:** Valid postal/ZIP code
+- **Country:** Country selection from dropdown
+- **Email Verification:** Confirmed email address
+</Warning>
+
+### Benefits of Complete Profile
+
+<Steps>
+  <Step title="Payment Processing">
+    Enable credit purchases and resource billing
+  </Step>
+  <Step title="Resource Creation">
+    Create volumes, snapshots, and other paid resources
+  </Step>
+  <Step title="Full Platform Access">
+    Access all features and capabilities
+  </Step>
+  <Step title="Support Services">
+    Receive prioritized customer support
+  </Step>
+</Steps>
+
+## Form Validation
+
+Input validation requirements ensure data quality and security:
+
+### Field-Specific Validation
+
+<Tabs>
+  <Tab title="Name Validation">
+    **Full Name Requirements**
+    - **Character Set:** Only letters, spaces, hyphens, and apostrophes
+    - **Length:** Between 2 and 100 characters
+    - **Required:** Cannot be empty
+    - **Format:** Proper name format expected
+    - **Examples:** "John Smith", "Mary-Jane O'Connor", "José García"
+  </Tab>
+  
+  <Tab title="Phone Validation">
+    **Phone Number Format**
+    - **Optional Field:** Not required for account completion
+    - **Format:** Valid international format with country code
+    - **Characters:** Digits, plus sign, spaces, dashes, parentheses only
+    - **Length:** Reasonable length for international numbers
+    - **Examples:** "+1 (555) 123-4567", "+44 20 1234 5678"
+  </Tab>
+  
+  <Tab title="Address Validation">
+    **Address Field Requirements**
+    - **Address Line:** Required, maximum 255 characters
+    - **City:** Optional, letters/spaces/hyphens/periods/apostrophes only
+    - **State:** Optional, letters/spaces/hyphens only
+    - **Postal Code:** Required, alphanumeric with hyphens/spaces
+    - **Country:** Required selection from dropdown list
+  </Tab>
+</Tabs>
+
+### Real-time Validation
+
+<AccordionGroup>
+  <Accordion title="Immediate Feedback">
+    **Form Validation Features**
+    - Real-time validation as you type
+    - Immediate error highlighting
+    - Helpful error messages
+    - Character count displays where applicable
+  </Accordion>
+  
+  <Accordion title="Error Prevention">
+    **Proactive Error Handling**
+    - Format guidance for phone numbers
+    - Country-specific postal code validation
+    - Character restrictions clearly indicated
+    - Save button disabled until all requirements met
+  </Accordion>
+  
+  <Accordion title="Success Indicators">
+    **Completion Feedback**
+    - Green checkmarks for completed fields
+    - Profile completion status indicator
+    - Success messages after saving
+    - Clear indication of required vs. optional fields
+  </Accordion>
+</AccordionGroup>
+
+## Account Security
+
+### Security Best Practices
+
+<Steps>
+  <Step title="Strong Password">
+    - Use a unique, complex password
+    - Include uppercase, lowercase, numbers, and symbols
+    - Avoid personal information or common words
+    - Change password regularly
+  </Step>
+  <Step title="Email Security">
+    - Keep email account secure with strong password
+    - Enable two-factor authentication on email if available
+    - Monitor for suspicious login attempts
+    - Keep email address current and accessible
+  </Step>
+  <Step title="Account Monitoring">
+    - Review account activity regularly
+    - Monitor credit usage and spending patterns
+    - Check for unauthorized access or changes
+    - Report suspicious activity immediately
+  </Step>
+  <Step title="Information Protection">
+    - Keep billing information current and accurate
+    - Protect account credentials from sharing
+    - Use secure networks for account access
+    - Log out from shared computers
+  </Step>
+</Steps>
+
+### Privacy and Data Protection
+
+<CardGroup cols={2}>
+  <Card title="Data Security" icon="shield">
+    **Information Protection**
+    - All personal data encrypted in transit and at rest
+    - Secure data centers with physical security
+    - Limited access to personal information
+    - Regular security audits and updates
+  </Card>
+  
+  <Card title="Privacy Compliance" icon="eye-slash">
+    **Regulatory Compliance**
+    - GDPR compliance for European users
+    - Privacy regulations followed based on location
+    - Data retention policies clearly defined
+    - User rights respected and protected
+  </Card>
+</CardGroup>
+
+## Account Support
+
+### Getting Help
+
+<CardGroup cols={2}>
+  <Card
+    title="Email Support"
+    icon="envelope"
+    href="mailto:support@barrack.ai"
+  >
+    **General Account Help**
+    
+    Contact for:
+    - Profile completion assistance
+    - Billing address questions
+    - Payment processing issues
+    - General account inquiries
+  </Card>
+  
+  <Card
+    title="Technical Support"
+    icon="wrench"
+    href="mailto:support@barrack.ai?subject=Technical Support"
+  >
+    **Technical Issues**
+    
+    Contact for:
+    - Platform access problems
+    - Form validation errors
+    - Account functionality issues
+    - Security concerns
+  </Card>
+</CardGroup>
+
+### Support Information to Include
+
+<AccordionGroup>
+  <Accordion title="Account Information">
+    **Include in Support Requests**
+    - Account email address
+    - Account creation date (if known)
+    - Specific issue description
+    - Steps attempted to resolve issue
+  </Accordion>
+  
+  <Accordion title="Error Information">
+    **Technical Details**
+    - Error messages received
+    - Browser type and version
+    - Operating system information
+    - Screenshots if helpful
+  </Accordion>
+  
+  <Accordion title="Profile Issues">
+    **Profile-Specific Problems**
+    - Fields that won't save or validate
+    - Payment processing errors
+    - Country/currency assignment issues
+    - Billing address validation problems
+  </Accordion>
+</AccordionGroup>
+
+<Tip>
+Keep your profile information current and complete to ensure uninterrupted access to all platform features and the best possible support experience.
+</Tip>

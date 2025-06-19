@@ -1,0 +1,497 @@
+---
+title: "SSH Key Configuration"
+description: "Configure SSH keys for secure access to your virtual machines"
+---
+
+# SSH Key Configuration
+
+SSH keys provide secure access to your virtual machines. SSH key management requires user authentication.
+
+## SSH Key Requirements
+
+<Warning>
+**SSH Key Prerequisites:**
+
+- At least one SSH key is required for VM deployment
+- SSH key management requires user authentication
+- Keys are automatically distributed to all regions upon creation
+- Private keys are only available for download during creation
+</Warning>
+
+## Managing SSH Keys
+
+Access your SSH keys through the platform interface:
+
+<CardGroup cols={2}>
+  <Card title="Automatic Loading" icon="refresh">
+    **Seamless Integration**
+    - SSH keys are automatically loaded when authenticated
+    - Keys are displayed in the deployment interface
+    - Multiple keys can be selected for team access
+    - Regional distribution is handled automatically
+  </Card>
+  
+  <Card title="Key Selection" icon="check-square">
+    **Flexible Key Assignment**
+    - Keys are automatically selected if you have only one available
+    - Multiple keys can be selected for single VM
+    - Team members can use different keys
+    - Keys remain associated with VMs after deployment
+  </Card>
+</CardGroup>
+
+## Creating SSH Keys
+
+Generate new SSH key pairs directly through the platform interface.
+
+### Key Generation Process
+
+<Steps>
+  <Step title="Access SSH Keys">
+    Navigate to [SSH Keys](https://barrack.ai/ssh-keys) section
+  </Step>
+  <Step title="Initiate Creation">
+    Click "Create Key" in the SSH key management interface
+  </Step>
+  <Step title="Name Your Key">
+    Enter a unique name for the key (1-50 characters):
+    - Use descriptive names like "my-project-key" or "development-server"
+    - Names must contain only letters, numbers, underscores, hyphens, and periods
+    - Choose names that help identify the key's purpose
+  </Step>
+  <Step title="Generate and Download">
+    Click "Create Key" to generate the keypair:
+    - System generates a secure 2048-bit RSA public/private key pair
+    - Private key file automatically downloads to your computer
+    - Public key is stored in your account
+  </Step>
+</Steps>
+
+### Key Generation Features
+
+<AccordionGroup>
+  <Accordion title="Automatic Generation">
+    **Secure Key Creation**
+    - 2048-bit RSA encryption for strong security
+    - Cryptographically secure random generation
+    - Industry-standard key format
+    - Compatible with all SSH clients
+  </Accordion>
+  
+  <Accordion title="Instant Download">
+    **Secure Key Delivery**
+    - Private key automatically downloads during creation
+    - Download happens only once for security
+    - File is named with your chosen key name
+    - Ready to use immediately
+  </Accordion>
+  
+  <Accordion title="Platform Integration">
+    **Seamless Platform Integration**
+    - Public key automatically stored in your account
+    - Key distributed to all regions
+    - Available for immediate VM deployment
+    - No additional configuration required
+  </Accordion>
+</AccordionGroup>
+
+### Critical Security Notice
+
+<Warning>
+**Private Key Security:**
+
+• The private key is only available for download once during creation
+• Store it securely as it cannot be retrieved later from our servers
+• The private key file is automatically downloaded for security reasons
+• Never share your private key with anyone or upload it to version control
+• Back up your private key in a secure location
+</Warning>
+
+## Importing Existing SSH Keys
+
+Import SSH keys that you already use for other services.
+
+### Import Process
+
+<Steps>
+  <Step title="Access Import Function">
+    Navigate to [SSH Keys](https://barrack.ai/ssh-keys) and click "Import Key"
+  </Step>
+  <Step title="Name Your Key">
+    Enter a descriptive name for the key (maximum 50 characters):
+    - Use names like "github-key" or "laptop-ssh-key"
+    - Names must contain only letters, numbers, underscores, hyphens, and periods
+    - Choose names that identify the key's source or purpose
+  </Step>
+  <Step title="Paste Public Key">
+    Paste your public key content in the text area:
+    - Key must begin with ssh-rsa, ssh-ed25519, or similar
+    - Include the entire public key on a single line
+    - Include optional comment if desired
+  </Step>
+  <Step title="Import Key">
+    Click "Import Key" to add it to your account:
+    - System validates key format
+    - Key is added to your account immediately
+    - Available for VM deployment right away
+  </Step>
+</Steps>
+
+### Finding Your Public Key
+
+Locate your existing public key on your system:
+
+<Tabs>
+  <Tab title="Linux/MacOS">
+    **Common Public Key Locations**
+    
+    Your public key is typically located at:
+    ```bash
+    ~/.ssh/id_rsa.pub
+    ~/.ssh/id_ed25519.pub
+    ~/.ssh/id_ecdsa.pub
+    ```
+    
+    **Display and copy your public key:**
+    ```bash
+    # For RSA keys
+    cat ~/.ssh/id_rsa.pub
+    
+    # For Ed25519 keys
+    cat ~/.ssh/id_ed25519.pub
+    
+    # For ECDSA keys
+    cat ~/.ssh/id_ecdsa.pub
+    ```
+  </Tab>
+  
+  <Tab title="Windows">
+    **Windows Key Locations**
+    
+    **With Git Bash or WSL:**
+    ```bash
+    ~/.ssh/id_rsa.pub
+    ~/.ssh/id_ed25519.pub
+    ```
+    
+    **Display with Git Bash:**
+    ```bash
+    cat ~/.ssh/id_rsa.pub
+    ```
+    
+    **With PowerShell:**
+    ```powershell
+    Get-Content $env:USERPROFILE\.ssh\id_rsa.pub
+    ```
+    
+    **Common Windows locations:**
+    - `C:\Users\YourUsername\.ssh\id_rsa.pub`
+    - `C:\Users\YourUsername\.ssh\id_ed25519.pub`
+  </Tab>
+</Tabs>
+
+### Public Key Format Requirements
+
+Understanding the correct format for import:
+
+<CodeGroup>
+```bash RSA Key Example
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC0WGP1EZykEtv5YGC9nMiPFW3U3DmZNzKFO5nEu6uozEHh3JLi9bii user@example.com
+```
+
+```bash Ed25519 Key Example
+ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIE1ZWv7A6ZH9R7O3k6Cq8A5b9J5r8aKz1L2mN3oPq4Rs user@example.com
+```
+
+```bash ECDSA Key Example
+ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBAzq5s... user@example.com
+```
+</CodeGroup>
+
+**Valid public key requirements:**
+- Must begin with key type: `ssh-rsa`, `ssh-ed25519`, or `ssh-dss`
+- Contains a long base64-encoded string of characters
+- Optionally ends with a comment (usually email address or description)
+- Must be on a single line with no line breaks
+
+## Setting Private Key Permissions
+
+After downloading your private key file, you must set the correct permissions for security:
+
+<Tabs>
+  <Tab title="Linux/MacOS">
+    **Set Secure Permissions**
+    
+    ```bash
+    chmod 600 /path/to/your_private_key.pem
+    ```
+    
+    **Example:**
+    ```bash
+    chmod 600 ~/.ssh/my-barrack-key.pem
+    ```
+    
+    This command ensures only you can read and write the file, which is required for SSH security.
+  </Tab>
+  
+  <Tab title="Windows">
+    **PowerShell Permission Setting**
+    
+    ```powershell
+    icacls "C:\path\to\your_private_key.pem" /inheritance:r /grant:r "$($env:USERNAME):(R,W)"
+    ```
+    
+    **Example:**
+    ```powershell
+    icacls "C:\Users\YourName\Downloads\my-barrack-key.pem" /inheritance:r /grant:r "$($env:USERNAME):(R,W)"
+    ```
+    
+    This removes inheritance and grants only the current user read/write access.
+  </Tab>
+</Tabs>
+
+## SSH Key Limits and Restrictions
+
+<CardGroup cols={2}>
+  <Card title="Key Limits" icon="limit">
+    **Account Restrictions**
+    - Maximum of 25 SSH keys per region
+    - Key names must be unique within your account
+    - Generated keys use 2048-bit RSA encryption
+    - Keys are automatically distributed to all regions upon creation
+  </Card>
+  
+  <Card title="Naming Requirements" icon="tag">
+    **Key Naming Rules**
+    - 1-50 characters maximum length
+    - Letters, numbers, underscores, hyphens, periods only
+    - Must be unique within your account
+    - Use descriptive names for easy identification
+  </Card>
+</CardGroup>
+
+## Supported Key Types
+
+The platform supports industry-standard SSH key types:
+
+<AccordionGroup>
+  <Accordion title="RSA Keys">
+    **RSA Key Support**
+    - **Format:** ssh-rsa
+    - **Recommended Size:** 2048+ bits (4096 bits preferred)
+    - **Compatibility:** Universal compatibility with all SSH clients
+    - **Generation:** Default type for platform-generated keys
+  </Accordion>
+  
+  <Accordion title="Ed25519 Keys">
+    **Ed25519 Key Support**
+    - **Format:** ssh-ed25519
+    - **Security:** Modern, highly secure elliptic curve cryptography
+    - **Performance:** Faster than RSA with equivalent security
+    - **Recommended:** Best choice for new key generation
+  </Accordion>
+  
+  <Accordion title="ECDSA Keys">
+    **ECDSA Key Support**
+    - **Formats:** ecdsa-sha2-nistp256/384/521
+    - **Curves:** NIST P-256, P-384, P-521
+    - **Compatibility:** Supported by modern SSH clients
+    - **Use Case:** Good balance of security and performance
+  </Accordion>
+</AccordionGroup>
+
+## SSH Connection Examples
+
+Once your keys are configured, use them to connect to your VMs:
+
+### Basic SSH Connection
+
+```bash
+ssh -i /path/to/your-private-key.pem username@vm-ip-address
+```
+
+**Parameter explanations:**
+- `/path/to/private_key` - Path to your downloaded private key file
+- `username` - Default user for your OS (ubuntu, centos, admin, etc.)
+- `vm_ip_address` - Public IP address of your VM
+
+### Username by Operating System
+
+<Tabs>
+  <Tab title="Ubuntu Images">
+    **Default Username: ubuntu**
+    
+    ```bash
+    ssh -i ~/.ssh/my-key.pem ubuntu@203.0.113.1
+    ```
+    
+    All Ubuntu-based OS images use the `ubuntu` user by default.
+  </Tab>
+  
+  <Tab title="Other Linux">
+    **Common Default Usernames**
+    
+    ```bash
+    # CentOS/RHEL
+    ssh -i ~/.ssh/my-key.pem centos@203.0.113.1
+    
+    # Amazon Linux
+    ssh -i ~/.ssh/my-key.pem ec2-user@203.0.113.1
+    
+    # Debian
+    ssh -i ~/.ssh/my-key.pem admin@203.0.113.1
+    ```
+  </Tab>
+</Tabs>
+
+### SSH Config File (Recommended)
+
+For easier connections, add entries to your SSH config file (`~/.ssh/config`):
+
+```bash
+Host my-vm
+  HostName 203.0.113.1
+  User ubuntu
+  IdentityFile ~/.ssh/my_private_key.pem
+  IdentitiesOnly yes
+```
+
+After adding this configuration, you can connect simply with:
+```bash
+ssh my-vm
+```
+
+## Key Selection During VM Deployment
+
+During VM deployment, you can configure SSH key access:
+
+### Single Key Selection
+
+<Steps>
+  <Step title="Automatic Selection">
+    If you have only one SSH key, it's automatically selected
+  </Step>
+  <Step title="Manual Selection">
+    If you have multiple keys, choose the appropriate one for the VM
+  </Step>
+  <Step title="Key Validation">
+    System validates key availability and format
+  </Step>
+  <Step title="VM Integration">
+    Selected keys are automatically installed on the VM during provisioning
+  </Step>
+</Steps>
+
+### Multiple Key Selection
+
+<CardGroup cols={2}>
+  <Card title="Team Access" icon="users">
+    **Multiple Key Benefits**
+    - Allow access by different team members
+    - Each person uses their own SSH key
+    - Individual access control and auditing
+    - No shared credentials needed
+  </Card>
+  
+  <Card title="Backup Access" icon="key">
+    **Redundant Access**
+    - Multiple keys provide backup access
+    - Different keys for different purposes
+    - Reduced risk of lockout
+    - Flexible access management
+  </Card>
+</CardGroup>
+
+## Regional Key Distribution
+
+SSH keys are automatically distributed across all available regions when created or imported:
+
+<Tabs>
+  <Tab title="Automatic Distribution">
+    **Seamless Regional Access**
+    - Keys automatically available in all regions
+    - No manual distribution required
+    - Consistent access across deployments
+    - Simplified multi-region operations
+  </Tab>
+  
+  <Tab title="Available Regions">
+    **Regional Coverage**
+    - **Norway Region:** NORWAY-1
+    - **Canada Region:** CANADA-1
+    - **US Region:** US-1
+    
+    All keys work in all regions automatically.
+  </Tab>
+</Tabs>
+
+## SSH Key Best Practices
+
+### Security Best Practices
+
+<AccordionGroup>
+  <Accordion title="Key Generation">
+    **Secure Key Creation**
+    - Generate separate keys for different projects or environments
+    - Use descriptive names that identify the key's purpose
+    - Prefer Ed25519 keys for new generations (more secure and faster)
+    - Use minimum 2048-bit RSA keys (4096-bit recommended for high security)
+  </Accordion>
+  
+  <Accordion title="Key Storage">
+    **Secure Key Management**
+    - Store private keys securely and never share them
+    - Use passphrase protection for your private keys
+    - Back up private keys in encrypted storage
+    - Set correct file permissions (600 for private keys)
+  </Accordion>
+  
+  <Accordion title="Key Maintenance">
+    **Ongoing Key Management**
+    - Regularly audit and rotate your SSH keys
+    - Remove unused or unnecessary keys promptly
+    - Monitor key usage and access patterns
+    - Keep an inventory of where keys are deployed
+  </Accordion>
+  
+  <Accordion title="Access Control">
+    **Team Key Management**
+    - Use separate keys for different team members
+    - Implement key rotation policies
+    - Revoke access immediately when team members leave
+    - Consider using SSH certificates for large teams
+  </Accordion>
+</AccordionGroup>
+
+### Operational Best Practices
+
+<Steps>
+  <Step title="Plan Key Strategy">
+    - Determine key naming conventions
+    - Plan for different environments (dev, staging, prod)
+    - Consider team access requirements
+    - Plan key rotation schedule
+  </Step>
+  <Step title="Implement Key Management">
+    - Create keys with descriptive names
+    - Set up secure key storage
+    - Document key purposes and usage
+    - Train team on key security practices
+  </Step>
+  <Step title="Monitor and Maintain">
+    - Track key usage and access patterns
+    - Regular security audits of key access
+    - Remove unused keys promptly
+    - Update key documentation regularly
+  </Step>
+  <Step title="Scale Security">
+    - Implement automated key rotation where possible
+    - Use configuration management for key distribution
+    - Monitor for unauthorized key usage
+    - Plan for emergency key replacement procedures
+  </Step>
+</Steps>
+
+<Tip>
+Use descriptive key names that indicate their purpose, such as "production-web-servers" or "ml-development-team", to make key management easier as your infrastructure grows.
+</Tip>

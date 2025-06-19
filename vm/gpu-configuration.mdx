@@ -1,0 +1,389 @@
+---
+title: "GPU Configuration"
+description: "Select from high-performance GPU options based on your computational needs"
+---
+
+# GPU Configuration
+
+Select from our high-performance GPU options based on your computational needs.
+
+## Available GPU Types
+
+Choose the GPU that best matches your workload requirements:
+
+| GPU Model | Performance | Best For |
+|-----------|-------------|----------|
+| **H100-SXM5-80GB** | Highest performance for large-scale AI training | Large language models, complex AI research |
+| **H100-PCIe-NVLink-80GB** | High-performance with NVLink | Multi-GPU workloads, distributed training |
+| **H100-PCIe-80GB** | High-performance PCIe interface | Single-GPU inference, model training |
+| **A100-SXM4-80GB-NVLink** | Excellent for deep learning and HPC | Deep learning, scientific computing |
+| **A100-PCIe-80GB** | High-performance PCIe A100 | ML training, data analytics |
+| **L40** | Balanced performance for diverse workloads | AI inference, graphics workloads |
+| **RTX-A6000** | Cost-effective for smaller workloads | Development, small-scale training |
+| **A40** | Versatile professional GPU | Professional graphics, AI development |
+
+## GPU Instance Pricing
+
+### USD Pricing
+
+| GPU Model | USD per Hour | Performance Level |
+|-----------|--------------|-------------------|
+| **H100-SXM5-80GB** | $2.69 | Highest |
+| **H100-PCIe-NVLink-80GB** | $2.29 | Very High |
+| **H100-PCIe-80GB** | $2.25 | Very High |
+| **A100-SXM4-80GB-NVLink** | $1.59 | High |
+| **A100-PCIe-80GB** | $1.55 | High |
+| **L40** | $1.19 | Medium-High |
+| **RTX-A6000** | $0.69 | Medium |
+| **A40** | $0.69 | Medium |
+
+### EUR Pricing
+
+| GPU Model | EUR per Hour | Performance Level |
+|-----------|--------------|-------------------|
+| **H100-SXM5-80GB** | €2.49 | Highest |
+| **H100-PCIe-NVLink-80GB** | €2.09 | Very High |
+| **H100-PCIe-80GB** | €2.05 | Very High |
+| **A100-SXM4-80GB-NVLink** | €1.45 | High |
+| **A100-PCIe-80GB** | €1.39 | High |
+| **L40** | €1.09 | Medium-High |
+| **RTX-A6000** | €0.45 | Medium |
+| **A40** | €0.45 | Medium |
+
+### INR Pricing
+
+| GPU Model | INR per Hour | Performance Level |
+|-----------|--------------|-------------------|
+| **H100-SXM5-80GB** | ₹239 | Highest |
+| **H100-PCIe-NVLink-80GB** | ₹199 | Very High |
+| **H100-PCIe-80GB** | ₹195 | Very High |
+| **A100-SXM4-80GB-NVLink** | ₹135 | High |
+| **A100-PCIe-80GB** | ₹135 | High |
+| **L40** | ₹99 | Medium-High |
+| **RTX-A6000** | ₹49 | Medium |
+| **A40** | ₹49 | Medium |
+
+## GPU Detailed Specifications
+
+<Tabs>
+  <Tab title="H100 Series">
+    ### NVIDIA H100 GPUs
+    
+    **H100-SXM5-80GB**
+    - **Memory:** 80GB HBM3
+    - **Architecture:** Hopper
+    - **Best for:** Large language models, transformer training
+    - **Multi-Instance GPU:** Yes
+    - **NVLink:** 900 GB/s
+    
+    **H100-PCIe-NVLink-80GB**
+    - **Memory:** 80GB HBM3
+    - **Interface:** PCIe with NVLink
+    - **Best for:** Multi-GPU distributed training
+    - **Interconnect:** High-bandwidth NVLink
+    
+    **H100-PCIe-80GB**
+    - **Memory:** 80GB HBM3
+    - **Interface:** PCIe 5.0
+    - **Best for:** Single-GPU inference and training
+    - **Power Efficiency:** Optimized for single-node workloads
+  </Tab>
+  
+  <Tab title="A100 Series">
+    ### NVIDIA A100 GPUs
+    
+    **A100-SXM4-80GB-NVLink**
+    - **Memory:** 80GB HBM2e
+    - **Architecture:** Ampere
+    - **Best for:** Deep learning, scientific computing
+    - **Multi-Instance GPU:** Yes
+    - **NVLink:** 600 GB/s
+    
+    **A100-PCIe-80GB**
+    - **Memory:** 80GB HBM2e
+    - **Interface:** PCIe 4.0
+    - **Best for:** ML training, data analytics
+    - **Tensor Cores:** 3rd generation
+  </Tab>
+  
+  <Tab title="Professional GPUs">
+    ### Professional Workstation GPUs
+    
+    **L40**
+    - **Memory:** 48GB GDDR6
+    - **Architecture:** Ada Lovelace
+    - **Best for:** AI inference, graphics workloads
+    - **RT Cores:** 3rd generation
+    - **Tensor Cores:** 4th generation
+    
+    **RTX A6000**
+    - **Memory:** 48GB GDDR6
+    - **Architecture:** Ampere
+    - **Best for:** Development, visualization
+    - **RT Cores:** 2nd generation
+    - **CUDA Cores:** 10,752
+    
+    **A40**
+    - **Memory:** 48GB GDDR6
+    - **Architecture:** Ampere
+    - **Best for:** Professional graphics, AI development
+    - **Multi-Instance GPU:** Yes
+  </Tab>
+</Tabs>
+
+## GPU Count Selection
+
+Choose the number of GPUs for your virtual machine:
+
+<CardGroup cols={2}>
+  <Card title="Single GPU" icon="microchip">
+    **Perfect for:**
+    - Development and testing
+    - Small to medium model training
+    - Inference workloads
+    - Cost-effective computing
+  </Card>
+  
+  <Card title="Multi-GPU" icon="server">
+    **Ideal for:**
+    - Large model training
+    - Distributed computing
+    - High-throughput inference
+    - Parallel processing workloads
+  </Card>
+</CardGroup>
+
+### Multi-GPU Configuration
+
+- Available counts are dynamically updated based on current stock
+- Higher GPU counts provide more computational power for parallel workloads
+- Multi-GPU setups automatically include NVLink for supported GPU types
+- GPU availability varies by region and is updated in real-time
+
+<Note>
+NVLink is automatically included for multi-GPU configurations with compatible GPU types (H100 and A100 series with NVLink variants).
+</Note>
+
+## GPU Selection Guide
+
+### By Use Case
+
+<AccordionGroup>
+  <Accordion title="Large Language Models (LLMs)">
+    **Recommended GPUs:**
+    - **H100-SXM5-80GB** - Best performance for massive models
+    - **H100-PCIe-80GB** - High performance for large models
+    - **A100-SXM4-80GB-NVLink** - Excellent for most LLM training
+    
+    **Considerations:**
+    - Memory capacity is crucial for large models
+    - Multi-GPU setups for distributed training
+    - NVLink for efficient multi-GPU communication
+  </Accordion>
+  
+  <Accordion title="Deep Learning Research">
+    **Recommended GPUs:**
+    - **H100 Series** - Cutting-edge performance
+    - **A100 Series** - Proven performance for research
+    - **L40** - Balanced performance and cost
+    
+    **Considerations:**
+    - Tensor Core performance for mixed precision
+    - Memory bandwidth for large datasets
+    - Multi-Instance GPU for resource sharing
+  </Accordion>
+  
+  <Accordion title="AI Inference">
+    **Recommended GPUs:**
+    - **L40** - Optimized for inference workloads
+    - **RTX A6000** - Cost-effective for inference
+    - **A40** - Professional-grade inference
+    
+    **Considerations:**
+    - Lower latency requirements
+    - Batch processing capabilities
+    - Cost optimization for production
+  </Accordion>
+  
+  <Accordion title="Development & Prototyping">
+    **Recommended GPUs:**
+    - **RTX A6000** - Excellent for development
+    - **A40** - Professional development environment
+    - **L40** - Balanced development platform
+    
+    **Considerations:**
+    - Cost-effective for iterative development
+    - Sufficient memory for model experimentation
+    - Good performance for rapid prototyping
+  </Accordion>
+  
+  <Accordion title="Graphics & Visualization">
+    **Recommended GPUs:**
+    - **RTX A6000** - Professional graphics workloads
+    - **A40** - High-end visualization
+    - **L40** - Graphics and AI combined workloads
+    
+    **Considerations:**
+    - RT Cores for real-time ray tracing
+    - CUDA cores for compute workloads
+    - Professional drivers and support
+  </Accordion>
+</AccordionGroup>
+
+### By Performance Tier
+
+<Tabs>
+  <Tab title="Maximum Performance">
+    **H100 Series**
+    - Latest architecture with highest performance
+    - 80GB memory for the largest models
+    - Advanced Tensor Cores for AI workloads
+    - Best for cutting-edge research and production
+    
+    **Best for:** Large-scale AI training, advanced research, production LLM inference
+  </Tab>
+  
+  <Tab title="High Performance">
+    **A100 Series**
+    - Proven performance for AI workloads
+    - 80GB memory variants available
+    - Multi-Instance GPU capabilities
+    - Excellent price-performance ratio
+    
+    **Best for:** Deep learning, scientific computing, multi-user environments
+  </Tab>
+  
+  <Tab title="Balanced Performance">
+    **L40**
+    - Modern architecture with good performance
+    - 48GB memory for most workloads
+    - Combined AI and graphics capabilities
+    - Good balance of performance and cost
+    
+    **Best for:** AI inference, mixed workloads, development
+  </Tab>
+  
+  <Tab title="Cost-Effective">
+    **RTX A6000 / A40**
+    - Professional-grade performance
+    - 48GB memory capacity
+    - Cost-effective for development
+    - Professional software support
+    
+    **Best for:** Development, small-scale training, visualization
+  </Tab>
+</Tabs>
+
+## Regional Availability
+
+GPU availability and selection varies by region:
+
+<CardGroup cols={3}>
+  <Card title="NORWAY-1" icon="globe">
+    **Europe Region**
+    - All GPU types available
+    - Low latency for European users
+    - GDPR compliant infrastructure
+  </Card>
+  
+  <Card title="CANADA-1" icon="globe">
+    **North America Region**
+    - All GPU types available
+    - High-speed connectivity
+    - Optimized for North American users
+  </Card>
+  
+  <Card title="US-1" icon="globe">
+    **United States Region**
+    - All GPU types available
+    - US-based infrastructure
+    - Low latency for US users
+  </Card>
+</CardGroup>
+
+<Note>
+GPU availability is updated in real-time. If your preferred GPU type is not available in your selected region, try another region or check back later.
+</Note>
+
+## GPU Selection Tips
+
+### Performance Optimization
+
+<CardGroup cols={2}>
+  <Card title="Memory Considerations" icon="memory">
+    **Key Factors:**
+    - Model size requirements
+    - Batch size optimization
+    - Dataset memory usage
+    - Multi-model deployment
+  </Card>
+  
+  <Card title="Compute Requirements" icon="cpu">
+    **Key Factors:**
+    - Training time constraints
+    - Inference latency needs
+    - Parallel processing requirements
+    - Throughput expectations
+  </Card>
+</CardGroup>
+
+### Cost Optimization
+
+<AccordionGroup>
+  <Accordion title="Development vs Production">
+    **Development:**
+    - Use cost-effective GPUs (RTX A6000, A40)
+    - Single GPU configurations
+    - Pay-per-minute billing for short experiments
+    
+    **Production:**
+    - Higher-performance GPUs for better efficiency
+    - Multi-GPU for scaling
+    - Consider total cost of ownership
+  </Accordion>
+  
+  <Accordion title="Workload Matching">
+    **Training Workloads:**
+    - Higher-end GPUs for faster training
+    - Multi-GPU for large models
+    - Consider training time vs. cost trade-offs
+    
+    **Inference Workloads:**
+    - Optimize for latency and throughput
+    - Lower-cost GPUs may be sufficient
+    - Batch processing for efficiency
+  </Accordion>
+</AccordionGroup>
+
+## Getting Started
+
+<Steps>
+  <Step title="Assess Your Needs">
+    - Determine your primary use case
+    - Estimate memory requirements
+    - Consider performance needs
+    - Plan your budget
+  </Step>
+  <Step title="Select GPU Type">
+    - Choose based on workload requirements
+    - Consider regional availability
+    - Review pricing for your currency
+    - Start with single GPU and scale as needed
+  </Step>
+  <Step title="Deploy and Test">
+    - Deploy VM with selected GPU
+    - Test performance with your workload
+    - Monitor resource utilization
+    - Optimize configuration as needed
+  </Step>
+  <Step title="Scale and Optimize">
+    - Add more GPUs if needed
+    - Optimize software for multi-GPU
+    - Monitor costs and performance
+    - Adjust configuration based on results
+  </Step>
+</Steps>
+
+<Tip>
+Start with a single GPU to test your workload, then scale to multi-GPU configurations as needed. This approach helps optimize both performance and costs.
+</Tip>

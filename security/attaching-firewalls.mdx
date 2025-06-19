@@ -1,0 +1,418 @@
+---
+title: "Attaching Firewalls to VMs"
+description: "Connect firewalls to virtual machines to enable network protection"
+---
+
+# Attaching Firewalls to VMs
+
+Firewalls must be attached to VMs to take effect. You can manage these attachments through the firewall management interface.
+
+## Attachment Process
+
+To attach a firewall to a virtual machine:
+
+<Steps>
+  <Step title="Access Attachment Interface">
+    From the firewall card, click the "Attach" button
+  </Step>
+  <Step title="Select Target VM">
+    Select a VM from the list of available machines:
+    - Only VMs with ACTIVE status are displayed
+    - VMs that have server_uuid are eligible for attachment
+    - Single VM selection using radio button interface
+    - Already attached VMs are marked with checkmark icon
+  </Step>
+  <Step title="Confirm Attachment">
+    Click "Attach Firewall" to confirm the attachment
+  </Step>
+  <Step title="Monitor Attachment Status">
+    Wait for attachment to complete and verify success
+  </Step>
+</Steps>
+
+## VM Compatibility Requirements
+
+### Eligible Virtual Machines
+
+<CardGroup cols={2}>
+  <Card title="VM Status Requirements" icon="server">
+    **Active VM Needed**
+    - VM must be in ACTIVE state to attach firewall
+    - VM must have a valid server_uuid
+    - VMs in HIBERNATED or STOPPED state cannot be attached
+    - VM must be fully operational and responsive
+  </Card>
+  
+  <Card title="Technical Requirements" icon="check-circle">
+    **System Prerequisites**
+    - VM networking must be properly configured
+    - VM must be accessible through management interface
+    - Network infrastructure must support firewall attachment
+    - No conflicting security configurations
+  </Card>
+</CardGroup>
+
+### VM State Validation
+
+<Tabs>
+  <Tab title="Supported States">
+    **Attachment-Ready States**
+    
+    **ACTIVE**
+    - VM is running and fully operational
+    - All services are available
+    - Network connectivity is established
+    - Ready for firewall attachment
+  </Tab>
+  
+  <Tab title="Unsupported States">
+    **Cannot Attach Firewalls**
+    
+    **HIBERNATED**
+    - VM state is saved but resources released
+    - Network interfaces are not active
+    - Must restore VM to ACTIVE state first
+    
+    **SHUTOFF**
+    - VM is powered off
+    - Network services unavailable
+    - Must start VM before attachment
+    
+    **CREATING/DELETING**
+    - VM is in transitional state
+    - Wait for VM to reach stable state
+    - Retry attachment after state stabilization
+  </Tab>
+  
+  <Tab title="Error States">
+    **Problematic VM States**
+    
+    **ERROR**
+    - VM encountered an operational issue
+    - Resolve VM issues before firewall attachment
+    - May require VM restart or troubleshooting
+    
+    **UNKNOWN**
+    - VM state cannot be determined
+    - Check VM status and connectivity
+    - Contact support if state persists
+  </Tab>
+</Tabs>
+
+## Multi-Firewall Attachments
+
+### Multiple Firewalls per VM
+
+<AccordionGroup>
+  <Accordion title="Firewall Stacking">
+    **Multiple Firewall Support**
+    - Multiple firewalls can be attached to the same VM
+    - All rules from attached firewalls apply cumulatively
+    - Rules are processed in order of attachment
+    - Conflicting rules are resolved based on precedence
+  </Accordion>
+  
+  <Accordion title="Rule Interaction">
+    **How Multiple Firewalls Work Together**
+    - **Additive Rules:** All allow rules from all firewalls are applied
+    - **Security Layering:** Multiple layers of protection
+    - **Rule Conflicts:** Most restrictive rule typically takes precedence
+    - **Performance Considerations:** More firewalls may impact performance
+  </Accordion>
+  
+  <Accordion title="Management Strategy">
+    **Best Practices for Multiple Firewalls**
+    - Use different firewalls for different security layers
+    - Organize rules by function (web, database, management)
+    - Document firewall purposes and interactions
+    - Test thoroughly when combining multiple firewalls
+  </Accordion>
+</AccordionGroup>
+
+### Firewall Organization Strategies
+
+<Tabs>
+  <Tab title="Application-Layer Organization">
+    **Functional Separation**
+    
+    **Web Tier Firewall:**
+    - HTTP/HTTPS traffic rules
+    - Load balancer configurations
+    - CDN and proxy rules
+    
+    **Application Tier Firewall:**
+    - API access rules
+    - Inter-service communication
+    - Database connection rules
+    
+    **Management Firewall:**
+    - SSH access rules
+    - Monitoring and logging
+    - Administrative interfaces
+  </Tab>
+  
+  <Tab title="Environment-Based Organization">
+    **Environment Separation**
+    
+    **Production Firewall:**
+    - Strict security rules
+    - Minimal access permissions
+    - Comprehensive logging
+    
+    **Development Firewall:**
+    - More permissive rules
+    - Developer access
+    - Testing and debugging tools
+    
+    **Staging Firewall:**
+    - Production-like security
+    - Limited external access
+    - Testing environment protection
+  </Tab>
+</Tabs>
+
+## Viewing Firewall Attachments
+
+To view and manage firewall attachments:
+
+<Steps>
+  <Step title="Access Firewall Details">
+    Click "View Details" on any firewall card
+  </Step>
+  <Step title="Navigate to Attachments">
+    Select the "Attached VMs" tab in the firewall details interface
+  </Step>
+  <Step title="Review Attachment Information">
+    View comprehensive attachment details:
+    - VM Name and identification
+    - VM Status (ACTIVE, HIBERNATED, etc.)
+    - Attachment Status (SUCCESS, ATTACHING, ERROR)
+    - Attachment timestamp and duration
+  </Step>
+  <Step title="Manage Attachments">
+    Use available controls to detach or modify attachments as needed
+  </Step>
+</Steps>
+
+### Attachment Status Types
+
+<CodeGroup>
+```bash SUCCESS
+Firewall is successfully attached and protecting the VM
+```
+
+```bash ATTACHING
+Firewall attachment is in progress
+```
+
+```bash ERROR
+Firewall attachment failed or encountered an issue
+```
+
+```bash DETACHING
+Firewall is being removed from the VM
+```
+</CodeGroup>
+
+## Attachment Information Display
+
+The attachment interface provides detailed information for management:
+
+### VM Information Table
+
+<Tabs>
+  <Tab title="Basic VM Details">
+    **Essential Information**
+    - **VM Name:** User-defined virtual machine identifier
+    - **VM ID:** System-generated unique identifier
+    - **Region:** Geographic location of the VM
+    - **Creation Date:** When the VM was originally created
+  </Tab>
+  
+  <Tab title="Status Information">
+    **Operational Status**
+    - **VM Status:** Current operational state (ACTIVE, SHUTOFF, etc.)
+    - **Attachment Status:** Current firewall attachment state
+    - **Health Status:** Overall VM health and responsiveness
+    - **Network Status:** Network connectivity and configuration
+  </Tab>
+  
+  <Tab title="Attachment Metadata">
+    **Attachment Details**
+    - **Attachment Time:** When firewall was attached to VM
+    - **Attachment Duration:** How long firewall has been attached
+    - **Rule Count:** Number of rules protecting this VM
+    - **Last Activity:** Most recent firewall activity or rule application
+  </Tab>
+</Tabs>
+
+## Detaching Firewalls
+
+To remove firewall protection from a VM:
+
+<Steps>
+  <Step title="Access Detachment Interface">
+    Navigate to firewall details and locate the attached VM
+  </Step>
+  <Step title="Initiate Detachment">
+    Click the detach button for the specific VM
+  </Step>
+  <Step title="Confirm Detachment">
+    Review the detachment warning and confirm the action
+  </Step>
+  <Step title="Monitor Detachment">
+    Wait for detachment to complete and verify removal
+  </Step>
+</Steps>
+
+<Warning>
+**Detachment Security Warning:**
+
+Detaching a firewall immediately removes network protection from the VM. Ensure you have alternative security measures in place or that the VM doesn't require firewall protection before proceeding.
+</Warning>
+
+### Detachment Considerations
+
+<AccordionGroup>
+  <Accordion title="Security Impact">
+    **Protection Removal**
+    - VM loses firewall protection immediately
+    - All blocked connections become allowed
+    - Network exposure increases significantly
+    - Consider alternative protection before detaching
+  </Accordion>
+  
+  <Accordion title="Service Continuity">
+    **Application Impact**
+    - Previously blocked traffic may suddenly be allowed
+    - Application behavior may change
+    - Monitor for unexpected connections
+    - Test application functionality after detachment
+  </Accordion>
+  
+  <Accordion title="Alternative Protection">
+    **Security Alternatives**
+    - Attach different firewall before detaching current one
+    - Implement host-based firewall on VM
+    - Use network-level security controls
+    - Consider moving VM to protected network segment
+  </Accordion>
+</AccordionGroup>
+
+## Attachment Best Practices
+
+### Planning Firewall Attachments
+
+<Steps>
+  <Step title="Assess Security Requirements">
+    - Identify network traffic patterns and requirements
+    - Determine necessary ports and protocols
+    - Plan for different security layers and functions
+    - Consider compliance and regulatory requirements
+  </Step>
+  <Step title="Design Firewall Architecture">
+    - Plan firewall organization and rule distribution
+    - Consider performance impact of multiple firewalls
+    - Design for scalability and maintainability
+    - Document firewall purposes and interactions
+  </Step>
+  <Step title="Test Attachment Strategy">
+    - Test firewall attachments in development environment
+    - Validate application functionality with firewalls attached
+    - Monitor performance impact of firewall rules
+    - Test failover and disaster recovery scenarios
+  </Step>
+  <Step title="Implement and Monitor">
+    - Attach firewalls during maintenance windows
+    - Monitor application performance and connectivity
+    - Validate security effectiveness
+    - Document operational procedures
+  </Step>
+</Steps>
+
+### Operational Best Practices
+
+<CardGroup cols={2}>
+  <Card title="Attachment Timing" icon="clock">
+    **When to Attach Firewalls**
+    - Attach firewalls before VM goes into production
+    - Use maintenance windows for production changes
+    - Coordinate with application deployment schedules
+    - Plan for testing and validation time
+  </Card>
+  
+  <Card title="Monitoring and Validation" icon="eye">
+    **Post-Attachment Monitoring**
+    - Monitor application performance after attachment
+    - Validate that required traffic is allowed
+    - Check that unauthorized traffic is blocked
+    - Monitor firewall logs for security events
+  </Card>
+</CardGroup>
+
+## Troubleshooting Attachment Issues
+
+### Common Attachment Problems
+
+<AccordionGroup>
+  <Accordion title="VM Not Eligible">
+    **VM Cannot Be Selected**
+    - **Cause:** VM not in ACTIVE state
+    - **Solution:** Start or restore VM to ACTIVE state
+    - **Verification:** Check VM status in dashboard
+    - **Timeline:** Wait for VM to fully boot before retry
+  </Accordion>
+  
+  <Accordion title="Attachment Fails">
+    **Attachment Process Errors**
+    - **Cause:** Network configuration issues or VM problems
+    - **Solution:** Check VM networking and connectivity
+    - **Verification:** Test VM accessibility through other means
+    - **Timeline:** May require VM restart or network reconfiguration
+  </Accordion>
+  
+  <Accordion title="Attachment Shows Error">
+    **Error Status After Attachment**
+    - **Cause:** Firewall rule conflicts or configuration issues
+    - **Solution:** Review firewall rules and VM configuration
+    - **Verification:** Test network connectivity and application functionality
+    - **Timeline:** May require rule adjustment or firewall reconfiguration
+  </Accordion>
+</AccordionGroup>
+
+### Debugging Attachment Issues
+
+<Steps>
+  <Step title="Check VM Status">
+    - Verify VM is in ACTIVE state
+    - Confirm VM has valid server_uuid
+    - Test VM responsiveness and connectivity
+    - Check for any VM error conditions
+  </Step>
+  <Step title="Validate Firewall Configuration">
+    - Review firewall rules for conflicts
+    - Check firewall status and health
+    - Verify firewall is in SUCCESS state
+    - Test firewall functionality with other VMs
+  </Step>
+  <Step title="Test Network Connectivity">
+    - Test VM network connectivity before and after attachment
+    - Verify DNS resolution and internet connectivity
+    - Check for blocked connections in firewall logs
+    - Validate application-specific connectivity requirements
+  </Step>
+  <Step title="Contact Support if Needed">
+    - Provide VM ID and firewall ID
+    - Include error messages and timestamps
+    - Describe attempted troubleshooting steps
+    - Include network configuration details
+  </Step>
+</Steps>
+
+<Info>
+When multiple firewalls are attached to the same VM, all rules apply cumulatively. Plan your firewall architecture carefully to avoid conflicts and ensure optimal security coverage.
+</Info>
+
+<Tip>
+Always test firewall attachments in a development environment before applying to production VMs. This helps identify potential connectivity issues and rule conflicts before they impact live services.
+</Tip>

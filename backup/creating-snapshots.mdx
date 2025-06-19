@@ -1,0 +1,397 @@
+---
+title: "Creating Snapshots"
+description: "Create point-in-time backups of your virtual machines to preserve their current state, data, and configuration"
+---
+
+# Creating Snapshots
+
+Create point-in-time backups of your virtual machines to preserve their current state, data, and configuration.
+
+## Prerequisites
+
+Before creating snapshots, ensure you meet these requirements:
+
+<Warning>
+**Prerequisites for Snapshot Creation:**
+
+- At least one virtual machine must be in ACTIVE state
+- VM must be in the same region as where you want to create the snapshot
+- Your account profile must be complete with billing information
+- Sufficient credits for snapshot storage costs
+</Warning>
+
+### Account Requirements
+
+<Steps>
+  <Step title="Complete Profile">
+    Ensure your [account profile](https://barrack.ai/account) is complete with all required billing information
+  </Step>
+  <Step title="Sufficient Credits">
+    Verify you have adequate credits for snapshot storage costs
+  </Step>
+  <Step title="Active VMs">
+    Have at least one VM in ACTIVE state available for snapshotting
+  </Step>
+  <Step title="Regional Planning">
+    Plan which region you want to store your snapshots in
+  </Step>
+</Steps>
+
+## Step-by-Step Creation Process
+
+To create a new snapshot:
+
+<Steps>
+  <Step title="Navigate to Snapshots">
+    Navigate to the [Snapshots page](https://barrack.ai/snapshots)
+  </Step>
+  <Step title="Select Region">
+    Select your desired region from the dropdown menu
+  </Step>
+  <Step title="Initiate Creation">
+    Click the "Create Snapshot" button (disabled if no active VMs are available)
+  </Step>
+  <Step title="Configure Snapshot">
+    In the Create Snapshot modal:
+    - Select a virtual machine from the dropdown
+    - Enter a unique snapshot name (required, 1-50 characters)
+    - Optionally click "Show advanced options" for additional settings
+  </Step>
+  <Step title="Advanced Options (Optional)">
+    Configure advanced settings:
+    - Add description text for documentation
+    - Toggle "Create as Image" for deployment templates
+  </Step>
+  <Step title="Create Snapshot">
+    Review your settings and click "Create Snapshot"
+  </Step>
+</Steps>
+
+## Basic Configuration
+
+### Virtual Machine Selection
+
+<CardGroup cols={2}>
+  <Card title="VM Dropdown" icon="server">
+    **Available VMs**
+    - Dropdown shows only ACTIVE VMs in the selected region
+    - Displays VM name, GPU type, and region for easy identification
+    - Example format: "my-vm - H100-SXM5-80GB (CANADA-1)"
+    - If no VMs are available, you'll see "No active VMs available"
+  </Card>
+  
+  <Card title="VM Requirements" icon="check-circle">
+    **Eligible VMs**
+    - VM must be in ACTIVE state
+    - VM must be fully operational and responsive
+    - VM should not be under heavy load during snapshot creation
+    - VM must have completed initial setup and configuration
+  </Card>
+</CardGroup>
+
+### Snapshot Naming
+
+<AccordionGroup>
+  <Accordion title="Naming Requirements">
+    **Required Field Specifications**
+    - **Required field** - cannot be empty
+    - **Length limit:** 1-50 characters
+    - **Allowed characters:** Letters, numbers, spaces, hyphens (-), underscores (_), periods (.)
+    - **Must be unique** within your account
+    - Real-time character count display (e.g., "25/50")
+  </Accordion>
+  
+  <Accordion title="Naming Best Practices">
+    **Effective Naming Strategies**
+    - Include date and time: "web-server-2024-06-19-14-30"
+    - Indicate purpose: "pre-update-backup" or "milestone-v2"
+    - Include project name: "ml-project-alpha-checkpoint"
+    - Use version numbers: "production-release-v1.2"
+    - Environment indicators: "staging-env-backup"
+  </Accordion>
+  
+  <Accordion title="Validation Feedback">
+    **Real-time Validation**
+    - Instant validation feedback for invalid names
+    - Character count display to track length
+    - Duplicate name detection and warnings
+    - Format validation with helpful error messages
+  </Accordion>
+</AccordionGroup>
+
+## Advanced Options
+
+Click "Show advanced options" to access additional configuration settings:
+
+### Description Field
+
+<CardGroup cols={2}>
+  <Card title="Documentation" icon="file-text">
+    **Snapshot Description**
+    - Optional text area for snapshot description
+    - Helps identify the snapshot's purpose
+    - Useful for team collaboration and documentation
+    - No character limit enforced in UI
+    - Supports detailed documentation of snapshot contents
+  </Card>
+  
+  <Card title="Best Practices" icon="lightbulb">
+    **Description Content**
+    - Include snapshot purpose and contents
+    - Document software versions and configurations
+    - Note any special considerations for restoration
+    - Include contact information for questions
+    - Document dependencies and requirements
+  </Card>
+</CardGroup>
+
+### Create as Image Option
+
+<Tabs>
+  <Tab title="Image Creation">
+    **Snapshot as Deployment Template**
+    - Toggle switch to create snapshot as an image
+    - Images can be used for future VM deployments
+    - Appears in boot source options during VM creation
+    - Useful for standardizing environments across team
+  </Tab>
+  
+  <Tab title="Image Benefits">
+    **Deployment Template Advantages**
+    - **Rapid Deployment:** Quick VM creation from standardized template
+    - **Environment Consistency:** Identical configurations across deployments
+    - **Team Collaboration:** Shared environments for development teams
+    - **Version Control:** Multiple image versions for different configurations
+  </Tab>
+  
+  <Tab title="Use Cases">
+    **When to Create Images**
+    - Development environment templates
+    - Production deployment standards
+    - Training and educational environments
+    - Software distribution and deployment
+    - Disaster recovery templates
+  </Tab>
+</Tabs>
+
+## Creation Process Details
+
+### Snapshot Creation Workflow
+
+<Steps>
+  <Step title="Validation">
+    System validates all input parameters and requirements
+  </Step>
+  <Step title="Initiation">
+    Snapshot creation begins with VM state capture
+  </Step>
+  <Step title="Data Capture">
+    Complete VM state, disk contents, and configuration captured
+  </Step>
+  <Step title="Compression">
+    Snapshot data compressed and optimized for storage
+  </Step>
+  <Step title="Verification">
+    Snapshot integrity verified and marked as available
+  </Step>
+</Steps>
+
+### Creation Process Monitoring
+
+<AccordionGroup>
+  <Accordion title="Progress Tracking">
+    **Real-time Updates**
+    - Form validation occurs instantly (name format, VM selection)
+    - Button shows "Creating..." state with spinner animation
+    - Modal remains open during creation process
+    - Progress indicators show completion status
+  </Accordion>
+  
+  <Accordion title="Error Handling">
+    **Issue Resolution**
+    - Any errors are displayed in red alert boxes
+    - Clear error messages explain issues and solutions
+    - Retry mechanisms for temporary failures
+    - Support contact information for persistent issues
+  </Accordion>
+  
+  <Accordion title="Success Confirmation">
+    **Completion Notification**
+    - Success results in modal closure and snapshots list refresh
+    - Snapshot appears in list with "Creating" status initially
+    - Status updates to "Success" when complete
+    - Notification of successful snapshot creation
+  </Accordion>
+</AccordionGroup>
+
+## Snapshot Creation Timing
+
+### Optimal Creation Windows
+
+<CardGroup cols={2}>
+  <Card title="Low Activity Periods" icon="clock">
+    **Best Times for Snapshots**
+    - During low VM activity or maintenance windows
+    - Outside of peak application usage hours
+    - Between batch processing jobs
+    - During scheduled maintenance periods
+  </Card>
+  
+  <Card title="Avoid High Load" icon="exclamation-triangle">
+    **Times to Avoid**
+    - During heavy computational workloads
+    - Peak user activity periods
+    - During backup or synchronization operations
+    - System update or installation processes
+  </Card>
+</CardGroup>
+
+### Performance Considerations
+
+<AccordionGroup>
+  <Accordion title="VM Performance Impact">
+    **During Snapshot Creation**
+    - Minimal performance impact on most applications
+    - Brief I/O increases during data capture
+    - Memory and CPU usage remain largely unaffected
+    - Network performance typically unimpacted
+  </Accordion>
+  
+  <Accordion title="Duration Estimates">
+    **Snapshot Creation Time**
+    - Small VMs (< 100GB): 5-15 minutes
+    - Medium VMs (100-500GB): 15-45 minutes
+    - Large VMs (> 500GB): 45+ minutes
+    - Time varies based on data volume and VM activity
+  </Accordion>
+  
+  <Accordion title="Resource Optimization">
+    **Minimizing Impact**
+    - Schedule snapshots during maintenance windows
+    - Avoid concurrent snapshots of multiple VMs
+    - Consider VM workload patterns when scheduling
+    - Monitor VM performance during snapshot creation
+  </Accordion>
+</AccordionGroup>
+
+## Snapshot Storage and Costs
+
+### Storage Optimization
+
+<Info>
+**Storage Efficiency:**
+
+- Snapshots use advanced compression algorithms
+- Duplicate data blocks are deduplicated
+- Only changed data is stored in incremental snapshots
+- Storage costs based on actual compressed size
+</Info>
+
+### Cost Management
+
+<Tabs>
+  <Tab title="Storage Costs">
+    **Billing Information**
+    - **Rate:** $0.1 per TB per hour (€0.1 per TB per hour | ₹10 per TB per hour)
+    - **Billing Method:** Hourly based on actual snapshot size
+    - **Compression:** Snapshots are compressed to reduce costs
+    - **No Transfer Costs:** No charges for snapshot creation or restoration
+  </Tab>
+  
+  <Tab title="Cost Optimization">
+    **Reducing Storage Costs**
+    - Delete unnecessary snapshots regularly
+    - Implement retention policies based on business needs
+    - Use incremental backups where possible
+    - Monitor snapshot storage usage and trends
+  </Tab>
+  
+  <Tab title="Budget Planning">
+    **Cost Estimation**
+    - Estimate snapshot size based on VM disk usage
+    - Plan for compression ratio (typically 30-70% reduction)
+    - Calculate monthly costs based on retention policy
+    - Monitor actual costs vs. estimates
+  </Tab>
+</Tabs>
+
+## Troubleshooting Snapshot Creation
+
+### Common Creation Issues
+
+<Tabs>
+  <Tab title="VM State Issues">
+    **VM Not Available**
+    - **Problem:** No VMs available for snapshotting
+    - **Solution:** Ensure at least one VM is in ACTIVE state
+    - **Verification:** Check VM status in dashboard
+    - **Prevention:** Maintain VMs in operational state
+  </Tab>
+  
+  <Tab title="Account Issues">
+    **Account Requirements**
+    - **Problem:** Cannot create snapshots due to account status
+    - **Solution:** Complete account profile with billing information
+    - **Verification:** Check account completion status
+    - **Prevention:** Maintain current account information and sufficient credits
+  </Tab>
+  
+  <Tab title="Resource Issues">
+    **Resource Limitations**
+    - **Problem:** Insufficient storage quota or credits
+    - **Solution:** Add credits or clean up existing snapshots
+    - **Verification:** Check current credit balance and storage usage
+    - **Prevention:** Monitor resource usage and plan capacity
+  </Tab>
+  
+  <Tab title="Technical Issues">
+    **Creation Failures**
+    - **Problem:** Snapshot creation fails or times out
+    - **Solution:** Retry during low VM activity periods
+    - **Verification:** Check VM health and performance
+    - **Prevention:** Schedule snapshots during maintenance windows
+  </Tab>
+</Tabs>
+
+### Error Resolution
+
+<Steps>
+  <Step title="Identify Issue">
+    - Review error messages carefully
+    - Check VM status and health
+    - Verify account and credit status
+    - Assess current system load
+  </Step>
+  <Step title="Apply Solution">
+    - Address specific error conditions
+    - Wait for VM to reach stable state if needed
+    - Add credits or complete profile as required
+    - Retry during optimal conditions
+  </Step>
+  <Step title="Verify Success">
+    - Monitor snapshot creation progress
+    - Verify snapshot appears in list
+    - Check snapshot status reaches "Success"
+    - Test snapshot accessibility
+  </Step>
+  <Step title="Prevent Recurrence">
+    - Document successful procedures
+    - Plan optimal timing for future snapshots
+    - Monitor account and resource status
+    - Establish regular snapshot schedule
+  </Step>
+</Steps>
+
+<Note>
+**Important Notes:**
+
+- Snapshot creation can take several minutes depending on VM disk size
+- The source VM remains operational during snapshot creation
+- Snapshot names must be unique across your entire account
+- Only VMs in ACTIVE state can be snapshotted
+- If no active VMs exist, the Create Snapshot button will be disabled
+</Note>
+
+<Tip>
+**Pro Tip:** Use descriptive snapshot names that include the date, purpose, and version information. This makes it much easier to identify the right snapshot for restoration later, especially when managing multiple snapshots across different projects.
+</Tip>

@@ -1,0 +1,417 @@
+---
+title: "Managing SSH Keys"
+description: "View, organize, and delete your SSH keys throughout their lifecycle"
+---
+
+# Managing SSH Keys
+
+The SSH Keys page provides comprehensive tools for managing your credentials throughout their lifecycle, from creation to deletion.
+
+## Viewing and Organizing Keys
+
+### Key Information Display
+
+<CardGroup cols={2}>
+  <Card title="Key Details" icon="info">
+    **Essential Information**
+    - View key name, fingerprint, and creation date
+    - Access the full public key content
+    - Copy public keys to clipboard with one click
+    - View regional distribution of keys
+  </Card>
+  
+  <Card title="Organization Features" icon="folder">
+    **Management Tools**
+    - Search keys by name
+    - Filter keys by region
+    - Sort by name or creation date
+    - Paginated view for large key collections
+  </Card>
+</CardGroup>
+
+### Key Information Components
+
+<Tabs>
+  <Tab title="Basic Information">
+    **Core Key Details**
+    - **Key Name:** User-defined identifier
+    - **Key Type:** RSA, Ed25519, or ECDSA
+    - **Key Size:** Bit length for security assessment
+    - **Creation Date:** When key was added to account
+    - **Source:** Whether created or imported
+  </Tab>
+  
+  <Tab title="Technical Details">
+    **Advanced Information**
+    - **Fingerprint:** Unique key identifier
+    - **Public Key:** Full public key content
+    - **Algorithm:** Specific cryptographic algorithm used
+    - **Comment:** Optional comment or identifier
+  </Tab>
+  
+  <Tab title="Usage Information">
+    **Key Usage Data**
+    - **VM Associations:** Which VMs use this key
+    - **Last Used:** Most recent usage timestamp
+    - **Regional Availability:** Regions where key is available
+    - **Status:** Active, inactive, or deprecated
+  </Tab>
+</Tabs>
+
+## Deleting SSH Keys
+
+To remove an SSH key from your account:
+
+<Steps>
+  <Step title="Navigate to Key Management">
+    Navigate to the [SSH Keys page](https://barrack.ai/ssh-keys)
+  </Step>
+  <Step title="Locate Target Key">
+    Find the key you want to delete using search or filters
+  </Step>
+  <Step title="Initiate Deletion">
+    Click the "Delete" button on the key card
+  </Step>
+  <Step title="Confirm Deletion">
+    Confirm the deletion in the popup dialog
+  </Step>
+  <Step title="Verify Removal">
+    The key will be immediately removed from all regions
+  </Step>
+</Steps>
+
+### Key Deletion Considerations
+
+<Warning>
+**Important Deletion Factors:**
+
+- **Irreversible:** Deleted keys cannot be recovered - this action is permanent
+- **VM Access Impact:** You cannot delete keys that are currently in use by active VMs
+- **Backup Requirement:** Ensure you have at least one working SSH key before deleting others
+- **Global Removal:** Keys are removed from all regions simultaneously
+- **Access Loss:** VMs using deleted keys will lose SSH access until a new key is configured
+</Warning>
+
+### Pre-Deletion Checklist
+
+<AccordionGroup>
+  <Accordion title="VM Access Verification">
+    **Check VM Dependencies**
+    - Identify all VMs using the key
+    - Ensure alternative access methods exist
+    - Plan for key replacement on affected VMs
+    - Test alternative keys before deletion
+  </Accordion>
+  
+  <Accordion title="Access Continuity">
+    **Maintain SSH Access**
+    - Verify at least one other working key exists
+    - Test alternative keys with existing VMs
+    - Ensure team members have alternative access
+    - Plan for emergency access if needed
+  </Accordion>
+  
+  <Accordion title="Documentation Update">
+    **Update Documentation**
+    - Remove references to deleted key from documentation
+    - Update team access procedures
+    - Modify automation scripts using the key
+    - Update key inventory and management records
+  </Accordion>
+</AccordionGroup>
+
+## Using SSH Keys with Virtual Machines
+
+SSH keys are automatically integrated into the VM deployment process:
+
+### VM Deployment Integration
+
+<Steps>
+  <Step title="Key Selection">
+    In the SSH Key Configuration section of VM deployment, select from your available keys
+  </Step>
+  <Step title="Multi-Key Selection">
+    Multiple keys can be selected for a single VM to allow access by different team members
+  </Step>
+  <Step title="Automatic Installation">
+    Selected keys are automatically installed on the VM during provisioning
+  </Step>
+  <Step title="User Configuration">
+    Keys are configured for the default user account (ubuntu, centos, etc. depending on OS)
+  </Step>
+</Steps>
+
+### Connection Examples
+
+**Basic SSH Connection:**
+```bash
+ssh -i /path/to/private_key username@vm_ip_address
+```
+
+**Parameter explanations:**
+- `/path/to/private_key` - Path to your downloaded private key file
+- `username` - Default user for your OS (ubuntu, centos, admin, etc.)
+- `vm_ip_address` - Public IP address of your VM
+
+**SSH Config File (Recommended):**
+
+For easier connections, add entries to your SSH config file (`~/.ssh/config`):
+
+```bash
+Host my-vm
+  HostName 203.0.113.1
+  User ubuntu
+  IdentityFile ~/.ssh/my_private_key.pem
+  IdentitiesOnly yes
+```
+
+After adding this configuration, you can connect simply with: `ssh my-vm`
+
+## Regional Key Distribution
+
+SSH keys are automatically distributed across all available regions when created or imported:
+
+### Regional Availability
+
+<CardGroup cols={3}>
+  <Card title="Norway Region" icon="globe">
+    **NORWAY-1**
+    - European data center
+    - GDPR compliant
+    - Low latency for European users
+  </Card>
+  
+  <Card title="Canada Region" icon="globe">
+    **CANADA-1**
+    - North American data center
+    - Privacy-focused
+    - Optimized for Canadian/northern US users
+  </Card>
+  
+  <Card title="US Region" icon="globe">
+    **US-1**
+    - United States data center
+    - US data residency
+    - Low latency for US users
+  </Card>
+</CardGroup>
+
+### Cross-Region Benefits
+
+<AccordionGroup>
+  <Accordion title="Seamless Deployment">
+    **Automatic Availability**
+    - Keys work in all regions without manual distribution
+    - Deploy VMs in any region with existing keys
+    - No additional configuration required
+    - Consistent access across global infrastructure
+  </Accordion>
+  
+  <Accordion title="Disaster Recovery">
+    **Business Continuity**
+    - Keys available for emergency deployments
+    - Cross-region failover capabilities
+    - Consistent access during regional outages
+    - Simplified multi-region architecture
+  </Accordion>
+</AccordionGroup>
+
+## SSH Key Best Practices
+
+### Security Best Practices
+
+<Steps>
+  <Step title="Key Generation">
+    - Generate separate keys for different projects or environments
+    - Use descriptive names that identify the key's purpose
+    - Prefer Ed25519 keys for new generations (more secure and faster)
+    - Use minimum 2048-bit RSA keys (4096-bit recommended for high security)
+  </Step>
+  <Step title="Key Storage">
+    - Store private keys securely and never share them
+    - Use passphrase protection for your private keys
+    - Back up private keys in encrypted storage
+    - Set correct file permissions (600 for private keys)
+  </Step>
+  <Step title="Key Maintenance">
+    - Regularly audit and rotate your SSH keys
+    - Remove unused or unnecessary keys promptly
+    - Monitor key usage and access patterns
+    - Keep an inventory of where keys are deployed
+  </Step>
+  <Step title="Access Control">
+    - Use separate keys for different team members
+    - Implement key rotation policies
+    - Revoke access immediately when team members leave
+    - Consider using SSH certificates for large teams
+  </Step>
+</Steps>
+
+### Operational Best Practices
+
+<AccordionGroup>
+  <Accordion title="Key Organization">
+    **Systematic Key Management**
+    - Use consistent naming conventions
+    - Group keys by project, environment, or team
+    - Document key purposes and usage
+    - Maintain key inventory and ownership records
+  </Accordion>
+  
+  <Accordion title="Lifecycle Management">
+    **Key Lifecycle Planning**
+    - Plan key rotation schedules
+    - Establish key retirement procedures
+    - Monitor key age and usage patterns
+    - Implement automated key management where possible
+  </Accordion>
+  
+  <Accordion title="Team Collaboration">
+    **Multi-User Key Management**
+    - Establish team key management policies
+    - Provide key management training
+    - Implement approval processes for key changes
+    - Maintain emergency access procedures
+  </Accordion>
+</AccordionGroup>
+
+## Troubleshooting Common Issues
+
+### Connection Problems
+
+<Tabs>
+  <Tab title="Permission Denied">
+    **SSH Authentication Failures**
+    
+    **Common Causes:**
+    - Wrong private key file
+    - Incorrect file permissions
+    - Wrong username for OS
+    - Key not installed on VM
+    
+    **Solutions:**
+    - Verify correct private key file path
+    - Set permissions: `chmod 600 ~/.ssh/private_key.pem`
+    - Use correct username (ubuntu, centos, etc.)
+    - Check key was selected during VM deployment
+  </Tab>
+  
+  <Tab title="Connection Refused">
+    **Network Connectivity Issues**
+    
+    **Common Causes:**
+    - VM not running or accessible
+    - Firewall blocking SSH port
+    - Wrong IP address
+    - Network connectivity issues
+    
+    **Solutions:**
+    - Verify VM is in ACTIVE state
+    - Check firewall rules allow port 22
+    - Confirm correct public IP address
+    - Test network connectivity with ping
+  </Tab>
+  
+  <Tab title="Key Not Found">
+    **SSH Key Problems**
+    
+    **Common Causes:**
+    - Key deleted or not available
+    - Wrong key file path
+    - Key file moved or renamed
+    - SSH agent not running
+    
+    **Solutions:**
+    - Verify key exists in SSH keys list
+    - Check file path is correct
+    - Locate moved or renamed key files
+    - Start SSH agent if using key agent
+  </Tab>
+</Tabs>
+
+### Key Management Issues
+
+<AccordionGroup>
+  <Accordion title="Cannot Delete Key">
+    **Key Deletion Blocked**
+    - **Cause:** Key is in use by active VMs
+    - **Solution:** Remove key from VMs first or ensure alternative access
+    - **Prevention:** Plan key replacement before deletion
+    - **Verification:** Check which VMs are using the key
+  </Accordion>
+  
+  <Accordion title="Key Not Working">
+    **Authentication Failures**
+    - **Cause:** Key format issues or corruption
+    - **Solution:** Re-import key or create new key
+    - **Prevention:** Validate key format during import
+    - **Verification:** Test key with new VM deployment
+  </Accordion>
+  
+  <Accordion title="Lost Private Key">
+    **Private Key Recovery**
+    - **Cause:** Private key file deleted or corrupted
+    - **Solution:** Cannot recover - must create new key pair
+    - **Prevention:** Maintain secure backups of private keys
+    - **Mitigation:** Use multiple keys for redundant access
+  </Accordion>
+</AccordionGroup>
+
+## Advanced Key Management
+
+### Key Rotation Strategy
+
+<Steps>
+  <Step title="Plan Rotation Schedule">
+    - Determine rotation frequency based on security requirements
+    - Identify high-priority keys requiring frequent rotation
+    - Plan rotation windows to minimize service disruption
+    - Coordinate with team schedules and maintenance windows
+  </Step>
+  <Step title="Prepare New Keys">
+    - Generate or import new SSH keys
+    - Test new keys with development VMs
+    - Update team access and documentation
+    - Prepare deployment procedures
+  </Step>
+  <Step title="Deploy New Keys">
+    - Add new keys to existing VMs
+    - Verify new key functionality
+    - Update automation and scripts
+    - Train team on new key usage
+  </Step>
+  <Step title="Retire Old Keys">
+    - Remove old keys from VMs
+    - Delete old keys from account
+    - Update documentation and procedures
+    - Verify no remaining dependencies
+  </Step>
+</Steps>
+
+### Automation Integration
+
+<CardGroup cols={2}>
+  <Card title="Infrastructure as Code" icon="code">
+    **Automated Key Management**
+    - Include SSH key management in infrastructure automation
+    - Use configuration management tools for key deployment
+    - Implement automated key rotation procedures
+    - Monitor key usage and compliance
+  </Card>
+  
+  <Card title="CI/CD Integration" icon="refresh">
+    **Pipeline Integration**
+    - Integrate key management with deployment pipelines
+    - Automate key distribution to new VMs
+    - Implement automated testing of key functionality
+    - Monitor and alert on key-related issues
+  </Card>
+</CardGroup>
+
+<Info>
+Regular SSH key management, including monitoring usage, rotating keys, and maintaining proper access controls, is essential for maintaining the security and reliability of your virtual machine infrastructure.
+</Info>
+
+<Tip>
+**Pro Tip:** Maintain at least two working SSH keys at all times and test them regularly. This provides redundancy and ensures you never lose access to your VMs due to key issues.
+</Tip>

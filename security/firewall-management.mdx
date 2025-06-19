@@ -1,0 +1,406 @@
+---
+title: "Firewall Management"
+description: "Create and configure network security rules to protect your virtual machines"
+---
+
+# Firewall Management
+
+The Firewall Management system allows you to create and configure network security rules to protect your virtual machines. **Maximum limit: 25 firewalls per account.**
+
+## Firewall Overview
+
+The Firewall page displays your existing firewalls with detailed information (6 firewalls per page):
+
+<CardGroup cols={2}>
+  <Card title="Firewall Information" icon="shield">
+    **Displayed Details**
+    - Firewall name and description
+    - Status indicator (SUCCESS, CREATING, ERROR)
+    - Region information
+    - Creation date
+    - Rule count
+    - Attached VM count
+  </Card>
+  
+  <Card title="Management Actions" icon="cogs">
+    **Available Operations**
+    - View Details
+    - Add Rule
+    - Attach to VMs
+    - Delete
+    - Real-time status monitoring
+  </Card>
+</CardGroup>
+
+## Dashboard Statistics
+
+The firewall management interface provides comprehensive statistics:
+
+<CardGroup cols={2}>
+  <Card title="Firewall Metrics" icon="chart-bar">
+    **System Overview**
+    - **Total Firewalls:** Number of firewalls in your account
+    - **Total Rules:** Combined rules across all firewalls
+    - **Attachments:** Total VM attachments across firewalls
+    - **Active Firewalls:** Firewalls currently protecting VMs
+  </Card>
+  
+  <Card title="Status Distribution" icon="activity">
+    **Operational Status**
+    - **SUCCESS:** Fully operational firewalls
+    - **CREATING:** Firewalls being set up
+    - **ERROR:** Firewalls with configuration issues
+    - **Regional Distribution:** Firewalls by region
+  </Card>
+</CardGroup>
+
+## Creating Firewalls
+
+To create a new firewall:
+
+<Steps>
+  <Step title="Access Creation">
+    Click the "Create Firewall" button (disabled when limit reached)
+  </Step>
+  <Step title="Configure Basic Information">
+    Enter firewall details:
+    - **Firewall name** (required, maximum 50 characters)
+    - **Description** (optional, maximum 255 characters)
+    - **Region** selection from dropdown
+  </Step>
+  <Step title="Create Firewall">
+    Click "Create Firewall" to initialize the new firewall
+  </Step>
+  <Step title="Configure Rules">
+    After creation, add security rules to define traffic policies
+  </Step>
+</Steps>
+
+### Firewall Naming Requirements
+
+<Warning>
+**Name Requirements:**
+
+- Must be 1-50 characters
+- Supports letters, numbers, spaces, hyphens (-), underscores (_), and dots (.)
+- Must be unique within your account
+- No special characters or symbols allowed
+- Cannot be empty or contain only whitespace
+</Warning>
+
+### Regional Considerations
+
+<AccordionGroup>
+  <Accordion title="Region Selection">
+    **Geographic Placement**
+    - Firewalls are region-specific
+    - Must match the region of VMs you want to protect
+    - Cannot be moved between regions after creation
+    - Consider multi-region deployment strategies
+  </Accordion>
+  
+  <Accordion title="Cross-Region Management">
+    **Multi-Region Strategies**
+    - Create separate firewalls for each region
+    - Maintain consistent rule sets across regions
+    - Document regional differences and requirements
+    - Plan for region-specific compliance needs
+  </Accordion>
+</AccordionGroup>
+
+## Firewall Lifecycle
+
+### Creation Process
+
+<Tabs>
+  <Tab title="Planning Phase">
+    **Before Creating Firewalls**
+    - Identify security requirements for your applications
+    - Map network traffic patterns and dependencies
+    - Determine required ports and protocols
+    - Plan for different environments (dev, staging, prod)
+  </Tab>
+  
+  <Tab title="Creation Phase">
+    **During Firewall Setup**
+    - Choose descriptive names that indicate purpose
+    - Select appropriate region for target VMs
+    - Add meaningful descriptions for team collaboration
+    - Document intended use cases and applications
+  </Tab>
+  
+  <Tab title="Configuration Phase">
+    **After Creation**
+    - Add security rules based on requirements
+    - Test rule configurations with target applications
+    - Attach firewall to appropriate VMs
+    - Monitor and validate effectiveness
+  </Tab>
+</Tabs>
+
+### Firewall States
+
+<CodeGroup>
+```bash SUCCESS
+Firewall is fully operational and ready to protect VMs
+```
+
+```bash CREATING
+Firewall is being initialized and configured
+```
+
+```bash ERROR
+Firewall encountered an issue during creation or operation
+```
+
+```bash UPDATING
+Firewall configuration is being modified
+```
+</CodeGroup>
+
+## Firewall Limits and Quotas
+
+### Account Limitations
+
+<CardGroup cols={2}>
+  <Card title="Firewall Limits" icon="limit">
+    **Quantity Restrictions**
+    - **Maximum:** 25 firewalls per account
+    - **Regional Distribution:** No per-region limits
+    - **Rule Limits:** Varies by firewall complexity
+    - **Attachment Limits:** Multiple VMs per firewall
+  </Card>
+  
+  <Card title="Resource Management" icon="balance-scale">
+    **Efficient Usage**
+    - Plan firewall usage across projects
+    - Reuse firewalls for similar applications
+    - Delete unused firewalls to free quota
+    - Group related rules in single firewalls
+  </Card>
+</CardGroup>
+
+### Best Practices for Limits
+
+<AccordionGroup>
+  <Accordion title="Firewall Consolidation">
+    **Efficient Firewall Usage**
+    - Group similar applications under one firewall
+    - Use descriptive names to avoid duplication
+    - Share firewalls across development teams
+    - Plan for different environments and use cases
+  </Accordion>
+  
+  <Accordion title="Quota Management">
+    **Staying Within Limits**
+    - Monitor current firewall count regularly
+    - Delete unused or test firewalls promptly
+    - Plan firewall architecture before creation
+    - Request quota increases for enterprise needs
+  </Accordion>
+</AccordionGroup>
+
+## Firewall Information Display
+
+### Detailed Firewall Information
+
+Each firewall displays comprehensive details:
+
+<Tabs>
+  <Tab title="Basic Information">
+    **Essential Details**
+    - **Name:** User-defined firewall identifier
+    - **Description:** Optional purpose description
+    - **Region:** Geographic deployment location
+    - **Status:** Current operational state
+    - **Creation Date:** When firewall was created
+  </Tab>
+  
+  <Tab title="Configuration Summary">
+    **Rule and Attachment Summary**
+    - **Rule Count:** Number of configured security rules
+    - **Attached VMs:** Number of protected virtual machines
+    - **Last Modified:** Most recent configuration change
+    - **Active Status:** Whether firewall is actively protecting resources
+  </Tab>
+  
+  <Tab title="Operational Metrics">
+    **Performance Information**
+    - **Traffic Processed:** Volume of network traffic filtered
+    - **Rules Applied:** Number of rule evaluations
+    - **Blocked Connections:** Security violations prevented
+    - **Performance Impact:** Latency and throughput metrics
+  </Tab>
+</Tabs>
+
+## Security Rules Timing
+
+<Note>
+**Important Timing Information:**
+
+Security rules may take up to 10 minutes to be fully applied after creation. During this time, your VM may appear to have limited connectivity while the firewall configuration propagates across the network infrastructure.
+</Note>
+
+### Rule Application Process
+
+<Steps>
+  <Step title="Rule Creation">
+    New rules are validated and saved to firewall configuration
+  </Step>
+  <Step title="Configuration Propagation">
+    Rules are distributed to network infrastructure (up to 10 minutes)
+  </Step>
+  <Step title="Traffic Filtering">
+    Rules become active and begin filtering network traffic
+  </Step>
+  <Step title="Monitoring and Validation">
+    Test connectivity and validate rule effectiveness
+  </Step>
+</Steps>
+
+## Firewall Management Best Practices
+
+### Security Design Principles
+
+<AccordionGroup>
+  <Accordion title="Defense in Depth">
+    **Layered Security Approach**
+    - Combine firewall rules with application-level security
+    - Use both network and host-based firewalls
+    - Implement monitoring and intrusion detection
+    - Regular security assessments and penetration testing
+  </Accordion>
+  
+  <Accordion title="Principle of Least Privilege">
+    **Minimize Access Rights**
+    - Only open ports that are actively needed
+    - Restrict source IP ranges to minimum required
+    - Use specific protocols instead of broad permissions
+    - Regularly audit and remove unnecessary rules
+  </Accordion>
+  
+  <Accordion title="Documentation and Compliance">
+    **Governance and Compliance**
+    - Document all firewall rules and their purposes
+    - Maintain change logs for audit trails
+    - Regular compliance reviews and updates
+    - Team training on security best practices
+  </Accordion>
+</AccordionGroup>
+
+### Operational Best Practices
+
+<Steps>
+  <Step title="Planning and Design">
+    - Map application network requirements before creating rules
+    - Design firewall architecture for scalability
+    - Plan for different environments and use cases
+    - Consider compliance and regulatory requirements
+  </Step>
+  <Step title="Implementation">
+    - Start with restrictive rules and open access gradually
+    - Test rules in development environment first
+    - Document all rules with clear descriptions
+    - Implement changes during maintenance windows
+  </Step>
+  <Step title="Monitoring and Maintenance">
+    - Monitor firewall effectiveness and performance
+    - Regular security audits and rule reviews
+    - Update rules based on changing requirements
+    - Remove obsolete or unused rules promptly
+  </Step>
+  <Step title="Incident Response">
+    - Plan for security incident response procedures
+    - Maintain emergency access procedures
+    - Document escalation and communication procedures
+    - Regular disaster recovery testing
+  </Step>
+</Steps>
+
+## Firewall Integration
+
+### Integration with VM Workflow
+
+<CardGroup cols={2}>
+  <Card title="VM Deployment" icon="rocket">
+    **Deployment Integration**
+    - Attach firewalls during VM creation
+    - Configure security rules before going live
+    - Test connectivity after deployment
+    - Monitor security effectiveness
+  </Card>
+  
+  <Card title="Application Deployment" icon="code">
+    **Application Integration**
+    - Configure rules for specific applications
+    - Plan for application update requirements
+    - Test application functionality with firewall rules
+    - Monitor application performance impact
+  </Card>
+</CardGroup>
+
+### Automation and Scaling
+
+<AccordionGroup>
+  <Accordion title="Automated Rule Management">
+    **Automation Strategies**
+    - Use infrastructure as code for firewall management
+    - Automate rule deployment across environments
+    - Implement automated testing of firewall rules
+    - Monitor and alert on rule effectiveness
+  </Accordion>
+  
+  <Accordion title="Scaling Considerations">
+    **Growth Planning**
+    - Plan firewall architecture for growth
+    - Consider performance impact of complex rule sets
+    - Monitor resource utilization and optimize
+    - Plan for multi-region and multi-environment scaling
+  </Accordion>
+</AccordionGroup>
+
+## Common Firewall Scenarios
+
+<Tabs>
+  <Tab title="Web Application">
+    **Web Server Firewall**
+    - **Purpose:** Protect web servers and applications
+    - **Common Rules:** HTTP (80), HTTPS (443), SSH (22)
+    - **Considerations:** Load balancer integration, CDN compatibility
+    - **Monitoring:** Web application performance and security metrics
+  </Tab>
+  
+  <Tab title="Database Server">
+    **Database Protection**
+    - **Purpose:** Secure database servers from unauthorized access
+    - **Common Rules:** Database ports (3306, 5432), management interfaces
+    - **Considerations:** Application server access, backup connectivity
+    - **Monitoring:** Database performance and connection monitoring
+  </Tab>
+  
+  <Tab title="Development Environment">
+    **Development Security**
+    - **Purpose:** Flexible security for development and testing
+    - **Common Rules:** SSH, custom application ports, development tools
+    - **Considerations:** Team access, debugging tools, temporary access
+    - **Monitoring:** Development productivity and security balance
+  </Tab>
+  
+  <Tab title="Production Environment">
+    **Production Security**
+    - **Purpose:** Strict security for production workloads
+    - **Common Rules:** Minimal required ports, monitoring interfaces
+    - **Considerations:** High availability, compliance requirements
+    - **Monitoring:** Strict security monitoring and incident response
+  </Tab>
+</Tabs>
+
+<Warning>
+**Important Security Reminder:**
+
+Always test firewall configurations in a development environment before applying to production systems. Incorrect firewall rules can block legitimate traffic and impact application availability.
+</Warning>
+
+<Tip>
+Use descriptive names and detailed descriptions for your firewalls to make management easier as your infrastructure grows. Consider creating template firewalls for common use cases that can be reused across projects.
+</Tip>

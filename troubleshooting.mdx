@@ -1,0 +1,563 @@
+---
+title: "Troubleshooting"
+description: "Solutions to common issues you may encounter when using the platform"
+---
+
+# Troubleshooting
+
+This section provides solutions to common issues you may encounter when using the platform.
+
+## VM Deployment Issues
+
+### Insufficient Credits
+
+If you receive an "Insufficient Credits" error during deployment:
+
+<Steps>
+  <Step title="Check Current Balance">
+    Navigate to your [account page](https://barrack.ai/account) to check your current credit balance
+  </Step>
+  <Step title="Purchase Additional Credits">
+    Add credits to your account through the account page payment section
+  </Step>
+  <Step title="Verify Minimum Requirements">
+    Ensure you meet minimum balance requirements:
+    - USD: $1.00
+    - EUR: €1.00
+    - INR: ₹100.00
+  </Step>
+  <Step title="Retry Deployment">
+    Return to the [deployment page](https://barrack.ai/deploy) and try again
+  </Step>
+</Steps>
+
+### Resource Availability
+
+If your selected GPU type or count is unavailable in the region:
+
+<Tabs>
+  <Tab title="Region Alternative">
+    **Try Different Regions**
+    - Switch to NORWAY-1, CANADA-1, or US-1
+    - Check availability in multiple regions
+    - Consider latency impact of region choice
+    - All regions offer the same GPU types
+  </Tab>
+  
+  <Tab title="GPU Alternative">
+    **Alternative GPU Selection**
+    - Select a different GPU type with similar performance
+    - Reduce the GPU count if multi-GPU setup
+    - Consider lower-tier GPUs for development/testing
+    - Check GPU comparison in documentation
+  </Tab>
+  
+  <Tab title="Timing Strategy">
+    **Wait and Retry**
+    - GPU availability changes frequently throughout the day
+    - Try deploying at different times
+    - Set up notifications for availability (if supported)
+    - Plan deployments during off-peak hours
+  </Tab>
+</Tabs>
+
+### SSH Connection Failures
+
+If you can't connect to your VM via SSH:
+
+<AccordionGroup>
+  <Accordion title="VM Status Verification">
+    **Check VM State**
+    1. Verify that the VM is in ACTIVE state in your [dashboard](https://barrack.ai/dashboard)
+    2. Wait for VM to fully boot (2-5 minutes after deployment)
+    3. Check for any error states or ongoing operations
+    4. Ensure VM has been assigned a public IP address
+  </Accordion>
+  
+  <Accordion title="SSH Key Validation">
+    **Verify SSH Configuration**
+    1. Ensure you're using the correct private key file
+    2. Check private key file permissions: `chmod 600 ~/.ssh/your-key.pem`
+    3. Verify the key was properly added during VM deployment
+    4. Test with verbose SSH output: `ssh -v -i your-key.pem user@ip`
+  </Accordion>
+  
+  <Accordion title="Username and Connection">
+    **Correct Connection Details**
+    1. Use the correct username for the OS:
+       - Ubuntu images: `ubuntu`
+       - Other images: `root` or check OS documentation
+    2. Verify you're using the correct public IP address
+    3. Ensure port 22 is open (check firewall rules)
+    4. Try connecting from a different network/location
+  </Accordion>
+  
+  <Accordion title="Network and Firewall">
+    **Network Configuration**
+    1. Verify that port 22 is open in your security rules
+    2. Check if your local firewall is blocking SSH
+    3. Ensure the VM has a public IP assigned
+    4. Test network connectivity: `ping vm-ip-address`
+  </Accordion>
+</AccordionGroup>
+
+#### SSH Connection Command Reference
+
+```bash
+# Basic SSH connection
+ssh -i /path/to/your-private-key.pem ubuntu@your-vm-ip
+
+# SSH with verbose output for debugging
+ssh -v -i /path/to/your-private-key.pem ubuntu@your-vm-ip
+
+# SSH with specific port (if not 22)
+ssh -i /path/to/your-private-key.pem -p 2222 ubuntu@your-vm-ip
+
+# Set correct permissions on private key
+chmod 600 /path/to/your-private-key.pem
+```
+
+## Firewall Issues
+
+### Rule Not Taking Effect
+
+If your firewall rules aren't working as expected:
+
+<Steps>
+  <Step title="Wait for Propagation">
+    Rules may take up to 10 minutes to fully apply after creation or modification
+  </Step>
+  <Step title="Verify Rule Configuration">
+    Check the rule configuration:
+    - Correct protocol (TCP, UDP, ICMP)
+    - Proper port ranges
+    - Accurate IP address ranges in CIDR notation
+    - Correct direction (Ingress/Egress)
+  </Step>
+  <Step title="Check Firewall Attachment">
+    Ensure the firewall is properly attached to the VM:
+    - Verify attachment in firewall management
+    - Check VM status is ACTIVE
+    - Confirm firewall is in SUCCESS state
+  </Step>
+  <Step title="Test Connectivity">
+    Test the specific connection:
+    - Use telnet to test port connectivity
+    - Check application logs for connection attempts
+    - Verify from both source and destination
+  </Step>
+</Steps>
+
+### Cannot Delete Firewall
+
+If you're unable to delete a firewall:
+
+<CardGroup cols={2}>
+  <Card title="Detach First" icon="unlink">
+    **Standard Procedure**
+    - Detach the firewall from all VMs first
+    - Verify no active attachments remain
+    - Check attachment status in firewall details
+    - Wait for detachment to complete
+  </Card>
+  
+  <Card title="Force Delete" icon="trash">
+    **Alternative Method**
+    - Use force delete option if available
+    - Contact support for stuck firewalls
+    - Check for hidden or failed attachments
+    - Verify firewall is not in transitional state
+  </Card>
+</CardGroup>
+
+## Volume Issues
+
+### Volume Attachment Failures
+
+If you can't attach a volume to a VM:
+
+<Tabs>
+  <Tab title="VM Status Check">
+    **Verify VM Readiness**
+    - Ensure VM is in ACTIVE state
+    - Check VM is not undergoing other operations
+    - Verify VM has completed initial setup
+    - Ensure VM is not hibernated or suspended
+  </Tab>
+  
+  <Tab title="Regional Compatibility">
+    **Region Verification**
+    - Confirm volume and VM are in the same region
+    - Check regional capacity and availability
+    - Verify volume is not already attached elsewhere
+    - Consider regional restrictions or limitations
+  </Tab>
+  
+  <Tab title="Volume Status">
+    **Volume State Validation**
+    - Ensure volume is in AVAILABLE state
+    - Check volume is not being used by another VM
+    - Verify volume creation completed successfully
+    - Check for any volume errors or issues
+  </Tab>
+  
+  <Tab title="System Limitations">
+    **Technical Constraints**
+    - Check maximum volumes per VM limit
+    - Verify volume size compatibility
+    - Ensure VM supports additional volumes
+    - Check for any platform-specific limitations
+  </Tab>
+</Tabs>
+
+### Volume Detachment Issues
+
+If you can't detach a volume:
+
+<AccordionGroup>
+  <Accordion title="VM State Requirements">
+    **Active VM Required**
+    - Ensure the VM is in ACTIVE state
+    - VM cannot be hibernated, stopped, or in transition
+    - Wait for any ongoing VM operations to complete
+    - Check VM health and responsiveness
+  </Accordion>
+  
+  <Accordion title="Boot Volume Protection">
+    **System Volume Restrictions**
+    - Cannot detach the system boot volume from running VM
+    - System identifies and protects critical volumes
+    - Check if volume is marked as bootable/system volume
+    - Consider stopping VM before detaching system volumes
+  </Accordion>
+  
+  <Accordion title="Application Dependencies">
+    **Active Usage Check**
+    - Applications may be actively using the volume
+    - Unmount volume from within the OS if possible
+    - Stop applications that depend on the volume
+    - Check for processes with open files on volume
+  </Accordion>
+</AccordionGroup>
+
+### Volume Creation Problems
+
+If you're having trouble creating a volume:
+
+<Steps>
+  <Step title="Size Validation">
+    Verify you have entered a valid size:
+    - Standard volumes: minimum 10GB
+    - Bootable volumes: minimum 100GB
+    - Maximum size: 1,048,576GB (1TB)
+    - Size must be a positive integer
+  </Step>
+  <Step title="Name Uniqueness">
+    Ensure you're using a unique volume name:
+    - Check existing volumes in all regions
+    - Volume names must be unique across your account
+    - Use descriptive, meaningful names
+    - Follow naming conventions (letters, numbers, spaces, hyphens, underscores, periods)
+  </Step>
+  <Step title="OS Image Selection">
+    For bootable volumes, confirm you've selected a valid OS image:
+    - Choose from available images in your region
+    - Verify image compatibility with volume size
+    - Check regional image availability
+    - Ensure image is not deprecated or unavailable
+  </Step>
+  <Step title="Account Requirements">
+    Check that you have sufficient credits for storage allocation:
+    - Verify minimum credit balance
+    - Ensure account profile is complete
+    - Check payment method validity
+    - Review storage cost implications
+  </Step>
+</Steps>
+
+## Snapshot and Image Issues
+
+### Snapshot Creation Failure
+
+If you're unable to create a snapshot:
+
+<CardGroup cols={2}>
+  <Card title="VM Prerequisites" icon="server">
+    **VM Requirements**
+    - Verify the VM is in ACTIVE state
+    - Ensure VM has sufficient disk space
+    - Check VM is not under heavy load
+    - Wait for any ongoing operations to complete
+  </Card>
+  
+  <Card title="Account Validation" icon="user">
+    **Account Requirements**
+    - Ensure you have a unique name for the snapshot
+    - Check sufficient credits for snapshot storage
+    - Verify account profile is complete
+    - Ensure no naming conflicts exist
+  </Card>
+</CardGroup>
+
+### Image Creation Issues
+
+If you're having trouble creating an image:
+
+<AccordionGroup>
+  <Accordion title="Source Snapshot Validation">
+    **Snapshot Requirements**
+    - Verify the snapshot is in a completed/SUCCESS state
+    - Ensure snapshot is accessible and not corrupted
+    - Check snapshot has not been deleted
+    - Verify snapshot size and integrity
+  </Accordion>
+  
+  <Accordion title="Naming and Resources">
+    **Image Creation Requirements**
+    - Ensure you have a unique name for the image
+    - Check sufficient credits for image storage
+    - Verify regional availability for image creation
+    - Follow image naming conventions and limits
+  </Accordion>
+</AccordionGroup>
+
+## Account and Billing Issues
+
+### Can't Purchase Credits
+
+If you can't buy credits:
+
+<Steps>
+  <Step title="Complete Profile">
+    Ensure your account profile is fully completed:
+    - Full name and contact information
+    - Complete billing address
+    - Postal code and country selection
+    - Phone number (recommended)
+  </Step>
+  <Step title="Payment Method">
+    Verify your payment method:
+    - Check card details and expiration
+    - Ensure sufficient funds available
+    - Try alternative payment methods
+    - Check with your bank for restrictions
+  </Step>
+  <Step title="Minimum Purchase">
+    Meet minimum purchase requirements:
+    - USD: $5 minimum
+    - EUR: €5 minimum
+    - INR: ₹100 minimum
+  </Step>
+  <Step title="Geographic Restrictions">
+    Check for any geographic payment restrictions:
+    - Verify supported countries for payments
+    - Check local banking regulations
+    - Consider alternative payment methods
+    - Contact support for assistance
+  </Step>
+</Steps>
+
+### Profile Not Complete
+
+Make sure you have all required information:
+
+<Tabs>
+  <Tab title="Personal Information">
+    **Required Fields**
+    - Full legal name
+    - Valid email address (primary contact)
+    - Phone number (optional but recommended)
+    - Verify email address is confirmed
+  </Tab>
+  
+  <Tab title="Billing Address">
+    **Address Requirements**
+    - Complete street address
+    - City and state/province (if applicable)
+    - Postal/ZIP code (required)
+    - Country selection (determines currency)
+  </Tab>
+  
+  <Tab title="Validation Steps">
+    **Profile Completion**
+    - Review all fields in [account settings](https://barrack.ai/account)
+    - Save changes after updates
+    - Verify profile completion status
+    - Check for any validation errors
+  </Tab>
+</Tabs>
+
+## SSH Key Management Issues
+
+### Key Import Failures
+
+If you can't import an SSH key:
+
+<AccordionGroup>
+  <Accordion title="Key Format Validation">
+    **Correct Format Requirements**
+    - Key must be in standard OpenSSH format
+    - Must begin with ssh-rsa, ssh-ed25519, or ssh-dss
+    - Single line with no line breaks
+    - Include key type, key data, and optional comment
+  </Accordion>
+  
+  <Accordion title="Common Format Issues">
+    **Troubleshooting Format Problems**
+    - Remove any line breaks or extra whitespace
+    - Ensure key isn't corrupted or truncated
+    - Verify key type is supported
+    - Check key isn't from unsupported source
+  </Accordion>
+  
+  <Accordion title="Naming Issues">
+    **Key Name Requirements**
+    - Name must be 1-50 characters
+    - Use only letters, numbers, underscores, hyphens, periods
+    - Name must be unique within your account
+    - Avoid special characters or spaces
+  </Accordion>
+</AccordionGroup>
+
+### Key Creation Problems
+
+If automatic key generation fails:
+
+<Steps>
+  <Step title="Browser Compatibility">
+    Check browser compatibility and settings:
+    - Ensure JavaScript is enabled
+    - Disable popup blockers temporarily
+    - Try a different browser
+    - Clear browser cache and cookies
+  </Step>
+  <Step title="Download Issues">
+    If private key download fails:
+    - Check browser download settings
+    - Verify sufficient disk space
+    - Try right-click "Save as" if auto-download fails
+    - Check antivirus software interference
+  </Step>
+  <Step title="Alternative Generation">
+    Generate keys manually if needed:
+    - Use ssh-keygen on local machine
+    - Import the generated public key
+    - Follow local key generation best practices
+    - Ensure proper key permissions
+  </Step>
+</Steps>
+
+## Getting Support
+
+If you're experiencing issues that aren't resolved by the troubleshooting steps above:
+
+<CardGroup cols={2}>
+  <Card
+    title="Email Support"
+    icon="envelope"
+    href="mailto:support@barrack.ai"
+  >
+    **Contact our support team**
+    
+    Response time: Usually within 24 hours
+    
+    **Include in your message:**
+    - Account email address
+    - Detailed description of the issue
+    - Steps you've already tried
+    - Error messages or screenshots
+    - Deployment ID or VM ID if applicable
+  </Card>
+  
+  <Card
+    title="Urgent Issues"
+    icon="exclamation-triangle"
+    href="mailto:support@barrack.ai?subject=Urgent Issue"
+  >
+    **For critical problems**
+    
+    Mark subject as "Urgent Issue"
+    
+    **For issues like:**
+    - Service outages
+    - Data loss concerns
+    - Security incidents
+    - Billing discrepancies
+  </Card>
+</CardGroup>
+
+### Support Checklist
+
+When contacting support, include this information for faster resolution:
+
+<Tabs>
+  <Tab title="Account Information">
+    - **Account email address**
+    - **Date and time when issue occurred**
+    - **Your timezone for scheduling**
+    - **Account ID or username if different from email**
+  </Tab>
+  
+  <Tab title="Issue Details">
+    - **Step-by-step description of what you were doing**
+    - **Expected behavior vs. actual behavior**
+    - **Any error messages or codes received**
+    - **Browser type and version (for web interface issues)**
+  </Tab>
+  
+  <Tab title="Resource Information">
+    - **Deployment ID** (format: DEP1234567)
+    - **VM ID or name** if applicable
+    - **Region where resources are deployed**
+    - **GPU type and configuration**
+  </Tab>
+  
+  <Tab title="Troubleshooting">
+    - **Steps you've already attempted**
+    - **Screenshots of the issue** (if applicable)
+    - **Relevant log files or error outputs**
+    - **Network information** (if connectivity issue)
+  </Tab>
+</Tabs>
+
+## Common Error Codes
+
+Understanding error codes can help you troubleshoot issues more effectively:
+
+<AccordionGroup>
+  <Accordion title="Authentication Errors">
+    **AUTH_001:** Invalid login credentials
+    **AUTH_002:** Account not verified
+    **AUTH_003:** Session expired
+    **AUTH_004:** Two-factor authentication required
+  </Accordion>
+  
+  <Accordion title="Resource Errors">
+    **RES_001:** Insufficient credits
+    **RES_002:** Resource not available in region
+    **RES_003:** Maximum resource limit reached
+    **RES_004:** Invalid resource configuration
+  </Accordion>
+  
+  <Accordion title="Network Errors">
+    **NET_001:** Connection timeout
+    **NET_002:** Firewall rule conflict
+    **NET_003:** Port already in use
+    **NET_004:** Invalid IP address range
+  </Accordion>
+  
+  <Accordion title="Storage Errors">
+    **STO_001:** Volume not found
+    **STO_002:** Volume already attached
+    **STO_003:** Insufficient storage quota
+    **STO_004:** Invalid volume configuration
+  </Accordion>
+</AccordionGroup>
+
+<Info>
+Most issues can be resolved by following the troubleshooting steps above. For persistent problems, don't hesitate to contact our support team with detailed information about your issue.
+</Info>
+
+<Tip>
+Keep your browser updated and clear cache regularly to avoid interface issues. Most connectivity problems can be resolved by checking VM status, SSH key permissions, and firewall configurations.
+</Tip>

@@ -1,0 +1,256 @@
+---
+title: "Getting Started"
+description: "Get up and running with your first virtual machine"
+---
+
+# Getting Started
+
+Get up and running with your first virtual machine in just a few steps.
+
+## First Steps
+
+Recommended setup process:
+
+<Steps>
+  <Step title="Create an Account">
+    Create an account using email/password or Google OAuth for quick access to the platform.
+    
+    **Sign up at:** [barrack.ai/signup](https://barrack.ai/signup)
+  </Step>
+  <Step title="Complete Your Profile">
+    Navigate to **[My Account](https://barrack.ai/account)** section and complete your profile with billing information (required for payments).
+    
+    **Required information:**
+    - Full name
+    - Complete address
+    - Postal code
+    - Country (determines currency)
+  </Step>
+  <Step title="Add Credits">
+    Purchase credits to pay for your virtual machines and storage.
+    
+    **Minimum amounts:**
+    - USD: $1.00
+    - EUR: €1.00  
+    - INR: ₹100.00
+  </Step>
+  <Step title="Setup SSH Access">
+    Create or import an SSH key from the **[SSH Keys](https://barrack.ai/ssh-keys)** section for secure VM access.
+  </Step>
+  <Step title="Deploy Your VM">
+    Use the **[Deploy VM](https://barrack.ai/deploy)** wizard to launch your first virtual machine.
+  </Step>
+</Steps>
+
+## Authentication & Access
+
+Multiple ways to access your account:
+
+<CardGroup cols={2}>
+  <Card title="Email & Password" icon="envelope">
+    **Traditional login** with your registered email and password
+    
+    - Secure authentication
+    - Password recovery available
+    - Login at [barrack.ai/login](https://barrack.ai/login)
+  </Card>
+  <Card title="OTP Login" icon="key">
+    **Secure one-time password** login via email
+    
+    - Enhanced security
+    - No password required
+    - Email verification
+  </Card>
+  <Card title="Google OAuth" icon="google">
+    **Quick sign-in** with your Google account
+    
+    - Single sign-on
+    - No additional password
+    - Instant access
+  </Card>
+  <Card title="Password Recovery" icon="lock-reset">
+    **Email-based password reset** with secure verification
+    
+    - Secure recovery process
+    - Email verification
+    - New password setup
+  </Card>
+</CardGroup>
+
+## Prerequisites Checklist
+
+Before deploying your first VM, ensure you have:
+
+<Tabs>
+  <Tab title="Profile Requirements">
+    - [ ] **Complete Profile** - Billing information must be filled out
+    - [ ] **Valid Address** - Street address, city, postal code
+    - [ ] **Country Selection** - Determines your billing currency
+    - [ ] **Contact Information** - Phone number (optional but recommended)
+  </Tab>
+  
+  <Tab title="Account Balance">
+    - [ ] **Sufficient Credits** - Minimum balance required:
+      - USD: Minimum $1.00
+      - EUR: Minimum €1.00  
+      - INR: Minimum ₹100.00
+    - [ ] **Payment Method** - Valid for purchasing additional credits
+  </Tab>
+  
+  <Tab title="Security Setup">
+    - [ ] **SSH Key** - At least one SSH key for secure access
+    - [ ] **Key Permissions** - Private key file with correct permissions (600)
+    - [ ] **Key Backup** - Secure backup of your private keys
+  </Tab>
+  
+  <Tab title="Planning">
+    - [ ] **Region Selection** - Choose the region closest to your users
+    - [ ] **GPU Requirements** - Determine which GPU type you need
+    - [ ] **Storage Needs** - Plan for additional storage volumes if needed
+  </Tab>
+</Tabs>
+
+<Warning>
+Your profile must be complete with billing information (address, postal code, country) before you can create volumes or make purchases.
+</Warning>
+
+## Quick Deployment Guide
+
+### 1. Choose Your GPU
+
+Select from our high-performance GPU options:
+
+| GPU Model | Performance Level | Best For | Price (USD/hour) |
+|-----------|------------------|----------|------------------|
+| **H100-SXM5-80GB** | Highest | Large language models, complex AI research | $2.69 |
+| **H100-PCIe-NVLink-80GB** | Very High | Multi-GPU workloads, distributed training | $2.29 |
+| **H100-PCIe-80GB** | Very High | Single-GPU inference, model training | $2.25 |
+| **A100-SXM4-80GB-NVLink** | High | Deep learning, scientific computing | $1.59 |
+| **A100-PCIe-80GB** | High | ML training, data analytics | $1.55 |
+| **L40** | Medium-High | AI inference, graphics workloads | $1.19 |
+| **RTX-A6000** | Medium | Development, small-scale training | $0.69 |
+| **A40** | Medium | Professional graphics, AI development | $0.69 |
+
+### 2. Select Region
+
+Choose the geographic location closest to your users:
+
+<CardGroup cols={3}>
+  <Card title="NORWAY-1" icon="globe">
+    **Europe Region**
+    
+    - Low latency for European users
+    - All GPU types available
+  </Card>
+  <Card title="CANADA-1" icon="globe">
+    **North America Region**
+    
+    - Optimized for North American users
+    - All GPU types available
+  </Card>
+  <Card title="US-1" icon="globe">
+    **United States Region**
+    
+    - US-based infrastructure
+    - All GPU types available
+  </Card>
+</CardGroup>
+
+### 3. Configure Boot Source
+
+Choose from multiple boot source options:
+
+<Tabs>
+  <Tab title="OS Images">
+    **Pre-configured operating systems** optimized for GPU workloads
+    
+    Available images:
+    - Ubuntu Server 22.04 LTS R550 CUDA 12.4
+    - Ubuntu Server 22.04 LTS R550 CUDA 12.4 with Docker
+    - Ubuntu Server 20.04 LTS R535 CUDA 12.2
+    - Ubuntu Server 20.04 LTS R535 CUDA 12.2 with Docker
+    
+    <Note>Images are filtered by your selected region</Note>
+  </Tab>
+  
+  <Tab title="Volumes">
+    **Boot from an existing storage volume** (authenticated users only)
+    
+    Requirements:
+    - Requires a bootable volume in the same region
+    - Volumes are filtered by region and bootable status
+    - Persistent between deployments
+    - Minimum 100GB for bootable volumes
+  </Tab>
+  
+  <Tab title="Custom Images">
+    **Use your own saved VM images** (authenticated users only)
+    
+    Features:
+    - Created from your own snapshots
+    - Pre-configured environments
+    - Region-specific availability
+    - Standardize deployments across teams
+  </Tab>
+</Tabs>
+
+### 4. Setup SSH Access
+
+Ensure you have at least one SSH key configured for secure access to your VM.
+
+<CardGroup cols={2}>
+  <Card title="Create New Key" icon="plus" href="/ssh/creating-keys">
+    Generate a new SSH key pair automatically
+    
+    - 2048-bit RSA encryption
+    - Automatic download of private key
+    - Secure key generation
+  </Card>
+  <Card title="Import Existing Key" icon="upload" href="/ssh/importing-keys">
+    Import your existing public key
+    
+    - Use keys from GitHub, GitLab, etc.
+    - Multiple key format support
+    - Validate key format automatically
+  </Card>
+</CardGroup>
+
+<Tip>
+Use the SSH key creation wizard if you don't have existing keys. The system will generate and download your private key automatically.
+</Tip>
+
+## Post-Deployment Steps
+
+Once your VM is deployed:
+
+<Steps>
+  <Step title="Connect via SSH">
+    Use your private key to securely connect to your VM
+    
+    ```bash
+    ssh -i /path/to/your-private-key.pem ubuntu@your-vm-ip
+    ```
+  </Step>
+  <Step title="Configure Firewall Rules">
+    Set up network security rules for your specific needs
+    
+    - [Create firewall rules](/security/firewall-rules)
+    - [Attach firewalls to VMs](/security/attaching-firewalls)
+  </Step>
+  <Step title="Create Storage Volumes">
+    Add persistent storage for your data and applications
+    
+    - [Create volumes](/storage/creating-volumes)
+    - [Manage volumes](/storage/managing-volumes)
+  </Step>
+  <Step title="Take Snapshots">
+    Create backups for recovery and replication
+    
+    - [Create snapshots](/backup/creating-snapshots)
+    - [Manage snapshots](/backup/managing-snapshots)
+  </Step>
+</Steps>
+
+<Info>
+VM deployment typically takes 2-5 minutes. You'll receive notifications when your VM is ready.
+</Info>

@@ -1,0 +1,17 @@
+/* White CTA Button Styling */
+[data-testid="topbar-cta-button"],
+.mintlify-cta-button,
+button[data-testid="topbar-cta"] {
+  background-color: #ffffff !important;
+  color: #000000 !important;
+  border: 2px solid #e0eacc !important;
+  transition: all 0.2s ease !important;
+}
+
+[data-testid="topbar-cta-button"]:hover,
+.mintlify-cta-button:hover,
+button[data-testid="topbar-cta"]:hover {
+  background-color: #f8f8f8 !important;
+  border-color: #d0dab3 !important;
+  transform: translateY(-1px) !important;
+}

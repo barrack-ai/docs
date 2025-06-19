@@ -1,0 +1,495 @@
+---
+title: "Boot Source Configuration"
+description: "Select from available boot source options for your virtual machines"
+---
+
+# Boot Source Configuration
+
+Select from available boot source options to configure how your virtual machine will start and what operating system it will run.
+
+## Boot Source Types
+
+Choose the boot source that best fits your deployment needs:
+
+<CardGroup cols={3}>
+  <Card title="OS Images" icon="cd">
+    **Pre-configured operating systems** optimized for GPU workloads
+    
+    - Ubuntu with CUDA pre-installed
+    - Docker variants available
+    - Optimized for AI/ML workloads
+    - Ready to use immediately
+  </Card>
+  
+  <Card title="Volumes" icon="database">
+    **Boot from existing storage volume** (authenticated users only)
+    
+    - Custom OS configurations
+    - Persistent between deployments
+    - Pre-installed software preserved
+    - Minimum 100GB required
+  </Card>
+  
+  <Card title="Custom Images" icon="image">
+    **Use your own saved VM images** (authenticated users only)
+    
+    - Created from your snapshots
+    - Standardized environments
+    - Team collaboration
+    - Version-controlled deployments
+  </Card>
+</CardGroup>
+
+## OS Images
+
+Pre-configured operating systems optimized for GPU workloads and machine learning applications.
+
+### Available OS Images
+
+<Tabs>
+  <Tab title="Ubuntu 22.04 LTS">
+    **Latest Long-term Support Release**
+    
+    **Ubuntu Server 22.04 LTS R550 CUDA 12.4**
+    - **NVIDIA Driver:** R550 (latest stable)
+    - **CUDA Version:** 12.4
+    - **Python:** 3.10.x pre-installed
+    - **Package Manager:** APT with GPU-optimized repositories
+    - **Best For:** Latest AI frameworks, new projects
+    
+    **Ubuntu Server 22.04 LTS R550 CUDA 12.4 with Docker**
+    - **All features above plus:**
+    - **Docker:** Latest Docker Engine pre-installed
+    - **Docker Compose:** Ready for container workflows
+    - **NVIDIA Container Toolkit:** GPU support in containers
+    - **Best For:** Containerized AI/ML workloads
+  </Tab>
+  
+  <Tab title="Ubuntu 20.04 LTS">
+    **Stable Long-term Support Release**
+    
+    **Ubuntu Server 20.04 LTS R535 CUDA 12.2**
+    - **NVIDIA Driver:** R535 (proven stability)
+    - **CUDA Version:** 12.2
+    - **Python:** 3.8.x pre-installed
+    - **Long-term Support:** Supported until 2025
+    - **Best For:** Production workloads, stability-focused projects
+    
+    **Ubuntu Server 20.04 LTS R535 CUDA 12.2 with Docker**
+    - **All features above plus:**
+    - **Docker:** Stable Docker Engine
+    - **Docker Compose:** Container orchestration
+    - **NVIDIA Runtime:** GPU access in containers
+    - **Best For:** Stable containerized environments
+  </Tab>
+</Tabs>
+
+### OS Image Features
+
+All OS images include:
+
+<AccordionGroup>
+  <Accordion title="GPU Optimization">
+    **NVIDIA GPU Support**
+    - Latest NVIDIA drivers pre-installed
+    - CUDA toolkit and libraries
+    - cuDNN for deep learning acceleration
+    - NCCL for multi-GPU communication
+    - Optimized kernel parameters
+  </Accordion>
+  
+  <Accordion title="Development Tools">
+    **Pre-installed Development Environment**
+    - Python 3 with pip and conda support
+    - Essential build tools (gcc, make, cmake)
+    - Git for version control
+    - SSH server configured and running
+    - Network tools and utilities
+  </Accordion>
+  
+  <Accordion title="AI/ML Libraries">
+    **Machine Learning Ready**
+    - CUDA libraries for GPU computing
+    - TensorRT for inference optimization
+    - Essential system libraries
+    - Optimized for popular ML frameworks
+    - Ready for PyTorch, TensorFlow installation
+  </Accordion>
+  
+  <Accordion title="System Configuration">
+    **Optimized System Settings**
+    - GPU-friendly kernel parameters
+    - Optimized memory management
+    - Network performance tuning
+    - Security hardening applied
+    - Automatic updates configured
+  </Accordion>
+</AccordionGroup>
+
+### Image Selection Guidelines
+
+<CardGroup cols={2}>
+  <Card title="Choose Ubuntu 22.04" icon="arrow-right">
+    **When You Need:**
+    - Latest software versions
+    - Newest CUDA features
+    - Modern Python 3.10+
+    - Latest container support
+    - New project development
+  </Card>
+  
+  <Card title="Choose Ubuntu 20.04" icon="arrow-right">
+    **When You Need:**
+    - Proven stability
+    - Legacy software compatibility
+    - Production environments
+    - Extended support lifecycle
+    - Conservative update approach
+  </Card>
+</CardGroup>
+
+## Bootable Volumes
+
+Boot from an existing storage volume that contains a complete operating system and your custom configurations.
+
+### Volume Requirements
+
+<Warning>
+**Bootable Volume Prerequisites:**
+
+- Volume must be marked as "bootable" during creation
+- Minimum size: 100GB
+- Must contain a valid operating system
+- Volume and VM must be in the same region
+- Volume cannot be attached to another running VM
+</Warning>
+
+### Creating Bootable Volumes
+
+<Steps>
+  <Step title="Create Volume">
+    Navigate to [Volumes](https://barrack.ai/volumes) and create a new volume:
+    - Enable "Make Bootable" option
+    - Select an OS image for initialization
+    - Size must be at least 100GB
+    - Choose the same region as your planned VM
+  </Step>
+  <Step title="Customize OS">
+    Deploy a VM using the bootable volume:
+    - Install required software and tools
+    - Configure system settings
+    - Set up applications and services
+    - Create user accounts and permissions
+  </Step>
+  <Step title="Create Snapshot">
+    Take a snapshot of the configured volume:
+    - Ensures you have a backup of your configuration
+    - Allows creating multiple identical volumes
+    - Enables version control of your environment
+  </Step>
+  <Step title="Use for Deployment">
+    Use the bootable volume for new VM deployments:
+    - Select volume as boot source during deployment
+    - Enjoy instant access to pre-configured environment
+    - Consistent setup across multiple VMs
+  </Step>
+</Steps>
+
+### Bootable Volume Benefits
+
+<AccordionGroup>
+  <Accordion title="Persistent Configurations">
+    **Custom Environment Preservation**
+    - All software installations persist
+    - User accounts and permissions preserved
+    - Application configurations maintained
+    - System tweaks and optimizations retained
+  </Accordion>
+  
+  <Accordion title="Rapid Deployment">
+    **Fast VM Creation**
+    - Skip software installation time
+    - Pre-configured environments ready immediately
+    - Consistent setup across multiple deployments
+    - Reduced time to productivity
+  </Accordion>
+  
+  <Accordion title="Team Standardization">
+    **Shared Development Environments**
+    - Identical environments for team members
+    - Version-controlled system configurations
+    - Standardized toolchains and libraries
+    - Reduced environment-related issues
+  </Accordion>
+  
+  <Accordion title="Version Control">
+    **Environment Versioning**
+    - Multiple bootable volumes for different versions
+    - Easy rollback to previous configurations
+    - A/B testing of environment changes
+    - Staged deployment strategies
+  </Accordion>
+</AccordionGroup>
+
+## Custom Images
+
+Use your own saved VM images created from snapshots for standardized deployments.
+
+### Image Creation Process
+
+<Steps>
+  <Step title="Configure Source VM">
+    Set up a VM with your desired configuration:
+    - Install and configure all required software
+    - Set up user accounts and permissions
+    - Configure system settings and optimizations
+    - Test all functionality thoroughly
+  </Step>
+  <Step title="Create Snapshot">
+    Take a snapshot of the configured VM:
+    - Navigate to [Snapshots](https://barrack.ai/snapshots)
+    - Select your configured VM
+    - Enable "Create as Image" option
+    - Provide descriptive name and documentation
+  </Step>
+  <Step title="Verify Image">
+    Test the custom image:
+    - Deploy a new VM using the custom image
+    - Verify all configurations are preserved
+    - Test application functionality
+    - Validate performance characteristics
+  </Step>
+  <Step title="Use for Production">
+    Deploy production VMs using the custom image:
+    - Consistent environments across deployments
+    - Faster deployment times
+    - Reduced configuration errors
+    - Standardized production environments
+  </Step>
+</Steps>
+
+### Custom Image Advantages
+
+<CardGroup cols={2}>
+  <Card title="Environment Consistency" icon="check-circle">
+    **Standardized Deployments**
+    - Identical software versions across VMs
+    - Consistent configuration settings
+    - Predictable performance characteristics
+    - Reduced deployment variability
+  </Card>
+  
+  <Card title="Operational Efficiency" icon="clock">
+    **Streamlined Operations**
+    - Faster VM deployment times
+    - Reduced manual configuration
+    - Lower risk of configuration errors
+    - Simplified troubleshooting
+  </Card>
+</CardGroup>
+
+### Image Management Best Practices
+
+<AccordionGroup>
+  <Accordion title="Naming Conventions">
+    **Organized Image Management**
+    - Use descriptive names with versions
+    - Include software versions in names
+    - Document purpose and use cases
+    - Follow team naming standards
+    
+    **Example naming:**
+    - `ml-env-pytorch-2.1-cuda12.4-v1.0`
+    - `web-app-prod-ubuntu22-v2.3`
+    - `dev-env-team-alpha-v1.5`
+  </Accordion>
+  
+  <Accordion title="Version Control">
+    **Image Lifecycle Management**
+    - Maintain multiple versions of images
+    - Document changes between versions
+    - Test new versions before production use
+    - Plan deprecation strategy for old versions
+  </Accordion>
+  
+  <Accordion title="Documentation">
+    **Image Documentation**
+    - Document installed software and versions
+    - Include configuration details
+    - Provide usage instructions
+    - Maintain change logs
+  </Accordion>
+  
+  <Accordion title="Testing Strategy">
+    **Quality Assurance**
+    - Test images before production deployment
+    - Validate functionality across different VM sizes
+    - Test with different GPU types
+    - Verify performance characteristics
+  </Accordion>
+</AccordionGroup>
+
+## Boot Source Selection Guide
+
+### Decision Matrix
+
+<Tabs>
+  <Tab title="Quick Start">
+    **OS Images**
+    
+    **Choose When:**
+    - Starting a new project
+    - Need immediate GPU-ready environment
+    - Want latest drivers and software
+    - Prefer standard configurations
+    
+    **Best For:** Development, experimentation, proof of concepts
+  </Tab>
+  
+  <Tab title="Custom Environment">
+    **Bootable Volumes**
+    
+    **Choose When:**
+    - Need specific software configurations
+    - Want to preserve custom settings
+    - Require non-standard system setup
+    - Need persistent custom environment
+    
+    **Best For:** Specialized workloads, custom applications
+  </Tab>
+  
+  <Tab title="Standardized Deployment">
+    **Custom Images**
+    
+    **Choose When:**
+    - Deploying multiple identical VMs
+    - Need consistent production environments
+    - Want to standardize team environments
+    - Require version-controlled deployments
+    
+    **Best For:** Production deployments, team environments
+  </Tab>
+</Tabs>
+
+## Regional Considerations
+
+<Note>
+**Regional Availability:**
+
+- OS images are automatically filtered by selected region
+- Volume and custom image options require user authentication
+- Bootable volumes must be in the same region as your VM
+- Custom images are created from your snapshots and are region-specific
+</Note>
+
+### Cross-Region Deployment
+
+If you need to deploy across multiple regions:
+
+<Steps>
+  <Step title="Plan Multi-Region Strategy">
+    - Identify which boot sources you need in each region
+    - Plan for image/volume replication needs
+    - Consider regional compliance requirements
+  </Step>
+  <Step title="Create Regional Resources">
+    - Create bootable volumes in each target region
+    - Generate custom images in required regions
+    - Test deployment procedures in each region
+  </Step>
+  <Step title="Maintain Consistency">
+    - Keep images synchronized across regions
+    - Document regional differences
+    - Test cross-region compatibility
+  </Step>
+</Steps>
+
+## Performance Considerations
+
+### Boot Time Optimization
+
+<CardGroup cols={2}>
+  <Card title="OS Images" icon="rocket">
+    **Fastest Boot Times**
+    - Optimized for quick startup
+    - Minimal additional configuration
+    - Standard driver initialization
+    - Ready for immediate use
+  </Card>
+  
+  <Card title="Custom Sources" icon="settings">
+    **Configuration-Dependent**
+    - Boot time depends on customizations
+    - Complex setups may increase boot time
+    - Pre-installed software adds to startup
+    - Consider startup script optimization
+  </Card>
+</CardGroup>
+
+### Storage Performance
+
+<AccordionGroup>
+  <Accordion title="OS Image Performance">
+    **Optimized Base Performance**
+    - Standard filesystem optimizations
+    - GPU driver optimizations applied
+    - Baseline performance characteristics
+    - Predictable performance profile
+  </Accordion>
+  
+  <Accordion title="Volume Performance">
+    **Customizable Performance**
+    - Performance depends on volume configuration
+    - Custom filesystem optimizations possible
+    - May include performance-tuned applications
+    - Consider volume size impact on performance
+  </Accordion>
+  
+  <Accordion title="Image Performance">
+    **Inherited Performance Characteristics**
+    - Performance based on source VM configuration
+    - May include custom optimizations
+    - Consider image size impact on deployment
+    - Test performance in target environment
+  </Accordion>
+</AccordionGroup>
+
+## Security Considerations
+
+### Boot Source Security
+
+<Warning>
+**Security Best Practices:**
+
+- OS images receive regular security updates
+- Custom images should be updated regularly
+- Bootable volumes require manual security maintenance
+- Verify source integrity before deployment
+</Warning>
+
+### Security Validation
+
+<Steps>
+  <Step title="Verify Source Integrity">
+    - Use only trusted OS images
+    - Validate custom image sources
+    - Check bootable volume history
+    - Verify no unauthorized modifications
+  </Step>
+  <Step title="Apply Security Updates">
+    - Update OS images regularly
+    - Maintain custom images with security patches
+    - Update bootable volumes periodically
+    - Monitor security advisories
+  </Step>
+  <Step title="Configure Security">
+    - Apply appropriate security configurations
+    - Configure firewalls and access controls
+    - Set up monitoring and logging
+    - Implement intrusion detection
+  </Step>
+</Steps>
+
+<Tip>
+Start with OS images for development and testing, then move to bootable volumes or custom images for production deployments that require specific configurations.
+</Tip>

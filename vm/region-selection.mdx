@@ -1,0 +1,447 @@
+---
+title: "Region Selection"
+description: "Choose the geographic location for your VM deployment"
+---
+
+# Region Selection
+
+Choose the geographic location for your virtual machine deployment to optimize performance and compliance.
+
+## Available Regions
+
+Select from our high-performance data centers around the world:
+
+<CardGroup cols={3}>
+  <Card title="NORWAY-1" icon="globe">
+    **Europe Region**
+    
+    **Location:** Norway, Europe
+    **Available GPU Types:** All GPUs Available
+    **Best For:** European users, GDPR compliance
+    **Latency:** Optimized for European traffic
+  </Card>
+  
+  <Card title="CANADA-1" icon="globe">
+    **North America Region**
+    
+    **Location:** Canada, North America
+    **Available GPU Types:** All GPUs Available
+    **Best For:** North American users
+    **Latency:** Low latency for Canadian and northern US users
+  </Card>
+  
+  <Card title="US-1" icon="globe">
+    **United States Region**
+    
+    **Location:** United States
+    **Available GPU Types:** All GPUs Available
+    **Best For:** US-based users and applications
+    **Latency:** Optimized for US traffic
+  </Card>
+</CardGroup>
+
+## Regional Specifications
+
+| Region | Location | GPU Availability | Network | Compliance |
+|--------|----------|------------------|---------|------------|
+| **NORWAY-1** | Europe | All GPU types | High-speed European network | GDPR compliant |
+| **CANADA-1** | North America | All GPU types | North American backbone | Privacy-focused |
+| **US-1** | United States | All GPU types | US domestic network | US data residency |
+
+## GPU Availability by Region
+
+All regions support the complete range of GPU types:
+
+<Tabs>
+  <Tab title="H100 Series">
+    **Available in All Regions**
+    - H100-SXM5-80GB
+    - H100-PCIe-NVLink-80GB
+    - H100-PCIe-80GB
+    
+    **Regional Notes:**
+    - High demand GPU types
+    - Availability varies by time and region
+    - Check real-time availability during deployment
+  </Tab>
+  
+  <Tab title="A100 Series">
+    **Available in All Regions**
+    - A100-SXM4-80GB-NVLink
+    - A100-PCIe-80GB
+    
+    **Regional Notes:**
+    - Most reliable availability
+    - Good performance across all regions
+    - Established infrastructure support
+  </Tab>
+  
+  <Tab title="Professional GPUs">
+    **Available in All Regions**
+    - L40
+    - RTX-A6000
+    - A40
+    
+    **Regional Notes:**
+    - Consistently available
+    - Cost-effective options
+    - Good for development and testing
+  </Tab>
+</Tabs>
+
+## Region Selection Factors
+
+### Performance Considerations
+
+<AccordionGroup>
+  <Accordion title="Latency Optimization">
+    **Choose Based on User Location**
+    
+    - **NORWAY-1:** Best for users in Europe, UK, Middle East, and parts of Africa
+    - **CANADA-1:** Optimal for Canada, northern US states, and Alaska
+    - **US-1:** Best for continental United States and parts of Mexico
+    
+    **Latency Impact:**
+    - Network round-trip time affects interactive applications
+    - SSH connections and real-time applications benefit from low latency
+    - Batch processing workloads are less sensitive to latency
+  </Accordion>
+  
+  <Accordion title="Network Performance">
+    **Regional Network Characteristics**
+    
+    - **European Network (NORWAY-1):** High-speed connections to European internet exchanges
+    - **North American Networks:** Optimized routing for continental traffic
+    - **Cross-region Traffic:** Higher latency for intercontinental access
+    
+    **Considerations:**
+    - Data transfer speeds for large datasets
+    - Real-time streaming and video processing
+    - API response times for web applications
+  </Accordion>
+  
+  <Accordion title="Resource Availability">
+    **Regional Capacity**
+    
+    - GPU availability varies by region and time
+    - Popular GPU types may have limited availability
+    - Consider backup region options
+    - Check availability during peak usage hours
+  </Accordion>
+</AccordionGroup>
+
+### Compliance and Legal
+
+<CardGroup cols={2}>
+  <Card title="Data Residency" icon="shield">
+    **Geographic Data Requirements**
+    
+    - **GDPR Compliance:** NORWAY-1 for European data
+    - **US Data Laws:** US-1 for US-specific requirements
+    - **Cross-border Restrictions:** Consider data transfer regulations
+    - **Industry Compliance:** Healthcare, finance sector requirements
+  </Card>
+  
+  <Card title="Privacy Regulations" icon="lock">
+    **Regional Privacy Laws**
+    
+    - **European GDPR:** Strict data protection in NORWAY-1
+    - **Canadian PIPEDA:** Privacy protection in CANADA-1
+    - **US State Laws:** Various state-specific regulations in US-1
+    - **International Transfers:** Consider data flow implications
+  </Card>
+</CardGroup>
+
+## Regional Pricing
+
+Pricing is consistent across all regions for the same GPU types:
+
+<Info>
+**Uniform Pricing:** All regions offer the same pricing for identical GPU configurations. Choose based on performance and compliance needs, not cost differences.
+</Info>
+
+### Currency by Region
+
+While pricing is uniform, billing currency is determined by your account country setting:
+
+<Tabs>
+  <Tab title="USD Billing">
+    **US Dollar Accounts**
+    - Most countries default to USD
+    - Consistent pricing across regions
+    - Standard international currency
+  </Tab>
+  
+  <Tab title="EUR Billing">
+    **Euro Accounts**
+    - European Union countries
+    - Some European non-EU countries
+    - Local currency convenience
+  </Tab>
+  
+  <Tab title="INR Billing">
+    **Indian Rupee Accounts**
+    - India-based accounts
+    - Local payment methods
+    - Regional banking integration
+  </Tab>
+</Tabs>
+
+## Storage and Volume Considerations
+
+### Regional Storage
+
+<Warning>
+**Important Storage Limitations:**
+
+- Storage volumes and snapshots are region-specific
+- Volumes can only be attached to VMs in the same region
+- Cross-region data transfer requires manual migration
+- Plan your storage allocation based on primary region
+</Warning>
+
+### Volume Management by Region
+
+<Steps>
+  <Step title="Plan Storage Strategy">
+    - Choose primary region for most workloads
+    - Consider data gravity and access patterns
+    - Plan for disaster recovery needs
+    - Evaluate cross-region backup requirements
+  </Step>
+  <Step title="Create Regional Resources">
+    - Create volumes in the same region as VMs
+    - Establish snapshots for backup and recovery
+    - Set up cross-region replication if needed
+    - Monitor regional storage usage
+  </Step>
+  <Step title="Optimize Access Patterns">
+    - Keep data close to compute resources
+    - Minimize cross-region data transfers
+    - Use local storage for temporary data
+    - Plan for regional failover scenarios
+  </Step>
+</Steps>
+
+## Network and Connectivity
+
+### Regional Network Features
+
+<CardGroup cols={3}>
+  <Card title="NORWAY-1 Network" icon="network-wired">
+    **European Connectivity**
+    
+    - Direct connections to major European internet exchanges
+    - Low latency to UK, Germany, France
+    - High-speed connections to Scandinavia
+    - Optimized for European CDN access
+  </Card>
+  
+  <Card title="CANADA-1 Network" icon="network-wired">
+    **North American Connectivity**
+    
+    - Direct connections to Canadian internet infrastructure
+    - Low latency to northern US regions
+    - Optimized for cross-border North American traffic
+    - Good connectivity to major US cities
+  </Card>
+  
+  <Card title="US-1 Network" icon="network-wired">
+    **US Domestic Network**
+    
+    - Direct connections to major US internet exchanges
+    - Optimized for continental US traffic
+    - Low latency to major metropolitan areas
+    - High-speed connections to cloud providers
+  </Card>
+</CardGroup>
+
+### Internet Connectivity Performance
+
+Expected latency ranges from each region:
+
+| Source Region | To Europe | To North America | To Asia-Pacific |
+|---------------|-----------|------------------|-----------------|
+| **NORWAY-1** | 10-50ms | 100-150ms | 200-300ms |
+| **CANADA-1** | 80-120ms | 20-80ms | 150-250ms |
+| **US-1** | 100-150ms | 20-100ms | 150-250ms |
+
+<Note>
+Latency values are approximate and depend on specific locations, network conditions, and routing paths.
+</Note>
+
+## Region Selection Best Practices
+
+### Decision Framework
+
+<Steps>
+  <Step title="Identify Primary Users">
+    - Determine geographic location of primary users
+    - Consider time zones for interactive applications
+    - Evaluate access patterns and usage times
+    - Plan for global vs. regional applications
+  </Step>
+  <Step title="Assess Compliance Requirements">
+    - Review data residency requirements
+    - Check industry-specific regulations
+    - Evaluate privacy law implications
+    - Consider cross-border data transfer restrictions
+  </Step>
+  <Step title="Evaluate Technical Requirements">
+    - Assess latency sensitivity of applications
+    - Consider data transfer volumes
+    - Evaluate integration with other services
+    - Plan for disaster recovery needs
+  </Step>
+  <Step title="Test and Validate">
+    - Deploy test VMs in candidate regions
+    - Measure actual performance characteristics
+    - Test connectivity from user locations
+    - Validate compliance and legal requirements
+  </Step>
+</Steps>
+
+### Multi-Region Strategy
+
+<AccordionGroup>
+  <Accordion title="Regional Redundancy">
+    **Disaster Recovery Planning**
+    
+    - Deploy critical workloads in multiple regions
+    - Create cross-region backup strategies
+    - Plan for regional failover scenarios
+    - Test disaster recovery procedures regularly
+  </Accordion>
+  
+  <Accordion title="Global Applications">
+    **Worldwide Service Delivery**
+    
+    - Deploy VMs in regions closest to user bases
+    - Use load balancing across regions
+    - Implement global content delivery strategies
+    - Consider data synchronization requirements
+  </Accordion>
+  
+  <Accordion title="Development vs. Production">
+    **Environment Separation**
+    
+    - Use cost-effective regions for development
+    - Deploy production in regions closest to users
+    - Consider staging environments in production regions
+    - Plan for environment promotion workflows
+  </Accordion>
+</AccordionGroup>
+
+## Common Region Selection Scenarios
+
+<Tabs>
+  <Tab title="European Business">
+    **NORWAY-1 Primary Choice**
+    
+    **Use Case:** EU-based company with European customers
+    **Benefits:**
+    - GDPR compliance by default
+    - Low latency for European users
+    - Data residency in Europe
+    - Integration with European services
+    
+    **Considerations:**
+    - Higher latency for non-European access
+    - Plan for global expansion
+  </Tab>
+  
+  <Tab title="North American Startup">
+    **US-1 or CANADA-1**
+    
+    **Use Case:** North American company serving local market
+    **Benefits:**
+    - Low latency for North American users
+    - Familiar regulatory environment
+    - Integration with North American services
+    - Cost-effective for regional operations
+    
+    **Considerations:**
+    - Choose based on primary user location
+    - Consider cross-border data implications
+  </Tab>
+  
+  <Tab title="Global SaaS">
+    **Multi-Region Deployment**
+    
+    **Use Case:** Global software service with worldwide users
+    **Strategy:**
+    - NORWAY-1 for European users
+    - US-1 for American users
+    - Load balancing and traffic routing
+    - Regional data storage strategies
+    
+    **Considerations:**
+    - Increased complexity and cost
+    - Data synchronization challenges
+    - Regional compliance requirements
+  </Tab>
+  
+  <Tab title="AI Research">
+    **GPU Availability Priority**
+    
+    **Use Case:** Machine learning research requiring specific GPUs
+    **Strategy:**
+    - Check GPU availability across regions
+    - Consider multiple regions for capacity
+    - Plan for high-demand GPU types
+    - Flexible region selection based on availability
+    
+    **Considerations:**
+    - Data transfer costs between regions
+    - Research collaboration requirements
+    - Academic institution preferences
+  </Tab>
+</Tabs>
+
+## Changing Regions
+
+### Current Limitations
+
+<Warning>
+**Region Migration Constraints:**
+
+- VMs cannot be moved between regions
+- Storage volumes are region-specific
+- Snapshots cannot be transferred between regions
+- Network configurations are regional
+</Warning>
+
+### Migration Strategies
+
+If you need to change regions after deployment:
+
+<Steps>
+  <Step title="Plan Migration">
+    - Create snapshots of current VMs
+    - Export important data and configurations
+    - Plan for service downtime
+    - Prepare new region resources
+  </Step>
+  <Step title="Recreate in New Region">
+    - Deploy new VMs in target region
+    - Create new storage volumes as needed
+    - Restore data from backups
+    - Reconfigure applications and services
+  </Step>
+  <Step title="Update Configurations">
+    - Update DNS and networking configurations
+    - Test connectivity and performance
+    - Update monitoring and logging
+    - Validate application functionality
+  </Step>
+  <Step title="Cleanup Old Resources">
+    - Delete old VMs and volumes
+    - Clean up networking configurations
+    - Update documentation and procedures
+    - Monitor for any remaining dependencies
+  </Step>
+</Steps>
+
+<Tip>
+Choose your region carefully during initial deployment. While migration is possible, it requires significant effort and may involve service downtime.
+</Tip>

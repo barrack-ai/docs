@@ -1,0 +1,426 @@
+---
+title: "Snapshots Management"
+description: "Create point-in-time backups of your virtual machines, restore them to create new VMs, and manage your backup history"
+---
+
+# Snapshots Management
+
+The Snapshots page allows you to create point-in-time backups of your virtual machines, restore them to create new VMs, and manage your backup history.
+
+## Dashboard Overview
+
+The snapshots dashboard provides key statistics and management capabilities:
+
+<CardGroup cols={2}>
+  <Card title="Snapshot Statistics" icon="chart-bar">
+    **System Overview**
+    - **Total Snapshots:** Number of snapshots in the selected region
+    - **Total Storage:** Combined storage used by all snapshots
+    - **Available VMs:** Number of active VMs that can be snapshotted
+    - **Restorable:** Number of snapshots with SUCCESS/available status
+  </Card>
+  
+  <Card title="Regional Management" icon="globe">
+    **Region-Based Organization**
+    - Snapshots are organized by region
+    - Use region dropdown to filter snapshots by location
+    - Only snapshots and VMs in selected region are displayed
+    - Snapshots are region-specific and cannot be moved between regions
+  </Card>
+</CardGroup>
+
+## Region Filtering
+
+Snapshots are organized by geographic region for optimal management:
+
+<Tabs>
+  <Tab title="US-1 Region">
+    **United States**
+    - US-based snapshot storage
+    - Low latency for US-based restoration
+    - Compliance with US data regulations
+    - Optimized for North American access
+  </Tab>
+  
+  <Tab title="CANADA-1 Region">
+    **Canada**
+    - Canadian snapshot storage
+    - Optimized for Canadian and northern US access
+    - Privacy-focused data handling
+    - Regional data residency compliance
+  </Tab>
+  
+  <Tab title="NORWAY-1 Region">
+    **Europe**
+    - European snapshot storage
+    - GDPR compliant data handling
+    - Low latency for European restoration
+    - EU data residency requirements
+  </Tab>
+</Tabs>
+
+## Snapshot Information Display
+
+Each snapshot displays comprehensive information for effective management:
+
+### Basic Snapshot Details
+
+<AccordionGroup>
+  <Accordion title="Snapshot Identification">
+    **Core Information**
+    - **Name:** User-defined snapshot name (up to 50 characters)
+    - **Size:** Storage space used by the snapshot in GB
+    - **Region:** Geographic location where snapshot is stored
+    - **Created:** Date and time when snapshot was created
+    - **Type:** VM Snapshot or Image (if created as image)
+  </Accordion>
+  
+  <Accordion title="Status Information">
+    **Operational Status**
+    - **Status:** SUCCESS/available (restorable) or other states
+    - **Health:** Overall snapshot integrity and accessibility
+    - **Availability:** Whether snapshot can be used for restoration
+    - **Completeness:** Verification that snapshot contains complete VM state
+  </Accordion>
+  
+  <Accordion title="Source VM Information">
+    **Original VM Details**
+    - **Source VM:** Name and ID of the VM that was snapshotted
+    - **VM Configuration:** Hardware specifications at time of snapshot
+    - **VM State:** State of VM when snapshot was created
+    - **Applications:** Software and services running when snapshotted
+  </Accordion>
+</AccordionGroup>
+
+### Storage and Size Information
+
+<CardGroup cols={2}>
+  <Card title="Storage Efficiency" icon="compress">
+    **Optimized Storage**
+    - Snapshots use compression to reduce storage costs
+    - Incremental data storage where possible
+    - Deduplication for common data blocks
+    - Optimized for fast restoration
+  </Card>
+  
+  <Card title="Size Calculation" icon="calculator">
+    **Storage Metrics**
+    - Size shown is actual storage used
+    - Compressed and optimized size
+    - May be smaller than original VM disk size
+    - Storage costs based on actual snapshot size
+  </Card>
+</CardGroup>
+
+## Pagination and Navigation
+
+The snapshots interface includes efficient navigation for large snapshot collections:
+
+### Navigation Features
+
+<Steps>
+  <Step title="Page Display">
+    6 snapshots displayed per page for optimal viewing
+  </Step>
+  <Step title="Navigation Controls">
+    Previous/Next navigation buttons with direct page number selection
+  </Step>
+  <Step title="Pagination Logic">
+    Pagination only appears when more than 6 snapshots exist
+  </Step>
+  <Step title="Responsive Design">
+    Layout adapts for desktop and mobile viewing
+  </Step>
+</Steps>
+
+### Snapshot Organization
+
+<Tabs>
+  <Tab title="Chronological Ordering">
+    **Time-Based Organization**
+    - Snapshots ordered by creation date
+    - Newest snapshots displayed first
+    - Easy identification of recent backups
+    - Historical snapshot tracking
+  </Tab>
+  
+  <Tab title="Regional Grouping">
+    **Geographic Organization**
+    - Snapshots grouped by region
+    - Filter by region for targeted management
+    - Regional compliance and data residency
+    - Optimized for regional restoration
+  </Tab>
+  
+  <Tab title="Status Grouping">
+    **Operational Organization**
+    - Success/available snapshots highlighted
+    - Error states clearly indicated
+    - In-progress snapshots tracked
+    - Restoration readiness clearly shown
+  </Tab>
+</Tabs>
+
+## Profile Requirements
+
+<Warning>
+**Account Prerequisites:**
+
+Your account profile must be complete with billing information before creating snapshots. Ensure your account has the required details configured:
+
+- **Complete Profile:** Full name, address, and contact information
+- **Billing Address:** Complete address with postal code and country
+- **Payment Method:** Valid payment method for snapshot storage costs
+- **Sufficient Credits:** Adequate credits for snapshot storage charges
+</Warning>
+
+### Snapshot Storage Costs
+
+Snapshots incur storage costs based on the actual compressed size:
+
+<Info>
+**Storage Billing:** $0.1 per TB per hour (€0.1 per TB per hour | ₹10 per TB per hour)
+
+Storage costs are calculated hourly based on the actual snapshot size after compression and optimization.
+</Info>
+
+## Snapshot Lifecycle Management
+
+### Creation to Deletion Workflow
+
+<Steps>
+  <Step title="Planning">
+    - Identify VMs that need regular backups
+    - Plan snapshot frequency based on change rates
+    - Consider retention policies for different types of data
+    - Plan for compliance and regulatory requirements
+  </Step>
+  <Step title="Creation">
+    - Create snapshots during low-activity periods when possible
+    - Use descriptive names that indicate purpose and date
+    - Add descriptions for team collaboration and documentation
+    - Monitor creation progress and verify completion
+  </Step>
+  <Step title="Management">
+    - Regular review of snapshot inventory
+    - Verify snapshot integrity and restorability
+    - Monitor storage costs and optimize retention
+    - Document snapshot purposes and retention policies
+  </Step>
+  <Step title="Cleanup">
+    - Delete old snapshots based on retention policies
+    - Remove snapshots that are no longer needed
+    - Archive important snapshots for long-term retention
+    - Monitor storage usage and optimize costs
+  </Step>
+</Steps>
+
+### Snapshot Retention Strategies
+
+<AccordionGroup>
+  <Accordion title="Daily Backups">
+    **Regular Backup Schedule**
+    - Create daily snapshots for active development VMs
+    - Retain last 7 days for immediate recovery needs
+    - Weekly snapshots for longer-term backup
+    - Monthly snapshots for historical recovery
+  </Accordion>
+  
+  <Accordion title="Milestone Snapshots">
+    **Project-Based Backups**
+    - Create snapshots before major changes
+    - Version-based snapshots for software releases
+    - Pre/post deployment snapshots
+    - Long-term retention for important milestones
+  </Accordion>
+  
+  <Accordion title="Compliance Snapshots">
+    **Regulatory Requirements**
+    - Create snapshots for compliance auditing
+    - Long-term retention for regulatory requirements
+    - Documented retention and deletion policies
+    - Secure storage for sensitive data snapshots
+  </Accordion>
+</AccordionGroup>
+
+## Snapshot Operations
+
+### Available Actions
+
+<CardGroup cols={3}>
+  <Card title="Create Snapshot" icon="camera">
+    **Backup Creation**
+    - Create point-in-time backups of VMs
+    - Preserve complete VM state and data
+    - Include custom configurations and software
+    - Generate images for deployment templates
+  </Card>
+  
+  <Card title="Restore Snapshot" icon="history">
+    **VM Restoration**
+    - Create new VMs from snapshots
+    - Restore complete environments instantly
+    - Deploy multiple VMs from single snapshot
+    - Cross-region restoration capabilities
+  </Card>
+  
+  <Card title="Manage Snapshots" icon="cogs">
+    **Lifecycle Management**
+    - View detailed snapshot information
+    - Delete unnecessary snapshots
+    - Monitor storage usage and costs
+    - Organize snapshots for efficient management
+  </Card>
+</CardGroup>
+
+### Snapshot Status Monitoring
+
+<CodeGroup>
+```bash SUCCESS/Available
+Snapshot is complete and ready for restoration
+```
+
+```bash Creating
+Snapshot creation is in progress
+```
+
+```bash Error
+Snapshot creation failed or became corrupted
+```
+
+```bash Restoring
+Snapshot is being used to create a new VM
+```
+</CodeGroup>
+
+## Multi-Region Snapshot Strategy
+
+### Cross-Region Considerations
+
+<Warning>
+**Regional Limitations:**
+
+- Snapshots cannot be directly moved between regions
+- Restoration must occur in the same region as the snapshot
+- Cross-region backup requires creating new snapshots in target regions
+- Plan regional backup strategies based on disaster recovery needs
+</Warning>
+
+### Disaster Recovery Planning
+
+<Steps>
+  <Step title="Assess Requirements">
+    - Identify critical VMs requiring cross-region backup
+    - Determine recovery time objectives (RTO) and recovery point objectives (RPO)
+    - Plan for regional failover scenarios
+    - Consider compliance and data residency requirements
+  </Step>
+  <Step title="Implement Strategy">
+    - Create snapshots in primary region for local recovery
+    - Deploy VMs in secondary regions from snapshots when needed
+    - Establish procedures for cross-region data synchronization
+    - Test disaster recovery procedures regularly
+  </Step>
+  <Step title="Monitor and Maintain">
+    - Regular testing of cross-region restoration procedures
+    - Monitor snapshot consistency across regions
+    - Update disaster recovery plans based on changing requirements
+    - Train team on disaster recovery procedures
+  </Step>
+</Steps>
+
+## Snapshot Best Practices
+
+### Operational Best Practices
+
+<AccordionGroup>
+  <Accordion title="Snapshot Timing">
+    **Optimal Backup Timing**
+    - Create snapshots during periods of low VM activity
+    - Coordinate with application maintenance windows
+    - Consider time zone differences for global applications
+    - Plan snapshots around scheduled system updates
+  </Accordion>
+  
+  <Accordion title="Naming and Documentation">
+    **Snapshot Organization**
+    - Use consistent naming conventions that include dates
+    - Add descriptions explaining snapshot purpose
+    - Document snapshot contents and intended use
+    - Include project or application identifiers in names
+  </Accordion>
+  
+  <Accordion title="Testing and Validation">
+    **Snapshot Verification**
+    - Regularly test snapshot restoration procedures
+    - Verify application functionality after restoration
+    - Test cross-region restoration capabilities
+    - Document and update restoration procedures
+  </Accordion>
+  
+  <Accordion title="Cost Management">
+    **Storage Optimization**
+    - Monitor snapshot storage costs regularly
+    - Implement retention policies to control costs
+    - Delete unnecessary or outdated snapshots
+    - Balance backup frequency with storage costs
+  </Accordion>
+</AccordionGroup>
+
+### Security Considerations
+
+<CardGroup cols={2}>
+  <Card title="Data Protection" icon="shield">
+    **Snapshot Security**
+    - Snapshots contain complete VM data including sensitive information
+    - Ensure proper access controls for snapshot management
+    - Consider encryption for snapshots containing sensitive data
+    - Monitor snapshot access and usage patterns
+  </Card>
+  
+  <Card title="Compliance" icon="file-text">
+    **Regulatory Requirements**
+    - Understand data retention requirements for your industry
+    - Implement appropriate snapshot retention policies
+    - Document snapshot handling procedures for audits
+    - Ensure snapshot storage meets compliance requirements
+  </Card>
+</CardGroup>
+
+## Troubleshooting Snapshots
+
+### Common Issues
+
+<Tabs>
+  <Tab title="Creation Failures">
+    **Snapshot Creation Problems**
+    - **VM State Issues:** Ensure VM is in ACTIVE state
+    - **Storage Space:** Verify sufficient storage quota
+    - **VM Load:** Avoid snapshots during high VM activity
+    - **Account Status:** Ensure account has sufficient credits
+  </Tab>
+  
+  <Tab title="Restoration Issues">
+    **Snapshot Restoration Problems**
+    - **Snapshot Status:** Verify snapshot is in SUCCESS state
+    - **Region Matching:** Ensure restoration in same region as snapshot
+    - **Resource Availability:** Check GPU and resource availability
+    - **Naming Conflicts:** Use unique VM names for restoration
+  </Tab>
+  
+  <Tab title="Storage Concerns">
+    **Storage and Cost Issues**
+    - **High Storage Costs:** Review snapshot retention policies
+    - **Storage Quota:** Monitor total snapshot storage usage
+    - **Performance Impact:** Consider snapshot frequency optimization
+    - **Regional Distribution:** Balance snapshots across regions
+  </Tab>
+</Tabs>
+
+<Info>
+Snapshots provide comprehensive backup and recovery capabilities for your virtual machines. Regular snapshot creation, combined with proper retention policies, ensures data protection while managing storage costs effectively.
+</Info>
+
+<Tip>
+Create snapshots before major system changes, software updates, or configuration modifications. This provides a quick rollback option if issues arise during the change process.
+</Tip>

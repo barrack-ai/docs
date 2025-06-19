@@ -1,0 +1,419 @@
+---
+title: "Credits System"
+description: "Purchase and manage credits to pay for your virtual machine and storage usage"
+---
+
+# Credits System
+
+The Credits System allows you to purchase and manage credits to pay for your virtual machine and storage usage on the platform.
+
+## Purchasing Credits
+
+The platform provides a simple process for purchasing credits:
+
+<Steps>
+  <Step title="Access Credits Section">
+    Navigate to your [account page](https://barrack.ai/account) and access the credits section
+  </Step>
+  <Step title="Choose Credit Package">
+    Choose from predefined credit packages or specify a custom amount:
+    - **Starter Package:** Perfect for small projects
+    - **Professional Package:** Ideal for medium-sized workloads  
+    - **Enterprise Package:** For large compute needs
+  </Step>
+  <Step title="Review Payment Summary">
+    Review the payment summary, which includes:
+    - Base amount
+    - Applicable taxes (GST at 18% is applied for Indian customers)
+    - Total amount
+  </Step>
+  <Step title="Complete Payment">
+    Click "Proceed to Payment" and complete the payment via Razorpay, our secure payment processor
+  </Step>
+  <Step title="Credits Added">
+    After successful payment, credits are instantly added to your account
+  </Step>
+</Steps>
+
+## Credit Purchase Requirements
+
+### Minimum Purchase Amounts
+
+<CardGroup cols={3}>
+  <Card title="USD Currency" icon="dollar-sign">
+    **United States Dollar**
+    - **Minimum Purchase:** $5
+    - **Most Countries:** Default currency
+    - **Payment Methods:** Credit card, debit card
+  </Card>
+  
+  <Card title="EUR Currency" icon="euro-sign">
+    **European Euro**
+    - **Minimum Purchase:** €5
+    - **European Countries:** EU member states
+    - **Payment Methods:** Credit card, SEPA
+  </Card>
+  
+  <Card title="INR Currency" icon="rupee-sign">
+    **Indian Rupee**
+    - **Minimum Purchase:** ₹100
+    - **India Only:** Indian accounts
+    - **Payment Methods:** UPI, cards, net banking
+  </Card>
+</CardGroup>
+
+### Prerequisites for Credit Purchase
+
+<Warning>
+**Required Before Purchase:**
+
+- Your profile must be complete with billing information before making a purchase
+- Payment is processed in your local currency based on your profile settings
+- All credit purchases are final and non-refundable
+- Credits have no expiry date and remain in your account until used
+</Warning>
+
+## Credit Usage
+
+Credits are automatically deducted from your account based on your resource consumption:
+
+### Compute Resources
+
+<AccordionGroup>
+  <Accordion title="Per-Minute Billing">
+    **Precise Usage Tracking**
+    - Credits are consumed based on your VM configuration
+    - Different GPU types have different consumption rates
+    - Multiple GPUs increase consumption proportionally
+    - Billing is calculated in per-minute increments
+    - You only pay for the exact time your resources are running
+  </Accordion>
+  
+  <Accordion title="GPU Cost Calculation">
+    **Primary Cost Component**
+    - GPU type determines primary billing rate
+    - Single vs. multi-GPU configurations
+    - Performance tier affects pricing
+    - Regional pricing consistency
+  </Accordion>
+  
+  <Accordion title="VM State Impact">
+    **State-Based Billing**
+    - **ACTIVE VMs:** Full GPU rate per minute
+    - **HIBERNATED VMs:** Reduced rate ($0.01/€0.01/₹1.00 per hour)
+    - **SHUTOFF VMs:** Full rate (resources remain reserved)
+    - **DELETED VMs:** No charges
+  </Accordion>
+</AccordionGroup>
+
+### Storage Resources
+
+Credits are consumed for storage resources based on provisioned capacity:
+
+<Tabs>
+  <Tab title="Volume Storage">
+    **Persistent Storage Billing**
+    - **Rate:** $0.1 per TB per hour (€0.1 per TB per hour | ₹10 per TB per hour)
+    - **Billing Method:** Hourly based on provisioned capacity
+    - **All Volume Types:** Standard and bootable volumes
+    - **Regional Consistency:** Same rates across all regions
+  </Tab>
+  
+  <Tab title="Snapshot Storage">
+    **Backup Storage Billing**
+    - **Rate:** Same as volume storage rates
+    - **Billing Method:** Hourly based on actual snapshot size
+    - **Compression:** Snapshots are compressed to reduce costs
+    - **Retention:** Indefinite retention until manually deleted
+  </Tab>
+</Tabs>
+
+## GPU Instance Pricing
+
+### Per-Hour Rates
+
+<Tabs>
+  <Tab title="USD Pricing">
+    | GPU Model | USD per Hour | USD per Minute |
+    |-----------|--------------|----------------|
+    | **H100-SXM5-80GB** | $2.69 | $0.0448 |
+    | **H100-PCIe-NVLink-80GB** | $2.29 | $0.0382 |
+    | **H100-PCIe-80GB** | $2.25 | $0.0375 |
+    | **A100-SXM4-80GB-NVLink** | $1.59 | $0.0265 |
+    | **A100-PCIe-80GB** | $1.55 | $0.0258 |
+    | **L40** | $1.19 | $0.0198 |
+    | **RTX-A6000** | $0.69 | $0.0115 |
+    | **A40** | $0.69 | $0.0115 |
+  </Tab>
+  
+  <Tab title="EUR Pricing">
+    | GPU Model | EUR per Hour | EUR per Minute |
+    |-----------|--------------|----------------|
+    | **H100-SXM5-80GB** | €2.49 | €0.0415 |
+    | **H100-PCIe-NVLink-80GB** | €2.09 | €0.0348 |
+    | **H100-PCIe-80GB** | €2.05 | €0.0342 |
+    | **A100-SXM4-80GB-NVLink** | €1.45 | €0.0242 |
+    | **A100-PCIe-80GB** | €1.39 | €0.0232 |
+    | **L40** | €1.09 | €0.0182 |
+    | **RTX-A6000** | €0.45 | €0.0075 |
+    | **A40** | €0.45 | €0.0075 |
+  </Tab>
+  
+  <Tab title="INR Pricing">
+    | GPU Model | INR per Hour | INR per Minute |
+    |-----------|--------------|----------------|
+    | **H100-SXM5-80GB** | ₹239 | ₹3.98 |
+    | **H100-PCIe-NVLink-80GB** | ₹199 | ₹3.32 |
+    | **H100-PCIe-80GB** | ₹195 | ₹3.25 |
+    | **A100-SXM4-80GB-NVLink** | ₹135 | ₹2.25 |
+    | **A100-PCIe-80GB** | ₹135 | ₹2.25 |
+    | **L40** | ₹99 | ₹1.65 |
+    | **RTX-A6000** | ₹49 | ₹0.82 |
+    | **A40** | ₹49 | ₹0.82 |
+  </Tab>
+</Tabs>
+
+## Cost Calculation Examples
+
+### Single GPU Usage Examples
+
+<Tabs>
+  <Tab title="Development Workload">
+    **RTX A6000 for Development**
+    
+    **Scenario:** 8 hours/day, 5 days/week development work
+    - **Active Time:** 40 hours/week
+    - **Hibernated Time:** 128 hours/week  
+    - **Weekly Cost (USD):** 
+      - Active: 40 × $0.69 = $27.60
+      - Hibernated: 128 × $0.01 = $1.28
+      - **Total: $28.88/week**
+    - **Monthly Cost:** ~$115.52
+  </Tab>
+  
+  <Tab title="Training Workload">
+    **A100 for ML Training**
+    
+    **Scenario:** 12 hours/day intensive training, 7 days/week
+    - **Active Time:** 84 hours/week
+    - **Hibernated Time:** 84 hours/week
+    - **Weekly Cost (USD):**
+      - Active: 84 × $1.59 = $133.56
+      - Hibernated: 84 × $0.01 = $0.84
+      - **Total: $134.40/week**
+    - **Monthly Cost:** ~$537.60
+  </Tab>
+  
+  <Tab title="Production Service">
+    **H100 for Production**
+    
+    **Scenario:** 24/7 high-performance inference
+    - **Active Time:** 168 hours/week
+    - **No Hibernation:** Continuous operation
+    - **Weekly Cost (USD):**
+      - Active: 168 × $2.69 = $451.92
+      - **Total: $451.92/week**
+    - **Monthly Cost:** ~$1,807.68
+  </Tab>
+</Tabs>
+
+### Multi-GPU Configurations
+
+<CardGroup cols={2}>
+  <Card title="Dual GPU Setup" icon="server">
+    **2x A100-PCIe-80GB**
+    - **Hourly Rate:** $1.55 × 2 = $3.10
+    - **Daily Cost (8 hrs active):** $24.80
+    - **Weekly Cost (40 hrs):** $124.00
+    - **Use Case:** Distributed training, large models
+  </Card>
+  
+  <Card title="Quad GPU Setup" icon="servers">
+    **4x H100-SXM5-80GB**
+    - **Hourly Rate:** $2.69 × 4 = $10.76
+    - **Daily Cost (8 hrs active):** $86.08
+    - **Weekly Cost (40 hrs):** $430.40
+    - **Use Case:** Large-scale model training
+  </Card>
+</CardGroup>
+
+## Credit Management Features
+
+### Balance Monitoring
+
+<AccordionGroup>
+  <Accordion title="Real-time Balance Tracking">
+    **Current Credit Status**
+    - Live credit balance display
+    - Real-time deduction tracking
+    - Spending rate calculation
+    - Projected balance duration based on current usage
+  </Accordion>
+  
+  <Accordion title="Usage Analytics">
+    **Spending Insights**
+    - Daily and hourly spending patterns
+    - Cost breakdown by resource type (GPU, storage)
+    - Historical usage trends
+    - Cost optimization recommendations
+  </Accordion>
+  
+  <Accordion title="Budget Alerts">
+    **Proactive Notifications**
+    - Low balance warnings
+    - Spending threshold alerts
+    - Daily/weekly budget notifications
+    - Projected overspend warnings
+  </Accordion>
+</AccordionGroup>
+
+### Credit Purchase Packages
+
+<Tabs>
+  <Tab title="Starter Package">
+    **Small Projects & Learning**
+    - **USD:** $25 - $100
+    - **EUR:** €25 - €100
+    - **INR:** ₹2,000 - ₹8,000
+    - **Best For:** Individual developers, learning, prototyping
+  </Tab>
+  
+  <Tab title="Professional Package">
+    **Medium Workloads**
+    - **USD:** $100 - $500
+    - **EUR:** €100 - €500
+    - **INR:** ₹8,000 - ₹40,000
+    - **Best For:** Small teams, production workloads, regular training
+  </Tab>
+  
+  <Tab title="Enterprise Package">
+    **Large Scale Operations**
+    - **USD:** $500+
+    - **EUR:** €500+
+    - **INR:** ₹40,000+
+    - **Best For:** Large teams, continuous operations, enterprise workloads
+  </Tab>
+</Tabs>
+
+## Payment Processing
+
+### Secure Payment Handling
+
+<CardGroup cols={2}>
+  <Card title="Razorpay Integration" icon="credit-card">
+    **Secure Payment Processor**
+    - Industry-standard security
+    - Multiple payment methods supported
+    - Instant credit processing
+    - Secure transaction handling
+  </Card>
+  
+  <Card title="Payment Methods" icon="payment">
+    **Flexible Payment Options**
+    - Credit and debit cards
+    - UPI (India)
+    - Net banking (India)
+    - SEPA transfers (Europe)
+  </Card>
+</CardGroup>
+
+### Payment Security
+
+<Warning>
+**Payment Security:**
+
+- All payments are processed through secure, encrypted connections
+- Card information is not stored on our servers
+- PCI DSS compliant payment processing
+- Two-factor authentication for payment verification
+- Instant transaction confirmation and receipt
+</Warning>
+
+## Credit System FAQ
+
+<AccordionGroup>
+  <Accordion title="How does per-minute billing work?">
+    The platform calculates usage in one-minute increments. You're only charged for the exact time your resources are running, with no minimum usage requirements or rounding to hours.
+  </Accordion>
+  
+  <Accordion title="What happens if I run out of credits?">
+    When your credit balance runs low, you'll receive notifications. If you run out completely, your resources will be hibernated to prevent data loss, and you'll need to add credits to resume operations.
+  </Accordion>
+  
+  <Accordion title="Can I get a refund for unused credits?">
+    No, all credit purchases are final and non-refundable. However, credits never expire and remain in your account until used.
+  </Accordion>
+  
+  <Accordion title="Can I transfer credits between accounts?">
+    Credits are tied to individual accounts and cannot be transferred between different accounts or organizations.
+  </Accordion>
+  
+  <Accordion title="How are taxes calculated?">
+    Taxes are calculated based on your account location. Indian customers pay 18% GST. European customers may pay VAT based on local regulations. US customers typically don't pay additional taxes.
+  </Accordion>
+  
+  <Accordion title="Can I set spending limits?">
+    While the platform doesn't enforce hard spending limits, you can set up balance alerts and monitor usage in real-time through the dashboard to manage your spending.
+  </Accordion>
+</AccordionGroup>
+
+## Cost Optimization Strategies
+
+### Hibernation Benefits
+
+<Steps>
+  <Step title="Identify Hibernation Opportunities">
+    - Development VMs during non-working hours
+    - Training VMs between experiment runs
+    - Staging environments when not in use
+    - Seasonal or periodic workloads
+  </Step>
+  <Step title="Implement Hibernation Schedule">
+    - Hibernate VMs during predictable downtime
+    - Use hibernation for weekend cost savings
+    - Coordinate team hibernation schedules
+    - Automate hibernation for unused resources
+  </Step>
+  <Step title="Monitor Savings">
+    - Track hibernation cost savings
+    - Compare costs before and after hibernation strategy
+    - Optimize hibernation timing based on usage patterns
+    - Calculate ROI of hibernation practices
+  </Step>
+</Steps>
+
+### Right-sizing Resources
+
+<AccordionGroup>
+  <Accordion title="GPU Selection Optimization">
+    **Choose Appropriate GPU Types**
+    - Use lower-cost GPUs for development and testing
+    - Reserve high-end GPUs for production and intensive training
+    - Consider workload requirements vs. GPU capabilities
+    - Monitor actual GPU utilization vs. allocated capacity
+  </Accordion>
+  
+  <Accordion title="Storage Optimization">
+    **Efficient Storage Management**
+    - Right-size volumes based on actual usage
+    - Delete unused volumes and snapshots
+    - Use compression for backup storage
+    - Monitor storage growth patterns
+  </Accordion>
+  
+  <Accordion title="Usage Pattern Analysis">
+    **Data-Driven Optimization**
+    - Analyze actual usage vs. allocated resources
+    - Identify underutilized resources
+    - Plan scaling based on usage trends
+    - Optimize deployment schedules
+  </Accordion>
+</AccordionGroup>
+
+<Info>
+**Enterprise Pricing:** For enterprise customers with large workloads, custom pricing plans are available. Contact our sales team for volume discounts and custom billing arrangements.
+</Info>
+
+<Tip>
+Monitor your credit usage regularly and take advantage of hibernation to reduce costs by up to 95% for VMs that don't need to run continuously.
+</Tip>

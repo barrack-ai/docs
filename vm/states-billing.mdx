@@ -1,0 +1,393 @@
+---
+title: "VM States & Billing"
+description: "Understanding virtual machine states and billing implications"
+---
+
+# VM States & Billing
+
+Virtual machines can exist in various states, each with different billing implications. Understanding these states helps you manage costs effectively.
+
+## Primary VM States
+
+<CardGroup cols={2}>
+  <Card title="ACTIVE" icon="play">
+    **The VM is running** with all resources allocated. This is the standard working state.
+    
+    **Billing:** Full rate (per-minute billing)
+  </Card>
+  
+  <Card title="SHUTOFF" icon="stop">
+    **The VM is stopped** but resources remain reserved exclusively for your use.
+    
+    **Billing:** Full rate (per-minute billing)
+  </Card>
+  
+  <Card title="HIBERNATED" icon="pause">
+    **The VM's state is saved** while hardware resources are released. Only root disk storage remains allocated.
+    
+    **Billing:** Reduced rate ($0.01/€0.01/₹1.00 per hour)
+  </Card>
+  
+  <Card title="DELETED" icon="trash">
+    **The VM is permanently removed** with all resources released.
+    
+    **Billing:** No charge
+  </Card>
+</CardGroup>
+
+## Per-Minute Billing
+
+The platform uses precise per-minute billing for optimal cost efficiency:
+
+<AccordionGroup>
+  <Accordion title="Billing Precision">
+    - **Billing Calculation:** Calculated in one-minute increments for exact usage tracking
+    - **No Rounding:** You pay only for the time your resources are actually running
+    - **No Minimums:** No minimum usage requirements or rounding to hours
+    - **Real-time Tracking:** Costs are tracked and displayed in real-time
+  </Accordion>
+  
+  <Accordion title="State-Based Billing">
+    - **ACTIVE VMs:** Billed at the full GPU rate per minute
+    - **SHUTOFF VMs:** Billed at the full GPU rate (resources remain reserved)
+    - **HIBERNATED VMs:** Billed at significantly reduced rate
+    - **DELETED VMs:** No billing charges
+  </Accordion>
+  
+  <Accordion title="Cost Optimization">
+    - **Use Hibernation:** For VMs not actively used but needed later
+    - **Delete Unused VMs:** For VMs no longer needed
+    - **Monitor Usage:** Track actual usage vs. allocated time
+    - **Right-size Resources:** Choose appropriate GPU types for workloads
+  </Accordion>
+</AccordionGroup>
+
+## Transitional VM States
+
+During operations, your VM may temporarily be in one of these states. No additional charges apply during these transitional states:
+
+<Tabs>
+  <Tab title="Creation States">
+    <CodeGroup>
+    ```bash CREATING/BUILD
+    Initial VM creation and configuration
+    ```
+
+    ```bash STARTING
+    VM is powering on from stopped state
+    ```
+    </CodeGroup>
+  </Tab>
+  
+  <Tab title="Shutdown States">
+    <CodeGroup>
+    ```bash STOPPING
+    VM is powering off to stopped state
+    ```
+
+    ```bash HIBERNATING
+    VM is entering hibernation mode
+    ```
+    </CodeGroup>
+  </Tab>
+  
+  <Tab title="Recovery States">
+    <CodeGroup>
+    ```bash RESTORING
+    VM is returning from hibernation
+    ```
+
+    ```bash REBOOTING
+    VM is restarting
+    ```
+    </CodeGroup>
+  </Tab>
+  
+  <Tab title="Removal States">
+    <CodeGroup>
+    ```bash DELETING
+    VM is being removed
+    ```
+
+    ```bash ERROR
+    VM encountered an issue during an operation
+    ```
+    </CodeGroup>
+  </Tab>
+</Tabs>
+
+## Billing Rate Examples
+
+### GPU Billing Rates per Minute
+
+Based on hourly rates, here are the per-minute costs:
+
+<Tabs>
+  <Tab title="USD Rates">
+    | GPU Model | USD per Hour | USD per Minute |
+    |-----------|--------------|----------------|
+    | **H100-SXM5-80GB** | $2.69 | $0.0448 |
+    | **H100-PCIe-NVLink-80GB** | $2.29 | $0.0382 |
+    | **H100-PCIe-80GB** | $2.25 | $0.0375 |
+    | **A100-SXM4-80GB-NVLink** | $1.59 | $0.0265 |
+    | **A100-PCIe-80GB** | $1.55 | $0.0258 |
+    | **L40** | $1.19 | $0.0198 |
+    | **RTX-A6000** | $0.69 | $0.0115 |
+    | **A40** | $0.69 | $0.0115 |
+  </Tab>
+  
+  <Tab title="EUR Rates">
+    | GPU Model | EUR per Hour | EUR per Minute |
+    |-----------|--------------|----------------|
+    | **H100-SXM5-80GB** | €2.49 | €0.0415 |
+    | **H100-PCIe-NVLink-80GB** | €2.09 | €0.0348 |
+    | **H100-PCIe-80GB** | €2.05 | €0.0342 |
+    | **A100-SXM4-80GB-NVLink** | €1.45 | €0.0242 |
+    | **A100-PCIe-80GB** | €1.39 | €0.0232 |
+    | **L40** | €1.09 | €0.0182 |
+    | **RTX-A6000** | €0.45 | €0.0075 |
+    | **A40** | €0.45 | €0.0075 |
+  </Tab>
+  
+  <Tab title="INR Rates">
+    | GPU Model | INR per Hour | INR per Minute |
+    |-----------|--------------|----------------|
+    | **H100-SXM5-80GB** | ₹239 | ₹3.98 |
+    | **H100-PCIe-NVLink-80GB** | ₹199 | ₹3.32 |
+    | **H100-PCIe-80GB** | ₹195 | ₹3.25 |
+    | **A100-SXM4-80GB-NVLink** | ₹135 | ₹2.25 |
+    | **A100-PCIe-80GB** | ₹135 | ₹2.25 |
+    | **L40** | ₹99 | ₹1.65 |
+    | **RTX-A6000** | ₹49 | ₹0.82 |
+    | **A40** | ₹49 | ₹0.82 |
+  </Tab>
+</Tabs>
+
+## Hibernation Benefits
+
+Hibernation provides significant cost savings while preserving your VM state:
+
+<CardGroup cols={2}>
+  <Card title="Cost Savings" icon="dollar-sign">
+    **Dramatic Cost Reduction**
+    
+    - Hibernated VMs cost only $0.01/€0.01/₹1.00 per hour
+    - Saves 95%+ compared to running VMs
+    - Perfect for VMs used intermittently
+    - Ideal for development environments
+  </Card>
+  
+  <Card title="State Preservation" icon="save">
+    **Complete Environment Preservation**
+    
+    - All applications and data remain intact
+    - Running processes are preserved
+    - Memory state is saved
+    - Quick restoration when needed
+  </Card>
+</CardGroup>
+
+### Hibernation Use Cases
+
+<AccordionGroup>
+  <Accordion title="Development Workflows">
+    **Perfect for Development**
+    - Preserve development environment between sessions
+    - Save costs during non-working hours
+    - Quick startup for continued work
+    - Maintain installed tools and configurations
+  </Accordion>
+  
+  <Accordion title="Batch Processing">
+    **Efficient for Scheduled Jobs**
+    - Hibernate between batch job runs
+    - Preserve environment setup
+    - Cost-effective for periodic workloads
+    - Quick activation for scheduled tasks
+  </Accordion>
+  
+  <Accordion title="Testing Environments">
+    **Ideal for QA and Testing**
+    - Preserve test environment states
+    - Cost-effective for intermittent testing
+    - Quick environment restoration
+    - Multiple test configurations available
+  </Accordion>
+  
+  <Accordion title="Training Experiments">
+    **Machine Learning Workflows**
+    - Pause long-running training jobs
+    - Save costs during data preparation
+    - Preserve model checkpoints and environment
+    - Resume training when ready
+  </Accordion>
+</AccordionGroup>
+
+## Cost Management Strategies
+
+### Billing Optimization
+
+<Tabs>
+  <Tab title="Short-term Usage">
+    **For Brief Tasks (< 1 hour)**
+    - Use per-minute billing advantage
+    - Choose appropriate GPU size
+    - Delete VM when complete
+    - Monitor usage in real-time
+  </Tab>
+  
+  <Tab title="Development Work">
+    **For Development (daily use)**
+    - Use hibernation during off-hours
+    - Right-size GPU for development needs
+    - Consider lower-cost GPUs for development
+    - Monitor and optimize usage patterns
+  </Tab>
+  
+  <Tab title="Production Workloads">
+    **For Production (continuous)**
+    - Keep VMs in ACTIVE state for 24/7 workloads
+    - Use hibernation for scheduled maintenance
+    - Monitor performance vs. cost trade-offs
+    - Plan capacity based on usage patterns
+  </Tab>
+  
+  <Tab title="Long-term Projects">
+    **For Extended Projects (weeks/months)**
+    - Use hibernation for non-working hours
+    - Create snapshots for important milestones
+    - Consider bootable volumes for quick setup
+    - Regular cost monitoring and optimization
+  </Tab>
+</Tabs>
+
+### State Management Best Practices
+
+<Steps>
+  <Step title="Plan Your Usage">
+    - Estimate actual usage hours per day
+    - Identify hibernation opportunities
+    - Plan for peak and off-peak usage
+    - Consider time zone differences for global teams
+  </Step>
+  <Step title="Implement State Management">
+    - Use hibernation for regular off-hours
+    - Set up monitoring for usage patterns
+    - Automate hibernation where possible
+    - Create procedures for team members
+  </Step>
+  <Step title="Monitor and Optimize">
+    - Track actual costs vs. estimates
+    - Identify optimization opportunities
+    - Adjust GPU sizes based on actual needs
+    - Regular review of hibernation effectiveness
+  </Step>
+  <Step title="Scale Efficiently">
+    - Add VMs based on actual demand
+    - Use hibernation for overflow capacity
+    - Consider bootable volumes for quick scaling
+    - Monitor performance vs. cost metrics
+  </Step>
+</Steps>
+
+## Real-world Cost Examples
+
+### Example Scenarios
+
+<Tabs>
+  <Tab title="Development Scenario">
+    **8-hour workday, 5 days per week**
+    
+    **A100-PCIe-80GB:**
+    - Active time: 40 hours/week × $1.55 = $62/week
+    - Hibernated: 128 hours/week × $0.01 = $1.28/week
+    - **Total: $63.28/week** vs. $260.40 if always active
+    - **Savings: 76%**
+  </Tab>
+  
+  <Tab title="Batch Processing">
+    **4 hours/day processing, 7 days per week**
+    
+    **L40:**
+    - Active time: 28 hours/week × $1.19 = $33.32/week
+    - Hibernated: 140 hours/week × $0.01 = $1.40/week
+    - **Total: $34.72/week** vs. $199.92 if always active
+    - **Savings: 83%**
+  </Tab>
+  
+  <Tab title="Research Project">
+    **12 hours/day intensive work, 7 days per week**
+    
+    **H100-SXM5-80GB:**
+    - Active time: 84 hours/week × $2.69 = $225.96/week
+    - Hibernated: 84 hours/week × $0.01 = $0.84/week
+    - **Total: $226.80/week** vs. $451.92 if always active
+    - **Savings: 50%**
+  </Tab>
+  
+  <Tab title="Production Service">
+    **24/7 continuous operation**
+    
+    **A100-SXM4-80GB-NVLink:**
+    - Always active: 168 hours/week × $1.59 = $267.12/week
+    - No hibernation benefits for 24/7 workloads
+    - **Total: $267.12/week**
+    - **Optimization:** Right-size GPU for actual load
+  </Tab>
+</Tabs>
+
+## Billing Monitoring
+
+### Real-time Cost Tracking
+
+<CardGroup cols={2}>
+  <Card title="Dashboard Monitoring" icon="chart-line">
+    **Track Usage in Real-time**
+    
+    - Current VM states and costs
+    - Hourly and daily usage summaries
+    - Cost projections based on current usage
+    - Historical usage patterns
+  </Card>
+  
+  <Card title="Cost Optimization Tools" icon="trending-down">
+    **Optimize Your Spending**
+    
+    - Hibernation opportunity identification
+    - Right-sizing recommendations
+    - Usage pattern analysis
+    - Cost-saving suggestions
+  </Card>
+</CardGroup>
+
+<Info>
+Monitor your VM states and costs regularly through the [dashboard](https://barrack.ai/dashboard) to ensure optimal resource utilization and cost management.
+</Info>
+
+## Billing FAQ
+
+<AccordionGroup>
+  <Accordion title="How precise is per-minute billing?">
+    Billing is calculated to the exact minute. If you use a VM for 37 minutes, you pay for exactly 37 minutes, not a full hour.
+  </Accordion>
+  
+  <Accordion title="What happens during state transitions?">
+    No additional charges apply during transitional states like STARTING, STOPPING, or HIBERNATING. You're only billed when the VM reaches a stable state.
+  </Accordion>
+  
+  <Accordion title="How quickly can I hibernate and restore?">
+    Hibernation typically takes 1-2 minutes, and restoration takes 2-3 minutes. The exact time depends on the VM's memory usage and configuration.
+  </Accordion>
+  
+  <Accordion title="Are there any hibernation limitations?">
+    Most VMs can be hibernated, but some workloads with specific hardware requirements may have limitations. The system will notify you if hibernation is not available.
+  </Accordion>
+  
+  <Accordion title="How do I track my usage?">
+    Use the [dashboard](https://barrack.ai/dashboard) to monitor real-time usage, costs, and VM states. Historical usage data is also available for analysis.
+  </Accordion>
+</AccordionGroup>
+
+<Tip>
+Use hibernation strategically to reduce costs by up to 80% for workloads that don't require 24/7 operation. This is especially effective for development and intermittent processing workloads.
+</Tip>

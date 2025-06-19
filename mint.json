@@ -9,6 +9,10 @@
     "primary": "#e0eacc",
     "light": "#f0f5dd", 
     "dark": "#d0dab3",
+    "background": {
+      "light": "#ffffff",
+      "dark": "#1a1a1a"
+    },
     "anchors": {
       "from": "#0D9373",
       "to": "#e0eacc"
@@ -28,6 +32,7 @@
     "name": "Deploy VM",
     "url": "https://barrack.ai/deploy"
   },
+  "css": "/custom.css",
   "navigation": [
     {
       "group": "Get Started",

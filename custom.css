@@ -25,3 +25,4 @@ button[data-testid="topbar-cta"]:hover {
   transform: translateY(-1px) !important;
   box-shadow: 0 4px 8px rgba(255, 215, 0, 0.3) !important;
 }
+

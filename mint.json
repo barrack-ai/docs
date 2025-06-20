@@ -34,6 +34,11 @@
     "default": "dark",
     "isHidden": true
   },
+  "logo": {
+  "light": "/logo.svg",
+  "dark": "/logo.svg",
+  "href": "https://barrack.ai/deploy"
+}
   "navigation": [
     {
       "group": "Get Started",

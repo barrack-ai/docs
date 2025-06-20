@@ -5,44 +5,19 @@ body, html, [data-theme="light"], [data-theme="dark"] {
 .mintlify-wrapper, .mintlify-content, main {
   background-color: #000000 !important;
 }
-
-/* Golden CTA Button Styling */
+/* White CTA Button Styling */
 [data-testid="topbar-cta-button"],
 .mintlify-cta-button,
-button[data-testid="topbar-cta"],
-a[href*="deploy"] {
-  background-color: #FFD700 !important;
+button[data-testid="topbar-cta"] {
+  background-color: #ffffff !important;
   color: #000000 !important;
-  border: 2px solid #FFD700 !important;
+  border: 2px solid #e0eacc !important;
   transition: all 0.2s ease !important;
-  font-weight: 600 !important;
 }
-
 [data-testid="topbar-cta-button"]:hover,
 .mintlify-cta-button:hover,
-button[data-testid="topbar-cta"]:hover,
-a[href*="deploy"]:hover {
-  background-color: #E6C200 !important;
-  border-color: #E6C200 !important;
+button[data-testid="topbar-cta"]:hover {
+  background-color: #f8f8f8 !important;
+  border-color: #d0dab3 !important;
   transform: translateY(-1px) !important;
-  box-shadow: 0 4px 8px rgba(255, 215, 0, 0.3) !important;
-}
-
-/* Make site title clickable */
-.mintlify-logo, .nx-font-semibold {
-  cursor: pointer !important;
-}
-.mintlify-logo:hover, .nx-font-semibold:hover {
-  opacity: 0.8 !important;
-}
-
-/* Add clickable functionality to site title */
-.mintlify-logo::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  cursor: pointer;
 }

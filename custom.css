@@ -27,3 +27,23 @@ a[href*="deploy"]:hover {
   transform: translateY(-1px) !important;
   box-shadow: 0 4px 8px rgba(255, 215, 0, 0.3) !important;
 }
+
+/* Make site title clickable */
+.mintlify-logo, .nx-font-semibold {
+  cursor: pointer !important;
+}
+.mintlify-logo:hover, .nx-font-semibold:hover {
+  opacity: 0.8 !important;
+}
+
+/* Add clickable functionality to site title */
+.mintlify-logo::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
+Alternative

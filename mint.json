@@ -1,11 +1,7 @@
 {
   "name": "Barrack",
   "favicon": "/favicon.svg",
-  "logo": {
-    "light": "/logo.svg",
-    "dark": "/logo.svg",
-    "href": "https://barrack.ai/deploy"
-  },
+  "logo": "Barrack",
   "colors": {
     "primary": "#FFD700",
     "light": "#f0f5dd", 

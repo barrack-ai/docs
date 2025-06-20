@@ -9,7 +9,8 @@ body, html, [data-theme="light"], [data-theme="dark"] {
 /* Golden CTA Button Styling */
 [data-testid="topbar-cta-button"],
 .mintlify-cta-button,
-button[data-testid="topbar-cta"] {
+button[data-testid="topbar-cta"],
+a[href*="deploy"] {
   background-color: #FFD700 !important;
   color: #000000 !important;
   border: 2px solid #FFD700 !important;
@@ -19,10 +20,10 @@ button[data-testid="topbar-cta"] {
 
 [data-testid="topbar-cta-button"]:hover,
 .mintlify-cta-button:hover,
-button[data-testid="topbar-cta"]:hover {
+button[data-testid="topbar-cta"]:hover,
+a[href*="deploy"]:hover {
   background-color: #E6C200 !important;
   border-color: #E6C200 !important;
   transform: translateY(-1px) !important;
   box-shadow: 0 4px 8px rgba(255, 215, 0, 0.3) !important;
 }
-

@@ -1,9 +1,9 @@
 {
   "name": "Barrack",
   "favicon": "/favicon.svg",
-  "logo": "Barrack",
+
   "colors": {
-    "primary": "#FFD700",
+    "primary": "#e0eacc",
     "light": "#f0f5dd", 
     "dark": "#d0dab3",
     "background": {
@@ -22,7 +22,7 @@
     },
     {
       "name": "Support",
-      "url": "https://mail.google.com/mail/?view=cm&to=support@barrack.ai"
+      "url": "mailto:support@barrack.ai"
     }
   ],
   "topbarCtaButton": {

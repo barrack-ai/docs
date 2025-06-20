@@ -1,7 +1,6 @@
 {
   "name": "Barrack",
   "favicon": "/favicon.svg",
-
   "colors": {
     "primary": "#e0eacc",
     "light": "#f0f5dd", 
@@ -35,10 +34,10 @@
     "isHidden": true
   },
   "logo": {
-  "light": "/logo.svg",
-  "dark": "/logo.svg",
-  "href": "https://barrack.ai/deploy"
-}
+    "light": "/logo.svg",
+    "dark": "/logo.svg",
+    "href": "https://barrack.ai/deploy"
+  },
   "navigation": [
     {
       "group": "Get Started",

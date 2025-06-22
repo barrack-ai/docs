@@ -3,7 +3,6 @@ title: "Getting Started"
 description: "Get up and running with your first virtual machine"
 ---
 
-
 Get up and running with your first virtual machine in just a few steps.
 
 ## First Steps
@@ -33,11 +32,8 @@ Recommended setup process:
     - EUR: €1.00  
     - INR: ₹100.00
   </Step>
-  <Step title="Setup SSH Access">
-    Create or import an SSH key from the **[SSH Keys](https://barrack.ai/ssh-keys)** section for secure VM access.
-  </Step>
   <Step title="Deploy Your VM">
-    Use the **[Deploy VM](https://barrack.ai/deploy)** wizard to launch your first virtual machine.
+    Use the **[Deploy VM](https://barrack.ai/deploy)** page to create your SSH key and launch your virtual machine.
   </Step>
 </Steps>
 
@@ -97,9 +93,9 @@ Before deploying your first VM, ensure you have:
   </Tab>
   
   <Tab title="Security Setup">
-    - [ ] **SSH Key** - At least one SSH key for secure access
-    - [ ] **Key Permissions** - Private key file with correct permissions (600)
-    - [ ] **Key Backup** - Secure backup of your private keys
+    - [ ] **SSH Key** - Created during VM deployment at barrack.ai/deploy
+    - [ ] **Public IP** - Enabled during or after deployment
+    - [ ] **Key Download** - Private key saved to Downloads folder
   </Tab>
   
   <Tab title="Planning">
@@ -111,6 +107,52 @@ Before deploying your first VM, ensure you have:
 
 <Warning>
 Your profile must be complete with billing information (address, postal code, country) before you can create volumes or make purchases.
+</Warning>
+
+## SSH Connection Guide
+
+### Step 1: SSH Key Creation (On Deploy Page)
+
+SSH keys are created on the deployment page at [barrack.ai/deploy](https://barrack.ai/deploy):
+
+1. Go to **[barrack.ai/deploy](https://barrack.ai/deploy)**
+2. **Find the SSH key creation option** on the deploy page
+3. **Create a new SSH key** (manual step - not automatic)
+4. **Download starts** - key saved to Downloads folder  
+5. **File format:** `hh_[keyname].pem`
+
+### Step 2: Get Your Public IP
+
+**If Public IP enabled during deployment:**
+- Find your VM in [dashboard](https://barrack.ai/dashboard)
+- Copy the Public IP (format: `185.x.x.x`)
+
+**If Public IP not enabled:**
+- Go to [dashboard](https://barrack.ai/dashboard) → Click VM **"Details"**
+- Enable **"Public IP"** → Wait 1-2 minutes → Copy new IP
+
+### Step 3: Connect via SSH
+
+**Windows (Command Prompt/PowerShell):**
+```cmd
+cd C:\Users\%USERNAME%\Downloads
+ssh -i "hh_[your-key-name].pem" ubuntu@[YOUR_PUBLIC_IP]
+```
+
+**Example:**
+```cmd
+ssh -i "hh_private_key.pem" ubuntu@185.216.21.177
+```
+
+**Mac/Linux:**
+```bash
+cd ~/Downloads
+chmod 600 hh_[your-key-name].pem
+ssh -i hh_[your-key-name].pem ubuntu@[YOUR_PUBLIC_IP]
+```
+
+<Warning>
+Always use **Public IP** (185.x.x.x), NOT Private IP (10.x.x.x). Username is always `ubuntu` for all Barrack images.
 </Warning>
 
 ## Quick Deployment Guide
@@ -193,31 +235,6 @@ Choose from multiple boot source options:
   </Tab>
 </Tabs>
 
-### 4. Setup SSH Access
-
-Ensure you have at least one SSH key configured for secure access to your VM.
-
-<CardGroup cols={2}>
-  <Card title="Create New Key" icon="plus" href="/ssh/creating-keys">
-    Generate a new SSH key pair automatically
-    
-    - 2048-bit RSA encryption
-    - Automatic download of private key
-    - Secure key generation
-  </Card>
-  <Card title="Import Existing Key" icon="upload" href="/ssh/importing-keys">
-    Import your existing public key
-    
-    - Use keys from GitHub, GitLab, etc.
-    - Multiple key format support
-    - Validate key format automatically
-  </Card>
-</CardGroup>
-
-<Tip>
-Use the SSH key creation wizard if you don't have existing keys. The system will generate and download your private key automatically.
-</Tip>
-
 ## Post-Deployment Steps
 
 Once your VM is deployed:
@@ -226,8 +243,8 @@ Once your VM is deployed:
   <Step title="Connect via SSH">
     Use your private key to securely connect to your VM
     
-    ```bash
-    ssh -i /path/to/your-private-key.pem ubuntu@your-vm-ip
+    ```cmd
+    ssh -i "hh_[your-key-name].pem" ubuntu@[YOUR_PUBLIC_IP]
     ```
   </Step>
   <Step title="Configure Firewall Rules">

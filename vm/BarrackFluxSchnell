@@ -1,0 +1,236 @@
+# FLUX Image Generation - Usage Guide
+
+Get instant AI image generation with pre-installed FLUX.1 Schnell model.
+
+## Prerequisites
+
+- Barrack account with credits
+- SSH client (Windows: Command Prompt, Mac/Linux: Terminal)
+- SSH key pair created in Barrack
+
+## Step 1: Deploy FLUX Custom Image
+
+### 1.1 Navigate to Deploy Page
+1. Go to [Barrack Deploy](https://Barrack.cloud/deploy)
+2. Select your desired GPU configuration
+3. Choose your region
+
+### 1.2 Select Custom Image
+1. In **Boot Source** section, select **"Custom Images"**
+2. Find **"Barrack FLUX Schnell Ready"** in the list
+3. Select this image
+
+### 1.3 Configure Deployment
+1. **SSH Key**: Select your SSH key from dropdown
+2. **Public IP**: ✅ **ENSURE THIS IS ENABLED** (Required for SSH access)
+3. **Firewall**: Use default or create custom rules
+4. Click **"Deploy"**
+
+### 1.4 Wait for Deployment
+- Deployment takes 2-3 minutes
+- VM status will change to **"ACTIVE"**
+- Note your **Public IP address** (format: 185.x.x.x)
+
+## Step 2: Connect via SSH
+
+### Windows (Command Prompt)
+```cmd
+cd C:\Users\%USERNAME%\Downloads
+ssh -i "your-ssh-key.pem" ubuntu@YOUR_PUBLIC_IP
+```
+
+### Mac/Linux (Terminal)
+```bash
+cd ~/Downloads
+chmod 600 your-ssh-key.pem
+ssh -i your-ssh-key.pem ubuntu@YOUR_PUBLIC_IP
+```
+
+**Replace:**
+- `your-ssh-key.pem` with your actual SSH key filename
+- `YOUR_PUBLIC_IP` with the IP from Barrack dashboard
+
+## Step 3: Generate Images with FLUX
+
+### 3.1 Activate FLUX Environment
+```bash
+cd /opt/flux_models
+source /home/ubuntu/flux_env/bin/activate
+```
+
+### 3.2 Generate Your First Image
+```bash
+python3 -c "
+from diffusers import FluxPipeline
+import torch
+
+# Load FLUX model (takes ~1-2 seconds)
+pipe = FluxPipeline.from_pretrained(
+    'black-forest-labs/FLUX.1-schnell', 
+    torch_dtype=torch.bfloat16,
+    cache_dir='/opt/flux_models'
+)
+pipe.to('cuda')
+
+# Generate image
+prompt = 'A beautiful sunset over mountains'
+image = pipe(
+    prompt, 
+    num_inference_steps=4, 
+    guidance_scale=0.0
+).images[0]
+
+# Save image
+image.save('/opt/flux_models/my_image.png')
+print('✅ Image generated: /opt/flux_models/my_image.png')
+"
+```
+
+### 3.3 Generate Multiple Images
+```bash
+python3 -c "
+from diffusers import FluxPipeline
+import torch
+
+pipe = FluxPipeline.from_pretrained(
+    'black-forest-labs/FLUX.1-schnell', 
+    torch_dtype=torch.bfloat16,
+    cache_dir='/opt/flux_models'
+)
+pipe.to('cuda')
+
+prompts = [
+    'A futuristic city at night',
+    'A cat wearing sunglasses',
+    'Abstract art with vibrant colors'
+]
+
+for i, prompt in enumerate(prompts):
+    print(f'Generating image {i+1}: {prompt}')
+    image = pipe(prompt, num_inference_steps=4, guidance_scale=0.0).images[0]
+    image.save(f'/opt/flux_models/image_{i+1}.png')
+    print(f'✅ Saved: image_{i+1}.png')
+"
+```
+
+## Step 4: Copy Images to Your Computer
+
+### 4.1 Check Generated Images
+```bash
+ls -la /opt/flux_models/*.png
+```
+
+### 4.2 Copy Images via SCP
+
+**Windows (Command Prompt):**
+```cmd
+# Copy single image
+scp -i "your-ssh-key.pem" ubuntu@YOUR_PUBLIC_IP:/opt/flux_models/my_image.png C:\Users\%USERNAME%\Desktop\
+
+# Copy all images
+scp -i "your-ssh-key.pem" ubuntu@YOUR_PUBLIC_IP:/opt/flux_models/*.png C:\Users\%USERNAME%\Desktop\
+```
+
+**Mac/Linux (Terminal):**
+```bash
+# Copy single image
+scp -i your-ssh-key.pem ubuntu@YOUR_PUBLIC_IP:/opt/flux_models/my_image.png ~/Desktop/
+
+# Copy all images
+scp -i your-ssh-key.pem ubuntu@YOUR_PUBLIC_IP:/opt/flux_models/*.png ~/Desktop/
+```
+
+## Example: Complete Workflow
+
+### Generate and Download Custom Image
+```bash
+# 1. SSH into your VM
+ssh -i "your-ssh-key.pem" ubuntu@185.123.45.67
+
+# 2. Navigate and activate FLUX
+cd /opt/flux_models
+source /home/ubuntu/flux_env/bin/activate
+
+# 3. Generate custom image
+python3 -c "
+from diffusers import FluxPipeline
+import torch
+
+pipe = FluxPipeline.from_pretrained(
+    'black-forest-labs/FLUX.1-schnell', 
+    torch_dtype=torch.bfloat16,
+    cache_dir='/opt/flux_models'
+)
+pipe.to('cuda')
+
+# Your custom prompt
+prompt = 'A professional logo design for a tech company'
+image = pipe(prompt, num_inference_steps=4, guidance_scale=0.0).images[0]
+image.save('/opt/flux_models/tech_logo.png')
+print('✅ Custom image generated!')
+"
+
+# 4. Exit SSH
+exit
+
+# 5. Download to your computer (run on your local machine)
+scp -i "your-ssh-key.pem" ubuntu@185.123.45.67:/opt/flux_models/tech_logo.png ~/Desktop/
+```
+
+## Performance Expectations
+
+- **Model Load Time**: ~1-2 seconds
+- **Image Generation**: ~4-5 seconds per image
+- **GPU**: Automatic acceleration enabled
+- **Image Quality**: High-quality, commercial use ready
+
+## Tips for Best Results
+
+### Effective Prompts
+- Be specific about style: "photorealistic", "digital art", "oil painting"
+- Include details: lighting, colors, composition
+- Specify image type: "portrait", "landscape", "logo", "illustration"
+
+### Example Prompts
+```
+"A photorealistic portrait of a woman in business attire, professional lighting"
+"Digital art of a dragon flying over a medieval castle, fantasy style"
+"Minimalist logo design with blue and white colors, geometric shapes"
+"Oil painting of a forest in autumn, warm colors, artistic style"
+```
+
+## Troubleshooting
+
+### SSH Connection Issues
+- Verify Public IP is correct
+- Check SSH key file path
+- Ensure Public IP was enabled during deployment
+
+### FLUX Not Working
+```bash
+# Test FLUX installation
+cd /opt/flux_models
+source /home/ubuntu/flux_env/bin/activate
+python3 -c "import torch; print('CUDA available:', torch.cuda.is_available())"
+```
+
+### File Transfer Issues
+- Verify file exists: `ls -la /opt/flux_models/*.png`
+- Check local directory permissions
+- Use absolute paths in SCP commands
+
+## Cleanup
+
+### Remove Generated Images (Optional)
+```bash
+rm /opt/flux_models/*.png
+```
+
+### Shutdown VM When Done
+```bash
+sudo shutdown -h now
+```
+
+---
+
+**Support**: For technical issues, contact support with your VM details and error messages.

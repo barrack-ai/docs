@@ -119,7 +119,7 @@ SSH keys are created on the deployment page at [barrack.ai/deploy](https://barra
 2. **Find the SSH key creation option** on the deploy page
 3. **Create a new SSH key** (manual step - not automatic)
 4. **Download starts** - key saved to Downloads folder  
-5. **File format:** `hh_[keyname].pem`
+5. **File format:** `barrack_[keyname].pem`
 
 ### Step 2: Get Your Public IP
 
@@ -136,19 +136,19 @@ SSH keys are created on the deployment page at [barrack.ai/deploy](https://barra
 **Windows (Command Prompt/PowerShell):**
 ```cmd
 cd C:\Users\%USERNAME%\Downloads
-ssh -i "hh_[your-key-name].pem" ubuntu@[YOUR_PUBLIC_IP]
+ssh -i "barrack_[your-key-name].pem" ubuntu@[YOUR_PUBLIC_IP]
 ```
 
 **Example:**
 ```cmd
-ssh -i "hh_private_key.pem" ubuntu@185.216.21.177
+ssh -i "barrack_private_key.pem" ubuntu@185.216.21.177
 ```
 
 **Mac/Linux:**
 ```bash
 cd ~/Downloads
-chmod 600 hh_[your-key-name].pem
-ssh -i hh_[your-key-name].pem ubuntu@[YOUR_PUBLIC_IP]
+chmod 600 barrack_[your-key-name].pem
+ssh -i barrack_[your-key-name].pem ubuntu@[YOUR_PUBLIC_IP]
 ```
 
 <Warning>
@@ -244,7 +244,7 @@ Once your VM is deployed:
     Use your private key to securely connect to your VM
     
     ```cmd
-    ssh -i "hh_[your-key-name].pem" ubuntu@[YOUR_PUBLIC_IP]
+    ssh -i "barrack_[your-key-name].pem" ubuntu@[YOUR_PUBLIC_IP]
     ```
   </Step>
   <Step title="Configure Firewall Rules">
